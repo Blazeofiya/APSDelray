@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>The Global Antiquity Society</title>
+  
+  <!-- Google Fonts: Cinzel + Roboto -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Roboto:wght@400;700&display=swap"
+    rel="stylesheet"
+  />
+  
+  <!-- Main CSS Styles -->
+  <link rel="stylesheet" href="assets/css/styles.css" />
+  
+  <!-- AOS CSS (CDN) -->
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/aos@next/dist/aos.css"
+  />
+</head>
+<body>
+  <!-- Navigation -->
+  <header class="main-header" data-aos="fade-down">
+    <div class="logo">
+      The Global Antiquity Society
+    </div>
+    <nav>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html">Home</a></li>
+        <li>
+          <a href="the-big-picture.html">
+            <!-- Icon example -->
+            <img src="assets/images/icons/globe-icon.svg" alt="Icon" class="nav-icon" />
+            The Big Picture
+          </a>
+        </li>
+        <li>
+          <a href="the-human-lens.html">
+            <img src="assets/images/icons/lens-icon.svg" alt="Icon" class="nav-icon" />
+            The Human Lens
+          </a>
+        </li>
+        <li>
+          <a href="roots-and-horizons.html">
+            <img src="assets/images/icons/roots-icon.svg" alt="Icon" class="nav-icon" />
+            Roots & Horizons
+          </a>
+        </li>
+        <li>
+          <a href="navigating-modernity.html">
+            <img src="assets/images/icons/nav-icon.svg" alt="Icon" class="nav-icon" />
+            Navigating Modernity
+          </a>
+        </li>
+        <li>
+          <a href="art-of-living.html">
+            <img src="assets/images/icons/art-icon.svg" alt="Icon" class="nav-icon" />
+            Art of Living
+          </a>
+        </li>
+        <li>
+          <a href="toolkits.html">
+            <img src="assets/images/icons/toolkits-icon.svg" alt="Icon" class="nav-icon" />
+            Toolkits
+          </a>
+        </li>
+        <li>
+          <a href="the-agora.html">
+            The Agora
+          </a>
+        </li>
+      </ul>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle Menu">
+        ☰
+      </button>
+    </nav>
+  </header>
+
+  <!-- Hero Section with Parallax and AOS -->
+  <section 
+    class="hero" 
+    data-aos="fade-in"
+    data-aos-duration="800"
+  >
+    <div 
+      class="hero-overlay" 
+      data-aos="zoom-in" 
+      data-aos-duration="800" 
+      data-aos-delay="200"
+    >
+      <div 
+        class="hero-text" 
+        data-aos="fade-up" 
+        data-aos-delay="400"
+      >
+        <h1>The Global Antiquity Society</h1>
+        <p>Explore the wisdom of the ages, bridging past, present, and future.</p>
+        <a href="#categories" class="btn-primary">Explore the Categories</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features (Categories Overview) -->
+  <section 
+    class="features" 
+    id="categories"
+    data-aos="fade-up"
+    data-aos-duration="800"
+  >
+    <h2>Categories at a Glance</h2>
+    <div class="feature-grid">
+      <div 
+        class="feature-item"
+        data-aos="fade-right"
+        data-aos-duration="800"
+      >
+        <img src="assets/images/feature1.jpg" alt="The Big Picture" />
+        <h3>The Big Picture</h3>
+        <p>Grand perspectives on civilization and cosmic context.</p>
+        <a href="the-big-picture.html" class="feature-link">Learn more</a>
+      </div>
+
+      <div 
+        class="feature-item"
+        data-aos="fade-left"
+        data-aos-duration="800"
+      >
+        <img src="assets/images/feature2.jpg" alt="The Human Lens" />
+        <h3>The Human Lens</h3>
+        <p>Dive into human experiences, identity, and wisdom.</p>
+        <a href="the-human-lens.html" class="feature-link">Learn more</a>
+      </div>
+
+      <div 
+        class="feature-item"
+        data-aos="fade-right"
+        data-aos-duration="800"
+        data-aos-delay="200"
+      >
+        <img src="assets/images/feature3.jpg" alt="Roots and Horizons" />
+        <h3>Roots & Horizons</h3>
+        <p>Explore cultural evolution and the future we’re shaping.</p>
+        <a href="roots-and-horizons.html" class="feature-link">Learn more</a>
+      </div>
+
+      <div 
+        class="feature-item"
+        data-aos="fade-left"
+        data-aos-duration="800"
+        data-aos-delay="200"
+      >
+        <img src="assets/images/feature4.jpg" alt="Navigating Modernity" />
+        <h3>Navigating Modernity</h3>
+        <p>Tools and ideas for thriving in a complex world.</p>
+        <a href="navigating-modernity.html" class="feature-link">Learn more</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Community & Navigation Block -->
+  <section 
+    class="community-block"
+    data-aos="fade-up"
+    data-aos-duration="800"
+  >
+    <h2>Join Our Community in The Agora</h2>
+    <p>
+      Connect with global voices, discussions, and shared wisdom.
+      <a href="the-agora.html" class="link-highlight">Visit The Agora</a>
+    </p>
+    <div class="map-embed">
+      <!-- Example Google Map Embed (replace with your own) -->
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18..."
+        width="100%"
+        height="200"
+        style="border:0;"
+        allowfullscreen=""
+        loading="lazy"
+      ></iframe>
+    </div>
+  </section>
+
+  <!-- Search Bar -->
+  <section 
+    class="search-section"
+    data-aos="fade-up"
+    data-aos-duration="800"
+  >
+    <h2>Looking for Something?</h2>
+    <form action="#" method="get" class="search-form">
+      <input
+        type="text"
+        name="search"
+        placeholder="Search for insights, philosophies, and more..."
+      />
+      <button type="submit" class="btn-search">Search</button>
+    </form>
+  </section>
+
+  <!-- Contact Block -->
+  <footer 
+    class="contact-block"
+    data-aos="fade-up"
+    data-aos-duration="800"
+    data-aos-delay="200"
+  >
+    <div class="contact-info">
+      <h3>Contact Us</h3>
+      <p>123 Ancient Road, Knowledge City, Earth</p>
+      <p>
+        Email: 
+        <a href="mailto:info@globalantiquity.org">info@globalantiquity.org</a>
+      </p>
+      <ul class="social-links">
+        <li><a href="#">Facebook</a></li>
+        <li><a href="#">Instagram</a></li>
+        <li><a href="#">Twitter</a></li>
+      </ul>
+    </div>
+    <p class="footer-copy">
+      &copy; 2025 The Global Antiquity Society. All rights reserved.
+    </p>
+  </footer>
+
+  <!-- Main Script for Mobile Nav -->
+  <script src="assets/js/script.js"></script>
+
+  <!-- AOS JS (CDN) & Initialization -->
+  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  <script>
+    AOS.init({
+      offset: 120,         // offset (in px) from the original trigger point
+      duration: 600,       // animation duration (in ms)
+      easing: 'ease-in-out', // easing function
+      delay: 100,          // global delay on all animations
+      once: false,         // whether animation should happen only once
+      mirror: false        // whether elements should animate out while scrolling past them
+    });
+  </script>
+</body>
+</html>

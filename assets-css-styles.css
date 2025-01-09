@@ -1,0 +1,372 @@
+/* 
+  Fonts:
+    - Cinzel (headings)
+    - Roboto (body)
+*/
+
+/* Root variables for colors */
+:root {
+  /* Slightly darker burnt sienna */
+  --primary-color: #b54103;
+  /* Subtle parchment tone for sub-section backgrounds */
+  --secondary-color: #f2e4ca;
+  /* Dark background if needed; we'll overlay a texture */
+  --background-dark: #1c1c1c;
+  /* Text colors */
+  --text-light: #ffffff;
+  --text-dark: #333333;
+  /* Accent color: optional greenish patina or gold */
+  --accent-color: #c79b53;
+}
+
+/* RESET / GLOBAL STYLES */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  /* Use a parchment texture background; ensure you have the image in assets/images */
+  background: url('../images/dark-parchment-texture.jpg') no-repeat center center fixed;
+  background-size: cover;
+  color: var(--text-light);
+  font-family: 'Roboto', sans-serif;
+  line-height: 1.6;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: var(--primary-color);
+  text-decoration: none;
+}
+
+a:hover {
+  opacity: 0.8;
+}
+
+h1, h2, h3 {
+  font-family: 'Cinzel', serif;
+  margin-bottom: 0.5rem;
+}
+
+p {
+  margin-bottom: 1rem;
+}
+
+/* HEADER / NAV */
+.main-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.8);
+  padding: 1rem 2rem;
+}
+
+.logo {
+  font-family: 'Cinzel', serif;
+  font-size: 1.5rem;
+  color: var(--accent-color);
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 1rem;
+}
+
+.nav-links a {
+  color: var(--text-light);
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+}
+
+.nav-links a img.nav-icon {
+  width: 20px;
+  height: 20px;
+  margin-right: 0.3rem;
+}
+
+.nav-links a.active {
+  color: var(--primary-color);
+}
+
+.nav-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--text-light);
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+/* MOBILE NAV */
+@media (max-width: 768px) {
+  .nav-links {
+    position: absolute;
+    top: 80px;
+    right: 0;
+    background-color: rgba(0,0,0,0.9);
+    flex-direction: column;
+    width: 200px;
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+    padding: 1rem;
+  }
+  .nav-links.show {
+    transform: translateX(0);
+  }
+  .nav-toggle {
+    display: block;
+  }
+}
+
+/* HERO SECTION WITH PARALLAX */
+.hero {
+  position: relative;
+  min-height: 70vh;
+  color: var(--text-light);
+  background: url('../images/hero-parchment-bg.jpg') center center / cover no-repeat fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+/* Optional overlay for more contrast */
+.hero-overlay {
+  background-color: rgba(0, 0, 0, 0.4);
+  padding: 2rem;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-text {
+  max-width: 600px;
+  margin: auto;
+}
+
+.hero-text h1 {
+  font-size: 3rem;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+  margin-bottom: 1rem;
+}
+
+.hero-text p {
+  font-size: 1.2rem;
+  margin-bottom: 1.5rem;
+}
+
+/* BUTTONS */
+.btn-primary {
+  background-color: var(--primary-color);
+  color: #fff;
+  padding: 0.75rem 1.5rem;
+  border-radius: 4px;
+  font-weight: bold;
+  box-shadow: inset 0 -3px 0 rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+}
+.btn-primary:hover {
+  box-shadow: inset 0 3px 0 rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+}
+
+/* FEATURES SECTION */
+.features {
+  padding: 2rem;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+.features h2 {
+  text-align: center;
+  margin-bottom: 2rem;
+  color: var(--accent-color);
+  position: relative;
+  display: inline-block;
+}
+.features h2::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -8px;
+  transform: translateX(-50%);
+  width: 60%;
+  height: 2px;
+  background: linear-gradient(to right, #d4af37, #b8860b);
+}
+
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+}
+
+.feature-item {
+  /* "Scroll-like" card style */
+  background-color: rgba(255, 255, 255, 0.07);
+  backdrop-filter: blur(3px);
+  padding: 1rem;
+  text-align: center;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+}
+
+.feature-item h3 {
+  margin-top: 1rem;
+  color: var(--accent-color);
+}
+
+.feature-link {
+  display: inline-block;
+  margin-top: 0.5rem;
+  color: var(--primary-color);
+}
+
+/* COMMUNITY BLOCK */
+.community-block {
+  padding: 2rem;
+  background-color: var(--secondary-color);
+  color: var(--text-dark);
+  text-align: center;
+}
+
+.community-block h2 {
+  margin-bottom: 1rem;
+  font-family: 'Cinzel', serif;
+}
+
+.community-block .map-embed {
+  margin-top: 1rem;
+  max-width: 600px;
+  margin: 1rem auto;
+}
+
+.link-highlight {
+  color: var(--primary-color);
+  font-weight: bold;
+}
+
+/* SEARCH SECTION */
+.search-section {
+  padding: 2rem;
+  background-color: rgba(0, 0, 0, 0.6);
+  text-align: center;
+}
+
+.search-section h2 {
+  margin-bottom: 1rem;
+  font-family: 'Cinzel', serif;
+  color: var(--accent-color);
+}
+
+.search-form {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.search-form input[type="text"] {
+  padding: 0.5rem;
+  width: 300px;
+  max-width: 90%;
+  border: none;
+  border-radius: 4px;
+}
+
+.btn-search {
+  padding: 0.5rem 1rem;
+  background-color: var(--primary-color);
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+}
+.btn-search:hover {
+  cursor: pointer;
+  opacity: 0.9;
+}
+
+/* CONTACT / FOOTER */
+.contact-block {
+  padding: 2rem;
+  background-color: #111;
+  text-align: center;
+}
+
+.contact-info {
+  margin-bottom: 1rem;
+}
+
+.contact-info p a {
+  color: var(--primary-color);
+}
+
+.social-links {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.footer-copy {
+  font-size: 0.9rem;
+  color: #777;
+}
+
+/* PAGE HERO (FOR SUBPAGES) */
+.page-hero {
+  background-color: var(--secondary-color);
+  color: var(--text-dark);
+  text-align: center;
+  padding: 4rem 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.page-hero::after {
+  /* Subtle decorative border or pattern overlay if desired */
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 8px;
+  background: linear-gradient(to right, #d4af37, #b8860b);
+  bottom: 0;
+  left: 0;
+}
+
+.page-hero-text h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.page-hero-text p {
+  font-size: 1.2rem;
+}
+
+/* MAIN CONTENT (SUBPAGES) */
+.content {
+  padding: 2rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.content h2 {
+  color: var(--accent-color);
+}
+
+/* Utility classes */
+.btn-primary:hover, .btn-search:hover {
+  cursor: pointer;
+  opacity: 0.9;
+}
