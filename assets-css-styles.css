@@ -28,7 +28,7 @@
 
 body {
   /* Use a parchment texture background; ensure you have the image in assets/images */
-  background: url('../images/dark-parchment-texture.jpg') no-repeat center center fixed;
+  background: url('assets/images/dark-parchment-texture.jpg') no-repeat center center fixed;
   background-size: cover;
   color: var(--text-light);
   font-family: 'Roboto', sans-serif;
@@ -132,7 +132,7 @@ p {
   position: relative;
   min-height: 70vh;
   color: var(--text-light);
-  background: url('../images/hero-parchment-bg.jpg') center center / cover no-repeat fixed;
+  background: url('assets/images/hero-parchment-bg.jpg') center center / cover no-repeat fixed;
   display: flex;
   align-items: center;
   justify-content: center;
