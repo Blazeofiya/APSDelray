@@ -55,7 +55,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const link = card?.querySelector("a")?.href;
         if (link) {
             img.src = `https://api.microlink.io/?url=${link}&screenshot=true&embed=screenshot.url`;
-            img.onerror = () => { img.src = "assets/images/fallback.jpg"; }; // Fallback image in case of errors
+            img.onerror = () => { img.src = "images/fallback.jpg"; }; // Fallback image in case of errors
         }
     });
 });
@@ -72,7 +72,7 @@ if (document.getElementById("map")) {
 
     // Custom marker icon
     const customIcon = L.icon({
-        iconUrl: 'assets/images/custom-marker.png',
+        iconUrl: 'images/custom-marker.png',
         iconSize: [38, 38],
         iconAnchor: [19, 38],
         popupAnchor: [0, -38]
