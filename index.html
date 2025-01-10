@@ -40,6 +40,10 @@
       width: 100%;
       height: 150px;
       object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+    .knowledge-card img:hover {
+      transform: scale(1.1);
     }
     .knowledge-card-content {
       padding: 1rem;
@@ -119,7 +123,7 @@
     <p>Explore these resources to learn more about history, tools, and research.</p>
     <div class="knowledge-grid">
       <div class="knowledge-card" data-category="research">
-        <img src="images/library-of-congress.jpg" alt="Library of Congress">
+        <img src="" alt="Preview of Library of Congress" class="dynamic-preview">
         <div class="knowledge-card-content">
           <h3>Library of Congress</h3>
           <p>The largest library in the world with millions of items for research.</p>
@@ -127,7 +131,7 @@
         </div>
       </div>
       <div class="knowledge-card" data-category="tools">
-        <img src="images/fmhy.jpg" alt="FMHY">
+        <img src="" alt="Preview of FMHY" class="dynamic-preview">
         <div class="knowledge-card-content">
           <h3>FMHY</h3>
           <p>A collection of free resources for modern living and learning.</p>
@@ -135,7 +139,7 @@
         </div>
       </div>
       <div class="knowledge-card" data-category="history">
-        <img src="images/unesco.jpg" alt="UNESCO World Heritage">
+        <img src="" alt="Preview of UNESCO World Heritage" class="dynamic-preview">
         <div class="knowledge-card-content">
           <h3>UNESCO World Heritage</h3>
           <p>Discover the world’s cultural and natural heritage sites.</p>
@@ -163,7 +167,13 @@
 
   <!-- Main Script -->
   <script src="assets-js-script.js"></script>
+  <script>
+    // Dynamic Previews
+    document.querySelectorAll('.dynamic-preview').forEach(img => {
+      const card = img.closest('.knowledge-card');
+      const link = card.querySelector('a').href;
+      img.src = `https://api.microlink.io/?url=${link}&screenshot=true&embed=screenshot.url`;
+    });
+  </script>
 </body>
 </html>
-
-
