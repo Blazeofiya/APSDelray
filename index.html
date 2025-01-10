@@ -188,15 +188,9 @@
    <!-- Main Script -->
   <script defer src="assets/js/script.min.js"></script>
   <script>
-    // Initialize the map
-    const map = L.map('map').setView([26.4615, -80.0728], 13);
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
-    L.marker([26.4615, -80.0728]).addTo(map)
-      .bindPopup('Community Event: Beach Cleanup<br>Jan 15, 10 AM')
-      .openPopup();
-
-    // Preloader logic
-    window.addEventListener("load", () => {
-      document.getElementById("preloader").style.display = "none";
-    });
-  </script>
+    
+  // Preloader logic
+  window.addEventListener("load", () => {
+    document.getElementById("preloader").style.display = "none";
+  });
+</script>
