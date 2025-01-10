@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>The Global Antiquity Society</title>
 
   <!-- Google Fonts: Cinzel + Roboto -->
@@ -14,125 +14,156 @@
   <!-- Main CSS Styles -->
   <link rel="stylesheet" href="assets-css-styles.css" />
 
-  <!-- AOS CSS (CDN) -->
-  <link
-    rel="stylesheet"
-    href="https://unpkg.com/aos@next/dist/aos.css"
-  />
+  <!-- Add Decorative Elements and Knowledge Grid Styles -->
+  <style>
+    .knowledge-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      padding: 2rem;
+      background-color: #e8e6df;
+    }
+    .knowledge-card {
+      background: #ffffff;
+      border: 2px solid #555;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
+    }
+    .knowledge-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+    }
+    .knowledge-card img {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+    }
+    .knowledge-card-content {
+      padding: 1rem;
+    }
+    .knowledge-card h3 {
+      font-family: 'Cinzel', serif;
+      font-size: 1.2rem;
+      margin-bottom: 0.5rem;
+      color: #333;
+    }
+    .knowledge-card p {
+      font-family: 'Roboto', sans-serif;
+      font-size: 1rem;
+      color: #555;
+      margin-bottom: 1rem;
+    }
+    .knowledge-card a {
+      display: inline-block;
+      padding: 0.5rem 1rem;
+      background: #555;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      text-align: center;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
+    }
+    .knowledge-card a:hover {
+      background: #333;
+    }
+    .knowledge-card::before {
+      content: "CLASSIFIED";
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: #d9534f;
+      color: white;
+      font-size: 0.8rem;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-family: 'Cinzel', serif;
+      transform: rotate(-10deg);
+    }
+  </style>
 </head>
 <body>
   <!-- Navigation -->
-  <header class="main-header" data-aos="fade-down">
-    <div class="logo">
-      The Global Antiquity Society
-    </div>
+  <header class="main-header">
+    <div class="logo">The Global Antiquity Society</div>
     <nav>
       <ul class="nav-links" id="navLinks">
-        <li><a href="index.html">Home</a></li>
-        <li>
-          <a href="the-big-picture.html">
-            <img src="images/icons/globe-icon.svg" alt="Icon" class="nav-icon" />
-            The Big Picture
-          </a>
-        </li>
-        <li>
-          <a href="the-human-lens.html">
-            <img src="images/icons/lens-icon.svg" alt="Icon" class="nav-icon" />
-            The Human Lens
-          </a>
-        </li>
-        <li>
-          <a href="roots-and-horizons.html">
-            <img src="images/icons/roots-icon.svg" alt="Icon" class="nav-icon" />
-            Roots & Horizons
-          </a>
-        </li>
-        <li>
-          <a href="navigating-modernity.html">
-            <img src="images/icons/nav-icon.svg" alt="Icon" class="nav-icon" />
-            Navigating Modernity
-          </a>
-        </li>
-        <li>
-          <a href="art-of-living.html">
-            <img src="images/icons/art-icon.svg" alt="Icon" class="nav-icon" />
-            Art of Living
-          </a>
-        </li>
+        <li><a href="index.html" class="active">Home</a></li>
+        <li><a href="the-big-picture.html">The Big Picture</a></li>
+        <li><a href="roots-and-horizons.html">Roots & Horizons</a></li>
         <li><a href="toolkits.html">Toolkits</a></li>
         <li><a href="the-agora.html">The Agora</a></li>
       </ul>
-      <button class="nav-toggle" id="navToggle" aria-label="Toggle Menu">
-        ☰
-      </button>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle Menu">☰</button>
     </nav>
   </header>
 
-  <!-- Hero Section with Parallax and AOS -->
-  <section 
-    class="hero" 
-    data-aos="fade-in"
-    data-aos-duration="800"
-    style="background: url('images/dark-parchment-texture.jpg') no-repeat center center fixed; background-size: cover;"
-  >
-    <div 
-      class="hero-overlay" 
-      data-aos="zoom-in" 
-      data-aos-duration="800" 
-      data-aos-delay="200"
-    >
-      <div 
-        class="hero-text" 
-        data-aos="fade-up" 
-        data-aos-delay="400"
-      >
-        <h1>The Global Antiquity Society</h1>
-        <p>Explore the wisdom of the ages, bridging past, present, and future.</p>
-        <a href="#categories" class="btn-primary">Explore the Categories</a>
+  <!-- Hero Section with Parallax Effect -->
+  <section class="hero">
+    <div class="hero-overlay"></div>
+    <div class="hero-text">
+      <h1>Embark on the Adventure of Knowledge</h1>
+      <p>Discover connections, hidden truths, and practical skills for the modern world.</p>
+      <a href="#categories" class="btn-primary">Explore the Categories</a>
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <!-- Knowledge Grid Section -->
+  <section class="knowledge-grid-section">
+    <h2>Knowledge Links</h2>
+    <p>Explore these resources to learn more about history, tools, and research.</p>
+    <div class="knowledge-grid">
+      <div class="knowledge-card" data-category="research">
+        <img src="images/library-of-congress.jpg" alt="Library of Congress">
+        <div class="knowledge-card-content">
+          <h3>Library of Congress</h3>
+          <p>The largest library in the world with millions of items for research.</p>
+          <a href="https://www.loc.gov/" target="_blank">Visit Website</a>
+        </div>
+      </div>
+      <div class="knowledge-card" data-category="tools">
+        <img src="images/fmhy.jpg" alt="FMHY">
+        <div class="knowledge-card-content">
+          <h3>FMHY</h3>
+          <p>A collection of free resources for modern living and learning.</p>
+          <a href="https://fmhy.net/" target="_blank">Visit Website</a>
+        </div>
+      </div>
+      <div class="knowledge-card" data-category="history">
+        <img src="images/unesco.jpg" alt="UNESCO World Heritage">
+        <div class="knowledge-card-content">
+          <h3>UNESCO World Heritage</h3>
+          <p>Discover the world’s cultural and natural heritage sites.</p>
+          <a href="https://whc.unesco.org/" target="_blank">Visit Website</a>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- Contact Block -->
-  <footer 
-    class="contact-block"
-    data-aos="fade-up"
-    data-aos-duration="800"
-    data-aos-delay="200"
-  >
+  <hr class="section-divider">
+
+  <!-- Footer with Decorative Compass Rose -->
+  <footer class="contact-block">
     <div class="contact-info">
       <h3>Contact Us</h3>
       <p>123 Ancient Road, Knowledge City, Earth</p>
       <p>
-        Email: 
+        Email:
         <a href="mailto:info@globalantiquity.org">info@globalantiquity.org</a>
       </p>
-      <ul class="social-links">
-        <li><a href="#">Facebook</a></li>
-        <li><a href="#">Instagram</a></li>
-        <li><a href="#">Twitter</a></li>
-      </ul>
+      <img src="images/compass-rose.png" alt="Compass Rose" style="width: 50px; margin-top: 10px;" />
     </div>
-    <p class="footer-copy">
-      &copy; 2025 The Global Antiquity Society. All rights reserved.
-    </p>
+    <p class="footer-copy">&copy; 2025 The Global Antiquity Society. All rights reserved.</p>
   </footer>
 
-  <!-- Main Script for Mobile Nav -->
+  <!-- Main Script -->
   <script src="assets-js-script.js"></script>
-
-  <!-- AOS JS (CDN) & Initialization -->
-  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
-  <script>
-    AOS.init({
-      offset: 120,         // offset (in px) from the original trigger point
-      duration: 600,       // animation duration (in ms)
-      easing: 'ease-in-out', // easing function
-      delay: 100,          // global delay on all animations
-      once: false,         // whether animation should happen only once
-      mirror: false        // whether elements should animate out while scrolling past them
-    });
-  </script>
 </body>
 </html>
+
 
