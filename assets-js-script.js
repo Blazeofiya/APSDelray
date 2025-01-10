@@ -52,3 +52,13 @@ document.head.insertAdjacentHTML(
     }
   </style>`
 );
+
+// Dynamic Previews for Knowledge Grid
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll(".dynamic-preview").forEach(img => {
+    const card = img.closest(".knowledge-card");
+    const link = card.querySelector("a").href;
+    img.src = `https://api.microlink.io/?url=${link}&screenshot=true&embed=screenshot.url`;
+    img.onerror = () => { img.src = "images/fallback.jpg"; }; // Fallback image in case of errors
+  });
+});
