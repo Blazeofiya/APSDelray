@@ -25,6 +25,34 @@
   padding: 0;
   box-sizing: border-box;
 }
+#preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+.spinner {
+    width: 50px;
+    height: 50px;
+    border: 6px solid #ccc;
+    border-top-color: #000;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
 
 body {
   /* Use a parchment texture background; ensure you have the image in assets/images */
@@ -85,6 +113,7 @@ p {
   font-weight: bold;
   display: flex;
   align-items: center;
+  text-transform: uppercase; /* Optional: Gives links a bold, uniform look */
 }
 
 .nav-links a img.nav-icon {
@@ -98,7 +127,7 @@ p {
 }
 
 .nav-toggle {
-  display: none;
+  display: none; /* Hidden on desktop */
   background: none;
   border: none;
   color: var(--text-light);
@@ -110,20 +139,37 @@ p {
 @media (max-width: 768px) {
   .nav-links {
     position: absolute;
-    top: 80px;
+    top: 80px; /* Adjust based on your header height */
     right: 0;
-    background-color: rgba(0,0,0,0.9);
+    background-color: rgba(0, 0, 0, 0.9);
     flex-direction: column;
-    width: 200px;
+    width: 250px; /* Slightly wider for better usability */
     transform: translateX(100%);
-    transition: transform 0.3s ease;
-    padding: 1rem;
+    transition: transform 0.3s ease-in-out;
+    padding: 1.5rem 1rem; /* Extra padding for a polished look */
+    z-index: 1000; /* Ensures the menu appears above all content */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Optional: Adds depth to the menu */
   }
+
   .nav-links.show {
     transform: translateX(0);
   }
+
+  .nav-links a {
+    margin-bottom: 1rem; /* Adds spacing between links */
+    text-align: right; /* Aligns text to the edge */
+  }
+
   .nav-toggle {
-    display: block;
+    display: block; /* Show toggle button on mobile */
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 1100; /* Ensures it’s above the nav menu */
+  }
+
+  .nav-toggle:focus {
+    outline: none;
   }
 }
 
@@ -220,6 +266,39 @@ p {
   border-radius: 10px;
   border: 1px solid rgba(255, 255, 255, 0.2);
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Knowledge Grid Styles */
+.knowledge-card {
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 1rem;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.knowledge-card:hover {
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  transform: translateY(-5px);
+}
+
+/* Highlight Effect for Knowledge Cards */
+.knowledge-card.highlight {
+  border-color: #ff9c3c;
+  box-shadow: 0 0 15px rgba(255, 156, 60, 0.6);
+  transform: scale(1.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Dynamic Previews */
+.dynamic-preview {
+  border-radius: 4px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  transition: box-shadow 0.3s ease;
+}
+
+.dynamic-preview:hover {
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
 .feature-item h3 {
@@ -369,4 +448,55 @@ p {
 .btn-primary:hover, .btn-search:hover {
   cursor: pointer;
   opacity: 0.9;
+}
+
+/* Map Section */
+.map-section {
+  margin: 2rem auto;
+  padding: 1.5rem;
+  background: rgba(0, 0, 0, 0.05); /* Subtle background for contrast */
+  border-radius: 12px;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+}
+
+#map {
+  height: 400px;
+  width: 100%;
+  border: 2px solid rgba(255, 255, 255, 0.5); /* Soft border */
+  border-radius: 12px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  overflow: hidden; /* Ensures clean edges */
+}
+
+.map-section h2 {
+  font-family: 'Cinzel', serif;
+  text-align: center;
+  margin-bottom: 1rem;
+  color: var(--primary-color);
+  font-size: 2rem;
+}
+
+.map-section p {
+  text-align: center;
+  font-size: 1.1rem;
+  color: var(--text-light);
+  margin-bottom: 1rem;
+}
+
+/* Leaflet Popup Styles */
+.leaflet-popup-content {
+  font-family: 'Roboto', sans-serif;
+  font-size: 1rem;
+  color: var(--text-dark);
+}
+.leaflet-popup-content-wrapper {
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+@media (max-width: 768px) {
+  #map {
+    height: 300px; /* Adjust height for smaller screens */
+  }
 }
