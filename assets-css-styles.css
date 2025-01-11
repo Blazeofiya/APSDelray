@@ -79,33 +79,30 @@ p {
 
 .nav-links {
   list-style: none;
-  display: flex;
-  gap: 1rem;
-  position: absolute;
-  top: 80px;
-  right: 0;
+  display: none; /* Hidden by default */
+  flex-direction: column; /* Stack items vertically on mobile */
   background-color: rgba(0, 0, 0, 0.9);
-  flex-direction: column;
+  position: absolute;
+  top: 70px; /* Adjust to align with header */
+  right: 0;
   width: 100%; /* Full width for mobile */
-  max-width: 300px; /* Prevent overly large menu */
-  transform: translateX(100%);
-  transition: transform 0.3s ease-in-out;
-  padding: 1.5rem 1rem;
+  max-width: 300px; /* Ensure menu doesn't exceed screen width */
   z-index: 1000;
-  overflow-x: hidden; /* Prevent horizontal scrolling issues */
+  padding: 1.5rem 1rem;
 }
 
 .nav-links.show {
-  transform: translateX(0); /* Show menu when toggled */
+  display: flex; /* Show the menu when toggled */
 }
 
 .nav-links a {
   color: var(--text-light);
   font-weight: bold;
   display: block;
-  padding: 0.5rem 0;
+  padding: 0.75rem 0;
   text-transform: uppercase;
   text-align: right; /* Align links to the right */
+  text-decoration: none;
 }
 
 .nav-links a.active {
@@ -117,34 +114,25 @@ p {
   color: var(--text-light);
   font-size: 1.5rem;
   cursor: pointer;
+  background: none;
+  border: none;
+  position: relative;
+  z-index: 1100; /* Ensure it stays above the menu */
 }
 
-/* Mobile Navigation */
-@media (max-width: 768px) {
+/* Desktop Navigation */
+@media (min-width: 769px) {
   .nav-links {
-    position: absolute;
-    top: 70px;
-    right: 0;
-    width: 250px; /* Adjusted width for better fit */
-    background-color: rgba(0, 0, 0, 0.9);
-    z-index: 1000;
-  }
-
-  .nav-links.show {
-    transform: translateX(0); /* Slide menu into view */
-  }
-
-  .nav-links a {
-    margin-bottom: 1rem;
-    text-align: right;
+    display: flex; /* Always visible on desktop */
+    position: static; /* Inline with header */
+    flex-direction: row; /* Horizontal layout */
+    background: none;
+    width: auto;
+    max-width: none;
   }
 
   .nav-toggle {
-    display: block; /* Show toggle button on mobile */
-  }
-
-  body {
-    overflow-x: hidden; /* Prevent horizontal scrolling on mobile */
+    display: none; /* Hide toggle button on desktop */
   }
 }
 
