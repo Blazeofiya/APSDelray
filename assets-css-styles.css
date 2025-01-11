@@ -80,19 +80,20 @@ p {
 .nav-links {
   list-style: none;
   display: none; /* Hidden by default */
-  flex-direction: column; /* Stack items vertically on mobile */
-  background-color: rgba(0, 0, 0, 0.9);
+  flex-direction: column; /* Stack items vertically */
+  background-color: rgba(0, 0, 0, 0.9); /* Dark background for menu */
   position: absolute;
   top: 70px; /* Adjust to align with header */
   right: 0;
   width: 100%; /* Full width for mobile */
-  max-width: 300px; /* Ensure menu doesn't exceed screen width */
+  max-width: 300px; /* Prevent overly wide menu */
   z-index: 1000;
   padding: 1.5rem 1rem;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.5); /* Add subtle shadow */
 }
 
 .nav-links.show {
-  display: flex; /* Show the menu when toggled */
+  display: flex; /* Show menu when toggled */
 }
 
 .nav-links a {
@@ -106,7 +107,7 @@ p {
 }
 
 .nav-links a.active {
-  color: var(--primary-color);
+  color: var(--primary-color); /* Highlight active link */
 }
 
 .nav-toggle {
@@ -123,18 +124,47 @@ p {
 /* Desktop Navigation */
 @media (min-width: 769px) {
   .nav-links {
-    display: flex; /* Always visible on desktop */
-    position: static; /* Inline with header */
-    flex-direction: row; /* Horizontal layout */
-    background: none; /* Remove background on desktop */
-    width: auto;
-    max-width: none;
+    display: none; /* Hidden by default, toggled by hamburger menu */
+    position: absolute;
+    top: 70px;
+    right: 0;
+    flex-direction: column; /* Stack vertically */
+    background-color: rgba(0, 0, 0, 0.9); /* Same styling as mobile */
+    width: 300px;
+    max-width: 300px;
+  }
+
+  .nav-links.show {
+    display: flex; /* Show menu when toggled */
   }
 
   .nav-toggle {
-    display: block; /* Make toggle button visible on desktop too */
-    position: relative;
-    right: 0; /* Ensure alignment with header */
+    display: block; /* Keep hamburger visible on desktop */
+  }
+}
+
+/* Mobile Navigation */
+@media (max-width: 768px) {
+  .nav-links {
+    position: absolute;
+    top: 70px;
+    right: 0;
+    width: 100%; /* Full width for mobile */
+    background-color: rgba(0, 0, 0, 0.9); /* Same styling as desktop */
+    z-index: 1000;
+  }
+
+  .nav-links.show {
+    display: flex; /* Simply show the menu */
+  }
+
+  .nav-links a {
+    margin-bottom: 1rem;
+    text-align: right;
+  }
+
+  .nav-toggle {
+    display: block; /* Show toggle button on mobile */
   }
 }
 
