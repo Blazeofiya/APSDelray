@@ -74,20 +74,38 @@ p {
   align-items: center;
   background-color: rgba(0, 0, 0, 0.8);
   padding: 1rem 2rem;
+  position: relative; /* Ensure header stays in place */
 }
 
 .nav-links {
   list-style: none;
   display: flex;
   gap: 1rem;
+  position: absolute;
+  top: 80px;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.9);
+  flex-direction: column;
+  width: 100%; /* Full width for mobile */
+  max-width: 300px; /* Prevent overly large menu */
+  transform: translateX(100%);
+  transition: transform 0.3s ease-in-out;
+  padding: 1.5rem 1rem;
+  z-index: 1000;
+  overflow-x: hidden; /* Prevent horizontal scrolling issues */
+}
+
+.nav-links.show {
+  transform: translateX(0); /* Show menu when toggled */
 }
 
 .nav-links a {
   color: var(--text-light);
   font-weight: bold;
-  display: flex;
-  align-items: center;
+  display: block;
+  padding: 0.5rem 0;
   text-transform: uppercase;
+  text-align: right; /* Align links to the right */
 }
 
 .nav-links a.active {
@@ -105,19 +123,15 @@ p {
 @media (max-width: 768px) {
   .nav-links {
     position: absolute;
-    top: 80px;
+    top: 70px;
     right: 0;
+    width: 250px; /* Adjusted width for better fit */
     background-color: rgba(0, 0, 0, 0.9);
-    flex-direction: column;
-    width: 250px;
-    transform: translateX(100%);
-    transition: transform 0.3s ease-in-out;
-    padding: 1.5rem 1rem;
     z-index: 1000;
   }
 
   .nav-links.show {
-    transform: translateX(0);
+    transform: translateX(0); /* Slide menu into view */
   }
 
   .nav-links a {
@@ -126,7 +140,11 @@ p {
   }
 
   .nav-toggle {
-    display: block;
+    display: block; /* Show toggle button on mobile */
+  }
+
+  body {
+    overflow-x: hidden; /* Prevent horizontal scrolling on mobile */
   }
 }
 
