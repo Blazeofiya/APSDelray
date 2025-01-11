@@ -12,6 +12,13 @@ if (navToggle && navLinks) {
     navToggle.addEventListener("click", () => {
         navLinks.classList.toggle("show");
     });
+    
+    // Close the menu when clicking outside
+    document.addEventListener("click", (event) => {
+        if (!navLinks.contains(event.target) && !navToggle.contains(event.target)) {
+            navLinks.classList.remove("show");
+        }
+    });
 }
 
 // Smooth Scrolling for Anchor Links
