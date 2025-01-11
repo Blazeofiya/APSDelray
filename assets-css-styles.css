@@ -80,7 +80,7 @@ p {
 .nav-links {
   list-style: none;
   display: flex; /* Always visible on desktop */
-  gap: 1rem;
+  gap: 2rem; /* Add spacing between the headers */
   flex-direction: row; /* Horizontal layout for desktop */
   background: none; /* Remove background on desktop */
   position: static; /* Inline with header */
@@ -102,14 +102,7 @@ p {
 }
 
 .nav-toggle {
-  display: none; /* Hide toggle button on desktop */
-  color: var(--text-light);
-  font-size: 1.5rem;
-  cursor: pointer;
-  background: none;
-  border: none;
-  position: relative;
-  z-index: 1100; /* Ensure it stays above the menu */
+  display: none; /* Hide the toggle button entirely on desktop */
 }
 
 /* Mobile Navigation */
@@ -138,7 +131,7 @@ p {
   }
 
   .nav-toggle {
-    display: block; /* Show toggle button on mobile */
+    display: block; /* Show toggle button only on mobile */
   }
 }
 
