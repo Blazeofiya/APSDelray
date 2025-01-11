@@ -79,31 +79,22 @@ p {
 
 .nav-links {
   list-style: none;
-  display: none; /* Hidden by default */
-  flex-direction: column; /* Stack items vertically */
-  background-color: rgba(0, 0, 0, 0.9); /* Dark background for menu */
-  position: absolute;
-  top: 70px; /* Adjust to align with header */
-  right: 0;
-  width: 100%; /* Full width for mobile */
-  max-width: 300px; /* Prevent overly wide menu */
-  z-index: 1000;
-  padding: 1.5rem 1rem;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.5); /* Add subtle shadow */
-}
-
-.nav-links.show {
-  display: flex; /* Show menu when toggled */
+  display: flex; /* Always visible on desktop */
+  gap: 1rem;
+  flex-direction: row; /* Horizontal layout for desktop */
+  background: none; /* Remove background on desktop */
+  position: static; /* Inline with header */
+  width: auto; /* Auto width for desktop */
+  padding: 0; /* Remove padding for desktop */
+  box-shadow: none; /* Remove shadow for desktop */
 }
 
 .nav-links a {
   color: var(--text-light);
   font-weight: bold;
-  display: block;
-  padding: 0.75rem 0;
   text-transform: uppercase;
-  text-align: right; /* Align links to the right */
   text-decoration: none;
+  padding: 0.5rem 1rem;
 }
 
 .nav-links a.active {
@@ -111,7 +102,7 @@ p {
 }
 
 .nav-toggle {
-  display: block; /* Make toggle button always visible */
+  display: none; /* Hide toggle button on desktop */
   color: var(--text-light);
   font-size: 1.5rem;
   cursor: pointer;
@@ -121,46 +112,29 @@ p {
   z-index: 1100; /* Ensure it stays above the menu */
 }
 
-/* Desktop Navigation */
-@media (min-width: 769px) {
-  .nav-links {
-    display: none; /* Hidden by default, toggled by hamburger menu */
-    position: absolute;
-    top: 70px;
-    right: 0;
-    flex-direction: column; /* Stack vertically */
-    background-color: rgba(0, 0, 0, 0.9); /* Same styling as mobile */
-    width: 300px;
-    max-width: 300px;
-  }
-
-  .nav-links.show {
-    display: flex; /* Show menu when toggled */
-  }
-
-  .nav-toggle {
-    display: block; /* Keep hamburger visible on desktop */
-  }
-}
-
 /* Mobile Navigation */
 @media (max-width: 768px) {
   .nav-links {
+    display: none; /* Hidden by default on mobile */
+    flex-direction: column; /* Stack items vertically on mobile */
+    background-color: rgba(0, 0, 0, 0.9); /* Add dark background */
     position: absolute;
-    top: 70px;
+    top: 70px; /* Align with header */
     right: 0;
     width: 100%; /* Full width for mobile */
-    background-color: rgba(0, 0, 0, 0.9); /* Same styling as desktop */
+    max-width: 300px;
     z-index: 1000;
+    padding: 1.5rem 1rem;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.5); /* Add shadow for mobile */
   }
 
   .nav-links.show {
-    display: flex; /* Simply show the menu */
+    display: flex; /* Show the menu when toggled */
   }
 
   .nav-links a {
     margin-bottom: 1rem;
-    text-align: right;
+    text-align: right; /* Align text to the right */
   }
 
   .nav-toggle {
