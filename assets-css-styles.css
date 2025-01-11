@@ -110,7 +110,7 @@ p {
 }
 
 .nav-toggle {
-  display: none;
+  display: block; /* Make toggle button always visible */
   color: var(--text-light);
   font-size: 1.5rem;
   cursor: pointer;
@@ -120,28 +120,21 @@ p {
   z-index: 1100; /* Ensure it stays above the menu */
 }
 
-/* Mobile Navigation */
-@media (max-width: 768px) {
+/* Desktop Navigation */
+@media (min-width: 769px) {
   .nav-links {
-    position: absolute;
-    top: 70px;
-    right: 0;
-    width: 250px; /* Adjusted width for better fit */
-    background-color: rgba(0, 0, 0, 0.9);
-    z-index: 1000;
-  }
-
-  .nav-links.show {
-    display: flex; /* Simply show the menu */
-  }
-
-  .nav-links a {
-    margin-bottom: 1rem;
-    text-align: right;
+    display: flex; /* Always visible on desktop */
+    position: static; /* Inline with header */
+    flex-direction: row; /* Horizontal layout */
+    background: none; /* Remove background on desktop */
+    width: auto;
+    max-width: none;
   }
 
   .nav-toggle {
-    display: block; /* Show toggle button on mobile */
+    display: block; /* Make toggle button visible on desktop too */
+    position: relative;
+    right: 0; /* Ensure alignment with header */
   }
 }
 
