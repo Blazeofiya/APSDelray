@@ -1,6 +1,3 @@
-/* Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Roboto:wght@400;700&display=swap');
-
 /* Root variables for colors */
 :root {
   --primary-color: #b54103;
@@ -273,8 +270,7 @@ p {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Matches updated card size */
   gap: 1.5rem; /* Consistent spacing between cards */
-  margin: 2rem auto; /* Add spacing and center the grid */
-}
+  margin: 2rem auto; /* Add spacing and center the grid
 
 /* Knowledge Card with Flip Effect */
 .knowledge-card {
