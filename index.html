@@ -69,155 +69,203 @@
     </nav>
   </header>
 
-<!-- Hero Section with Parallax Effect -->
-<section class="hero">
-  <div class="hero-overlay"></div>
-  <div class="hero-text">
-    <h1>Embark on the Adventure of Knowledge</h1>
-    <p>Discover connections, hidden truths, and practical skills for the modern world.</p>
-    <form class="search-form" role="search" aria-label="Search events, resources, or projects">
-      <input 
-        type="text" 
-        placeholder="Search events, resources, or projects..." 
-        aria-label="Search input" 
-      />
-      <button 
-        type="submit" 
-        class="btn-primary" 
-        aria-label="Search"
-      >
-        Search
-      </button>
-    </form>
-  </div>
-</section>
+  <!-- Hero Section with Parallax Effect -->
+  <section class="hero">
+    <div class="hero-overlay"></div>
+    <div class="hero-text">
+      <h1>Embark on the Adventure of Knowledge</h1>
+      <p>Discover connections, hidden truths, and practical skills for the modern world.</p>
+      <form class="search-form" role="search" aria-label="Search events, resources, or projects">
+        <input 
+          type="text" 
+          placeholder="Search events, resources, or projects..." 
+          aria-label="Search input" 
+        />
+        <button 
+          type="submit" 
+          class="btn-primary" 
+          aria-label="Search"
+        >
+          Search
+        </button>
+      </form>
+    </div>
+  </section>
 
-<hr class="section-divider">
+  <hr class="section-divider">
 
-<!-- Intro Cards Section -->
-<section class="intro-cards-section">
-  <h2>Explore More</h2>
-  <div class="intro-cards-grid">
-    <!-- Local Hubs Card -->
-    <div class="knowledge-card">
-      <div class="knowledge-card-inner">
-        <div class="knowledge-card-front">
-          <h3>Local Hubs</h3>
+  <!-- Knowledge Grid Section -->
+  <section class="knowledge-grid-section">
+    <h2>Knowledge Links</h2>
+    <p>Explore these resources to learn more about history, tools, and research.</p>
+
+    <h2>Join a Crew</h2>
+    <div class="knowledge-grid" data-category="local-hubs">
+      <!-- Add Local Hub cards here -->
+    </div>
+
+    <h2>Hidden Histories</h2>
+    <div class="knowledge-grid" data-category="hidden-histories">
+      <div class="knowledge-card" data-category="hidden-histories">
+        <div class="knowledge-card-inner">
+          <div class="knowledge-card-front">
+            <img src="images/fallback.jpg" alt="Preview of Hidden Histories" class="dynamic-preview" loading="lazy" />
+          </div>
+          <div class="knowledge-card-back">
+            <h3>Library of Congress</h3>
+            <p>The largest library in the world with millions of items for research.</p>
+            <a href="https://www.loc.gov/" target="_blank" aria-label="Visit the Library of Congress website">Visit Website</a>
+          </div>
         </div>
-        <div class="knowledge-card-back">
-          <p>Discover local opportunities to connect with like-minded individuals.</p>
-          <a href="roots-and-horizons.html" class="btn-primary" aria-label="Explore Local Hubs">Explore Local Hubs</a>
+      </div>
+      <div class="knowledge-card" data-category="hidden-histories">
+        <div class="knowledge-card-inner">
+          <div class="knowledge-card-front">
+            <img src="images/fallback.jpg" alt="Preview of Hidden Histories" class="dynamic-preview" loading="lazy" />
+          </div>
+          <div class="knowledge-card-back">
+            <h3>UNESCO World Heritage</h3>
+            <p>Discover the world’s cultural and natural heritage sites.</p>
+            <a href="https://whc.unesco.org/" target="_blank" aria-label="Visit the UNESCO World Heritage website">Visit Website</a>
+          </div>
+        </div>
+      </div>
+      <div class="knowledge-card" data-category="hidden-histories">
+        <div class="knowledge-card-inner">
+          <div class="knowledge-card-front">
+            <img src="images/fallback.jpg" alt="Preview of Peter Santenello" class="dynamic-preview" loading="lazy" />
+          </div>
+          <div class="knowledge-card-back">
+            <h3>Peter Santenello</h3>
+            <p>Explore unique cultural stories through Peter Santenello’s videos.</p>
+            <a href="https://www.youtube.com/@PeterSantenello/videos" target="_blank" aria-label="Visit Peter Santenello's YouTube channel">Visit Website</a>
+          </div>
+        </div>
+      </div>
+      <div class="knowledge-card" data-category="hidden-histories">
+        <div class="knowledge-card-inner">
+          <div class="knowledge-card-front">
+            <img src="images/fallback.jpg" alt="Preview of Weird Explorer" class="dynamic-preview" loading="lazy" />
+          </div>
+          <div class="knowledge-card-back">
+            <h3>Weird Explorer</h3>
+            <p>Discover rare fruits and cultural food explorations.</p>
+            <a href="https://www.youtube.com/@WeirdExplorer" target="_blank" aria-label="Visit Weird Explorer's YouTube channel">Visit Website</a>
+          </div>
+        </div>
+      </div>
+      <div class="knowledge-card" data-category="hidden-histories">
+        <div class="knowledge-card-inner">
+          <div class="knowledge-card-front">
+            <img src="images/fallback.jpg" alt="Preview of Channel 5 YouTube" class="dynamic-preview" loading="lazy" />
+          </div>
+          <div class="knowledge-card-back">
+            <h3>Channel 5</h3>
+            <p>Explore unconventional news and documentaries.</p>
+            <a href="https://www.youtube.com/@Channel5YouTube/videos" target="_blank" aria-label="Visit Channel 5's YouTube channel">Visit Website</a>
+          </div>
         </div>
       </div>
     </div>
-    <!-- Hidden Histories Card -->
-    <div class="knowledge-card">
-      <div class="knowledge-card-inner">
-        <div class="knowledge-card-front">
-          <h3>Hidden Histories</h3>
+
+    <h2>Manuals</h2>
+    <div class="knowledge-grid" data-category="practical-guides">
+      <div class="knowledge-card" data-category="practical-guides">
+        <div class="knowledge-card-inner">
+          <div class="knowledge-card-front">
+            <img src="images/fallback.jpg" alt="Preview of FMHY" class="dynamic-preview" loading="lazy" />
+          </div>
+          <div class="knowledge-card-back">
+            <h3>FMHY</h3>
+            <p>A collection of free resources for modern living and learning.</p>
+            <a href="https://fmhy.net/" target="_blank" aria-label="Visit the FMHY website">Visit Website</a>
+          </div>
         </div>
-        <div class="knowledge-card-back">
-          <p>Dive into historical investigations and unravel hidden truths.</p>
-          <a href="the-big-picture.html" class="btn-primary" aria-label="Explore Hidden Histories">Explore Hidden Histories</a>
+      </div>
+      <div class="knowledge-card" data-category="practical-guides">
+        <div class="knowledge-card-inner">
+          <div class="knowledge-card-front">
+            <img src="images/fallback.jpg" alt="Preview of Alternative To" class="dynamic-preview" loading="lazy" />
+          </div>
+          <div class="knowledge-card-back">
+            <h3>Alternative To</h3>
+            <p>Discover software and application alternatives.</p>
+            <a href="https://alternativeto.net/" target="_blank" aria-label="Visit the Alternative To website">Visit Website</a>
+          </div>
+        </div>
+      </div>
+      <div class="knowledge-card" data-category="practical-guides">
+        <div class="knowledge-card-inner">
+          <div class="knowledge-card-front">
+            <img src="images/fallback.jpg" alt="Preview of Privacy Guides" class="dynamic-preview" loading="lazy" />
+          </div>
+          <div class="knowledge-card-back">
+            <h3>Privacy Guides</h3>
+            <p>Explore resources to protect your online privacy.</p>
+            <a href="https://discuss.privacyguides.net/" target="_blank" aria-label="Visit the Privacy Guides discussion forum">Visit Website</a>
+          </div>
         </div>
       </div>
     </div>
-    <!-- Practical Guides Card -->
-    <div class="knowledge-card">
-      <div class="knowledge-card-inner">
-        <div class="knowledge-card-front">
-          <h3>Practical Guides</h3>
+
+    <h2>Repositories</h2>
+    <div class="knowledge-grid" data-category="repositories">
+      <div class="knowledge-card" data-category="repositories">
+        <div class="knowledge-card-inner">
+          <div class="knowledge-card-front">
+            <img src="images/fallback.jpg" alt="Preview of Free For Dev" class="dynamic-preview" loading="lazy" />
+          </div>
+          <div class="knowledge-card-back">
+            <h3>Free For Dev</h3>
+            <p>A curated list of free resources for developers.</p>
+            <a href="https://github.com/ripienaar/free-for-dev?tab=readme-ov-file" target="_blank" aria-label="Visit Free For Dev repository">Visit Website</a>
+          </div>
         </div>
-        <div class="knowledge-card-back">
-          <p>Master new skills with curated guides and resources.</p>
-          <a href="toolkits.html" class="btn-primary" aria-label="Explore Practical Guides">Explore Guides</a>
+      </div>
+      <div class="knowledge-card" data-category="repositories">
+        <div class="knowledge-card-inner">
+          <div class="knowledge-card-front">
+            <img src="images/fallback.jpg" alt="Preview of Awesome Lists" class="dynamic-preview" loading="lazy" />
+          </div>
+          <div class="knowledge-card-back">
+            <h3>Awesome Lists</h3>
+            <p>A curated list of awesome tools and resources.</p>
+            <a href="https://github.com/sindresorhus/awesome?tab=readme-ov-file" target="_blank" aria-label="Visit Awesome Lists repository">Visit Website</a>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<hr class="section-divider">
-<!-- Call-to-Action Section -->
-<section class="cta-section">
-  <h2>Join the Adventure</h2>
-  <p>Sign up to connect with like-minded individuals, learn new skills, and create meaningful projects.</p>
-  <a href="sign-up.html" class="btn-primary" aria-label="Sign up to join the adventure">Get Started</a>
-</section>
+  <hr class="section-divider">
 
-<hr class="section-divider">
+  <!-- Interactive Event Map Section -->
+  <section class="map-section">
+    <h2>Interactive Event Map</h2>
+    <p>Find events and meetups happening near you.</p>
+    <div id="map" style="height: 400px; margin-top: 20px;" aria-label="Interactive map displaying events and meetups"></div>
+  </section>
 
-<!-- Knowledge Grid Section -->
-<section class="knowledge-grid-section">
-  <h2>Knowledge Links</h2>
-  <p>Explore these resources to learn more about history, tools, and research.</p>
-  <div class="knowledge-grid">
-    <!-- Library of Congress -->
-    <div class="knowledge-card">
-      <div class="knowledge-card-inner">
-        <div class="knowledge-card-front">
-          <img src="images/fallback.jpg" alt="Preview of Library of Congress" class="dynamic-preview" loading="lazy" />
-        </div>
-        <div class="knowledge-card-back">
-          <h3>Library of Congress</h3>
-          <p>The largest library in the world with millions of items for research.</p>
-          <a href="https://www.loc.gov/" target="_blank" aria-label="Visit the Library of Congress website">Visit Website</a>
-        </div>
-      </div>
+  <hr class="section-divider">
+
+  <!-- Footer with Decorative Compass Rose -->
+  <footer class="contact-block">
+    <div class="contact-info">
+      <h3>Contact Us</h3>
+      <p>123 Ancient Road, Knowledge City, Earth</p>
+      <p>
+        Email:
+        <a href="mailto:info@globalantiquity.org" aria-label="Send an email to info@globalantiquity.org">info@globalantiquity.org</a>
+      </p>
+      <img src="images/compass-rose.png" alt="Decorative compass rose" style="width: 50px; margin-top: 10px;" />
     </div>
-    <!-- FMHY -->
-    <div class="knowledge-card">
-      <div class="knowledge-card-inner">
-        <div class="knowledge-card-front">
-          <img src="images/fallback.jpg" alt="Preview of FMHY" class="dynamic-preview" loading="lazy" />
-        </div>
-        <div class="knowledge-card-back">
-          <h3>FMHY</h3>
-          <p>A collection of free resources for modern living and learning.</p>
-          <a href="https://fmhy.net/" target="_blank" aria-label="Visit the FMHY website">Visit Website</a>
-        </div>
-      </div>
-    </div>
-    <!-- UNESCO World Heritage -->
-    <div class="knowledge-card">
-      <div class="knowledge-card-inner">
-        <div class="knowledge-card-front">
-          <img src="images/fallback.jpg" alt="Preview of UNESCO World Heritage" class="dynamic-preview" loading="lazy" />
-        </div>
-        <div class="knowledge-card-back">
-          <h3>UNESCO World Heritage</h3>
-          <p>Discover the world’s cultural and natural heritage sites.</p>
-          <a href="https://whc.unesco.org/" target="_blank" aria-label="Visit the UNESCO World Heritage website">Visit Website</a>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+    <p class="footer-copy">&copy; 2025 The Global Antiquity Society. All rights reserved.</p>
+  </footer>
 
-<hr class="section-divider">
-
-<!-- Interactive Event Map Section -->
-<section class="map-section">
-  <h2>Interactive Event Map</h2>
-  <p>Find events and meetups happening near you.</p>
-  <div id="map" style="height: 400px; margin-top: 20px;" aria-label="Interactive map displaying events and meetups"></div>
-</section>
-
-<hr class="section-divider">
-
-<!-- Footer with Decorative Compass Rose -->
-<footer class="contact-block">
-  <div class="contact-info">
-    <h3>Contact Us</h3>
-    <p>123 Ancient Road, Knowledge City, Earth</p>
-    <p>
-      Email:
-      <a href="mailto:info@globalantiquity.org" aria-label="Send an email to info@globalantiquity.org">info@globalantiquity.org</a>
-    </p>
-    <img src="images/compass-rose.png" alt="Decorative compass rose" style="width: 50px; margin-top: 10px;" />
-  </div>
-  <p class="footer-copy">&copy; 2025 The Global Antiquity Society. All rights reserved.</p>
-</footer>
+  <!-- Main Script -->
+  <script defer src="assets-js-script.js"></script>
+</body>
+</html>
 
 <!-- Main Script -->
 <script defer src="assets-js-script.js"></script>
