@@ -1,7 +1,9 @@
 // Preloader Logic
 window.addEventListener("load", () => {
     const preloader = document.getElementById("preloader");
-    if (preloader) preloader.style.display = "none";
+    if (preloader) {
+        preloader.style.display = "none";
+    }
 });
 
 // Mobile Navigation Toggle
@@ -68,7 +70,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 // Initialize the map with custom tiles
-if (document.getElementById("map")) {
+if (typeof L !== 'undefined' && document.getElementById("map")) {
     const map = L.map('map').setView([26.4615, -80.0728], 13);
 
     L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
@@ -92,6 +94,6 @@ if (document.getElementById("map")) {
 
     // Custom zoom control position
     L.control.zoom({
-        position: 'bottomright' // Move zoom controls to the bottom-right corner
+        position: 'bottomright'
     }).addTo(map);
 }
