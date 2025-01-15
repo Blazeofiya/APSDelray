@@ -85,6 +85,7 @@ p {
   width: auto; /* Auto width for desktop */
   padding: 0; /* Remove padding for desktop */
   box-shadow: none; /* Remove shadow for desktop */
+  transition: all 0.3s ease-in-out; /* Smooth show/hide effect */
 }
 
 .nav-links a {
@@ -103,10 +104,6 @@ p {
   color: var(--primary-color); /* Highlight active link */
 }
 
-.nav-links {
-  transition: all 0.3s ease-in-out; /* Smooth show/hide effect */
-}
-
 .nav-toggle {
   display: none; /* Hidden on desktop */
   font-size: 1.5rem;
@@ -115,20 +112,6 @@ p {
   color: var(--text-light);
   cursor: pointer;
   z-index: 1001; /* Ensure toggle button is above other elements */
-}
-
-/* Default (Desktop) Navigation */
-.nav-links {
-  list-style: none;
-  display: flex; /* Visible on desktop */
-  gap: 2rem;
-  flex-direction: row;
-  background: none; /* Transparent for desktop */
-  position: static;
-  width: auto;
-  padding: 0;
-  box-shadow: none;
-  transition: all 0.3s ease-in-out; /* Smooth transition */
 }
 
 /* Mobile Navigation */
