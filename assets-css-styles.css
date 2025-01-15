@@ -1,9 +1,9 @@
 /* Root variables for colors */
 :root {
-  --primary-color: #b54103;
+  --primary-color: #a63a00;
   --secondary-color: #f2e4ca;
   --background-dark: #1c1c1c;
-  --text-light: #ffffff;
+  --text-light: #f9f9f9;
   --text-dark: #333333;
   --accent-color: #c79b53;
 }
@@ -143,36 +143,27 @@ p {
   justify-content: center;
   text-align: center;
   padding: 2rem; /* Add padding for better spacing */
+  margin-bottom: 2rem;
 }
 
 .hero-overlay {
-  background-color: rgba(0, 0, 0, 0.5); /* Dark overlay for better text contrast */
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 1; /* Ensure overlay is below the text */
-}
-
-.hero-text {
-  position: relative;
-  z-index: 2; /* Ensure text is above the overlay */
-  max-width: 600px;
+  background-color: rgba(0, 0, 0, 0.5);
   display: flex;
-  flex-direction: column;
+  justify-content: center;
   align-items: center;
-  gap: 1.5rem; /* Add spacing between elements */
+  text-align: center;
+  padding: 2rem;
 }
 
 .hero-text h1 {
-  font-size: 3rem;
-  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7); /* Strong shadow for readability */
+  font-size: 2.5rem;
+  color: var(--text-light);
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5); /* Add depth */
 }
 
 .hero-text p {
   font-size: 1.2rem;
-  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+  color: var(--text-light);
 }
 
 .search-form {
@@ -258,12 +249,15 @@ p {
 
 /* Knowledge Card Highlight */
 .knowledge-card.highlight {
-  border: 2px solid gold; /* Highlight border */
-  box-shadow: 0px 4px 15px rgba(255, 215, 0, 0.8); /* Glow effect */
-  transform: scale(1.05); /* Slight zoom-in effect */
-  margin-bottom: 1rem; /* Ensure spacing below */
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 0 10px 2px var(--primary-color), 0 0 20px 5px rgba(181, 65, 3, 0.6); /* Glowing effect */
+  transform: scale(1.05); /* Slight scaling for emphasis */
+  transition: all 0.3s ease-in-out; /* Smooth transition */
 }
+
+.knowledge-card.highlight:hover {
+  box-shadow: 0 0 15px 3px var(--primary-color), 0 0 30px 10px rgba(181, 65, 3, 0.8); /* Brighter glow on hover */
+}
+
 /* Filter Buttons Styling */
 .filter-buttons {
     display: flex;
@@ -294,11 +288,11 @@ p {
 
 /* Dynamic Previews */
 .dynamic-preview {
-    width: 100%;
-    height: 200px; /* Adjust based on grid layout */
-    object-fit: cover;
-    border-radius: 8px; /* Rounded edges */
-    transition: transform 0.3s ease-in-out;
+  width: 100%;
+  height: 150px; /* Adjust as needed for your card size */
+  object-fit: cover; /* Ensures the image maintains aspect ratio */
+  border-radius: 4px; /* Matches the card styling */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for emphasis */
 }
 
 .dynamic-preview:hover {
@@ -310,7 +304,8 @@ p {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Matches updated card size */
   gap: 1.5rem; /* Consistent spacing between cards */
-  margin: 2rem auto; /* Add spacing and center the grid
+  padding: 2rem; /* Add spacing and center the grid */
+}
 
 /* Knowledge Card with Flip Effect */
 .knowledge-card {
@@ -319,6 +314,10 @@ p {
   height: 200px;
   perspective: 1000px; /* Enable 3D flip effect */
   margin: auto; /* Centers the cards */
+}
+
+.knowledge-card:hover .knowledge-card-inner {
+  transform: translateY(-5px); /* Simple hover effect for unsupported devices */
 }
 
 .knowledge-card-inner {
@@ -386,24 +385,26 @@ p {
   background: #9b3702; /* Slightly darker primary color */
 }
 
-/* Adjust grid for spacing */
-.knowledge-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive grid */
-  gap: 1.5rem; /* Spacing between cards */
-  margin: 2rem auto;
+/* Responsive Adjustments for Small Screens */
+@media (max-width: 320px) {
+  .knowledge-card {
+    width: 95%;
+    margin: 0.5rem auto;
+  }
+
+  .search-form input {
+    flex-basis: 100%;
+    padding: 0.5rem;
+  }
 }
 
+/* Section Spacing */
 section {
-  padding: 2rem 1rem; /* Consistent section padding */
+  padding: 2rem 1rem;
+  margin-bottom: 2rem;
 }
 
-h2 {
-  margin-bottom: 1rem;
-  text-align: center; /* Center all section headers */
-}
-
-/* Mobile-Specific Fixes */
+/* Responsive Grid Adjustments */
 @media (max-width: 768px) {
   .knowledge-grid {
     grid-template-columns: 1fr; /* Single column for smaller screens */
@@ -413,6 +414,11 @@ h2 {
   .filter-buttons {
     flex-wrap: wrap;
     gap: 0.5rem; /* Adjust spacing for buttons on smaller screens */
+  }
+
+  .knowledge-card {
+    width: 90%; /* Adjust card size for smaller screens */
+    margin: 1rem auto; /* Center and space out */
   }
 }
 
