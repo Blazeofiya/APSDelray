@@ -16,14 +16,18 @@ const navLinks = document.getElementById("navLinks");
 
 if (navToggle && navLinks) {
     navToggle.addEventListener("click", () => {
-        if (window.innerWidth < 768) { // Only toggle in mobile view
-            navLinks.classList.toggle("active");
-        }
+        // Toggle menu visibility
+        navLinks.classList.toggle("active");
     });
 
     // Close the menu when clicking outside
     document.addEventListener("click", (event) => {
-        if (window.innerWidth < 768 && !navLinks.contains(event.target) && !navToggle.contains(event.target)) {
+        // Ensure this only applies when the menu is active
+        if (
+            navLinks.classList.contains("active") &&
+            !navLinks.contains(event.target) &&
+            !navToggle.contains(event.target)
+        ) {
             navLinks.classList.remove("active");
         }
     });
@@ -107,6 +111,28 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
     }
+});
+
+// Enable Tap-to-Flip for Knowledge Cards on Touch Devices
+document.addEventListener("DOMContentLoaded", () => {
+    const cards = document.querySelectorAll(".knowledge-card");
+
+    cards.forEach(card => {
+        card.addEventListener("click", () => {
+            // Toggle the 'flipped' class on tap
+            card.querySelector(".knowledge-card-inner").classList.toggle("flipped");
+        });
+    });
+
+    // Close flipped cards when tapping outside (optional)
+    document.addEventListener("click", (event) => {
+        const cards = document.querySelectorAll(".knowledge-card-inner");
+        cards.forEach(card => {
+            if (!card.closest(".knowledge-card").contains(event.target) && card.classList.contains("flipped")) {
+                card.classList.remove("flipped");
+            }
+        });
+    });
 });
 
 // Initialize the map with custom tiles
