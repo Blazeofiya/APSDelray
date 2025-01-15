@@ -109,6 +109,20 @@ p {
   z-index: 1001; /* Ensure toggle button is above other elements */
 }
 
+/* Default (Desktop) Navigation */
+.nav-links {
+  list-style: none;
+  display: flex; /* Visible on desktop */
+  gap: 2rem;
+  flex-direction: row;
+  background: none; /* Transparent for desktop */
+  position: static;
+  width: auto;
+  padding: 0;
+  box-shadow: none;
+  transition: all 0.3s ease-in-out; /* Smooth transition */
+}
+
 /* Mobile Navigation */
 @media (max-width: 768px) {
   .nav-links {
@@ -118,11 +132,12 @@ p {
     position: absolute;
     top: 70px; /* Align with header */
     right: 0;
-    width: 100%; /* Full width for mobile */
+    width: 100%;
     max-width: 300px; /* Limit menu width */
     padding: 1.5rem 1rem;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.5); /* Add shadow for mobile menu */
-    z-index: 1000; /* Ensure menu appears above other elements */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.5); /* Shadow for dropdown */
+    z-index: 1000;
+    transition: all 0.3s ease-in-out; /* Smooth dropdown effect */
   }
 
   .nav-links.active {
@@ -131,28 +146,24 @@ p {
 
   .nav-links a {
     margin-bottom: 1rem;
-    text-align: left; /* Align links to the left */
+    text-align: left; /* Align text to the left */
   }
 
   .nav-toggle {
-    display: block; /* Show toggle button on mobile */
+    display: block; /* Show hamburger button */
+    font-size: 1.5rem;
+    color: var(--text-light);
+    background: none;
+    border: none;
+    cursor: pointer;
+    z-index: 1001;
   }
 }
 
-/* Desktop Navigation */
+/* Desktop View */
 @media (min-width: 769px) {
-  .nav-links {
-    display: flex !important; /* Always visible on desktop */
-    flex-direction: row; /* Horizontal layout */
-    background: transparent; /* No background for desktop */
-    position: static; /* Inline with header */
-    box-shadow: none; /* Remove shadow for desktop */
-    width: auto;
-    padding: 0;
-  }
-
   .nav-toggle {
-    display: none; /* Hide the hamburger menu on desktop */
+    display: none; /* Hide hamburger menu on desktop */
   }
 }
 
