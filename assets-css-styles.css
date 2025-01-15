@@ -95,8 +95,16 @@ p {
   padding: 0.5rem 1rem;
 }
 
+.nav-links a:hover {
+  color: var(--accent-color); /* Add a hover effect */
+}
+
 .nav-links a.active {
   color: var(--primary-color); /* Highlight active link */
+}
+
+.nav-links {
+  transition: all 0.3s ease-in-out; /* Smooth show/hide effect */
 }
 
 .nav-toggle {
