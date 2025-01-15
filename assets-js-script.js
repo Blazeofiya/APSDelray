@@ -16,12 +16,14 @@ const navLinks = document.getElementById("navLinks");
 
 if (navToggle && navLinks) {
     navToggle.addEventListener("click", () => {
-        navLinks.classList.toggle("active");
+        if (window.innerWidth < 768) { // Only toggle in mobile view
+            navLinks.classList.toggle("active");
+        }
     });
 
     // Close the menu when clicking outside
     document.addEventListener("click", (event) => {
-        if (!navLinks.contains(event.target) && !navToggle.contains(event.target)) {
+        if (window.innerWidth < 768 && !navLinks.contains(event.target) && !navToggle.contains(event.target)) {
             navLinks.classList.remove("active");
         }
     });
