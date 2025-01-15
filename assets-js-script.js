@@ -16,19 +16,13 @@ const navLinks = document.getElementById("navLinks");
 
 if (navToggle && navLinks) {
     navToggle.addEventListener("click", () => {
-        // Toggle menu visibility
-        navLinks.classList.toggle("active");
+        navLinks.classList.toggle("active"); // Toggle visibility of links
     });
 
     // Close the menu when clicking outside
     document.addEventListener("click", (event) => {
-        // Ensure this only applies when the menu is active
-        if (
-            navLinks.classList.contains("active") &&
-            !navLinks.contains(event.target) &&
-            !navToggle.contains(event.target)
-        ) {
-            navLinks.classList.remove("active");
+        if (!navLinks.contains(event.target) && !navToggle.contains(event.target)) {
+            navLinks.classList.remove("active"); // Close the menu
         }
     });
 }
