@@ -147,18 +147,17 @@ p {
 }
 
 .hero-overlay {
-  background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  padding: 2rem;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Adjust transparency if needed */
+  pointer-events: none; /* Prevent interaction with the overlay */
 }
-
-.hero-text h1 {
-  font-size: 2.5rem;
-  color: var(--text-light);
-  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5); /* Add depth */
+.hero-text {
+  position: relative; /* Ensure text stays above the overlay */
+  z-index: 1; /* Higher than the overlay */
 }
 
 .hero-text p {
