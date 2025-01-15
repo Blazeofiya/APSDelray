@@ -10,22 +10,32 @@ window.addEventListener("load", () => {
     }, 5000);
 });
 
-// Mobile Navigation Toggle
-const navToggle = document.getElementById("navToggle");
-const navLinks = document.getElementById("navLinks");
+// Mobile Navigation Toggle with Outside Click Support
+document.addEventListener("DOMContentLoaded", () => {
+    const navToggle = document.getElementById("navToggle");
+    const navLinks = document.getElementById("navLinks");
 
-if (navToggle && navLinks) {
-    navToggle.addEventListener("click", () => {
-        navLinks.classList.toggle("active"); // Toggle visibility of links
-    });
+    if (navToggle && navLinks) {
+        // Toggle menu visibility when the hamburger menu is clicked
+        navToggle.addEventListener("click", () => {
+            navLinks.classList.toggle("active"); // Show/hide the menu
+        });
 
-    // Close the menu when clicking outside
-    document.addEventListener("click", (event) => {
-        if (!navLinks.contains(event.target) && !navToggle.contains(event.target)) {
-            navLinks.classList.remove("active"); // Close the menu
-        }
-    });
-}
+        // Close the menu when clicking outside of it
+        document.addEventListener("click", (event) => {
+            // Check if the click was outside of navLinks and navToggle
+            if (
+                !navLinks.contains(event.target) &&
+                !navToggle.contains(event.target) &&
+                navLinks.classList.contains("active")
+            ) {
+                navLinks.classList.remove("active"); // Hide the menu
+            }
+        });
+    } else {
+        console.error("Navigation elements (navToggle or navLinks) not found in the DOM.");
+    }
+});
 
 // Smooth Scrolling for Anchor Links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
