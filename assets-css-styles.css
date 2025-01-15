@@ -71,21 +71,21 @@ p {
   align-items: center;
   background-color: rgba(0, 0, 0, 0.8);
   padding: 1rem 2rem;
-  position: relative; /* Ensure header stays in place */
-  z-index: 1000; /* Place header above other elements */
+  position: relative;
+  z-index: 1000;
 }
 
 .nav-links {
   list-style: none;
-  display: flex; /* Visible on desktop */
-  gap: 2rem; /* Add spacing between links */
-  flex-direction: row; /* Horizontal layout for desktop */
-  background: none; /* Remove background for desktop */
-  position: static; /* Inline with header */
-  width: auto; /* Auto width for desktop */
-  padding: 0; /* Remove padding for desktop */
-  box-shadow: none; /* Remove shadow for desktop */
-  transition: all 0.3s ease-in-out; /* Smooth show/hide effect */
+  display: flex; /* Default: visible on desktop */
+  gap: 2rem;
+  flex-direction: row; /* Horizontal on desktop */
+  background: none; 
+  position: static;
+  width: auto;
+  padding: 0;
+  box-shadow: none;
+  transition: all 0.3s ease-in-out;
 }
 
 .nav-links a {
@@ -97,60 +97,58 @@ p {
 }
 
 .nav-links a:hover {
-  color: var(--accent-color); /* Add a hover effect */
+  color: var(--accent-color); 
 }
 
 .nav-links a.active {
-  color: var(--primary-color); /* Highlight active link */
+  color: var(--primary-color); 
 }
 
 .nav-toggle {
-  display: none; /* Hidden on desktop */
+  display: none; /* Hidden by default (desktop) */
   font-size: 1.5rem;
   background: none;
   border: none;
   color: var(--text-light);
   cursor: pointer;
-  z-index: 1001; /* Ensure toggle button is above other elements */
+  z-index: 1001;
 }
 
 /* Mobile Navigation */
 @media (max-width: 768px) {
   .nav-toggle {
-    display: block; /* Show hamburger button */
+    display: block; /* Show hamburger button on mobile */
   }
   .nav-links {
-    display: none; /* Hidden by default */
-    flex-direction: column; /* Stack links vertically */
-    background-color: rgba(0, 0, 0, 0.9); /* Dark background for mobile */
+    display: none; /* Hidden by default on mobile */
+    flex-direction: column;
+    background-color: rgba(0, 0, 0, 0.9);
     position: absolute;
-    top: 70px; /* Align with header */
+    top: 70px; /* Align with header height */
     right: 0;
     width: 100%;
     max-width: 300px; /* Limit menu width */
     padding: 1.5rem 1rem;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.5); /* Shadow for dropdown */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.5);
     z-index: 1000;
-    transition: all 0.3s ease-in-out; /* Smooth dropdown effect */
+    transition: all 0.3s ease-in-out;
   }
-
   .nav-links.active {
     display: flex; /* Show menu when toggled */
   }
-
   .nav-links a {
     margin-bottom: 1rem;
-    text-align: left; /* Align text to the left */
+    text-align: left;
   }
 }
 
 /* Desktop View */
 @media (min-width: 769px) {
   .nav-toggle {
-    display: none; /* Hide hamburger menu on desktop */
+    display: none; /* Hide hamburger on desktop */
   }
   .nav-links {
-    display: flex; /* Show on desktop */
+    display: flex; /* Show links inline on desktop */
     flex-direction: row;
     position: static;
     background: transparent;
@@ -483,25 +481,6 @@ section {
     gap: 2rem; /* Increase spacing between cards for large screens */
     padding: 2rem 3rem; /* Adjust grid padding for large screens */
   }
-}
-
-/* Nav Links (Mobile Adjustments) */
-.nav-links {
-  position: absolute;
-  top: 70px;
-  right: 0;
-  width: 100%;
-  background-color: rgba(0, 0, 0, 0.9);
-  z-index: 1000;
-}
-
-.nav-links a {
-  margin-bottom: 1rem;
-  text-align: right; /* Align text to the right */
-}
-
-.nav-toggle {
-  display: block; /* Show toggle button only on mobile */
 }
 
 /* Hero Section */
