@@ -318,26 +318,35 @@ p {
 /* Knowledge Grid Layout */
 .knowledge-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Cards stay 300px wide or adjust if needed */
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Ensure consistent card size and flexible layout */
   gap: 1.5rem; /* Space between cards */
-  justify-content: center; /* Center cards when fewer are present */
-  max-width: 1200px; /* Prevent grid from becoming too wide */
-  margin: 0 auto; /* Center grid on the page */
+  justify-content: center; /* Center the grid */
+  max-width: 1200px; /* Limit grid width on desktop */
+  margin: 0 auto; /* Center grid within the page */
+  padding: 2rem; /* Add spacing around the grid */
 }
 
-/* Knowledge Card with Flip Effect */
+/* Knowledge Card */
 .knowledge-card {
-  position: relative;
-  width: 300px; /* Fixed size for consistent flipping */
-  height: 200px;
-  perspective: 1000px; /* Enable 3D flip effect */
-  margin: auto; /* Centers the cards */
+  width: 300px; /* Fixed size for all cards */
+  height: 200px; /* Maintain consistent height */
+  margin: auto; /* Center-align each card */
+  border: 1px solid #ccc; /* Border for definition */
+  border-radius: 8px; /* Rounded edges */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.knowledge-card:hover {
+  transform: scale(1.05); /* Subtle zoom effect */
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2); /* Enhanced shadow on hover */
 }
 
 .knowledge-card:hover .knowledge-card-inner {
   transform: translateY(-5px); /* Simple hover effect for unsupported devices */
 }
 
+/* Knowledge Card with Flip Effect */
 .knowledge-card-inner {
   position: relative;
   width: 100%;
@@ -404,15 +413,24 @@ p {
 }
 
 /* Responsive Adjustments for Small Screens */
-@media (max-width: 320px) {
-  .knowledge-card {
-    width: 95%;
-    margin: 0.5rem auto;
+@media (max-width: 768px) {
+  .knowledge-grid {
+    grid-template-columns: 1fr; /* Single column for smaller screens */
+    gap: 1rem; /* Reduce spacing between items */
+    justify-content: center; /* Ensure items are centrally aligned */
+    padding: 1rem; /* Add space around the grid */
   }
 
   .search-form input {
-    flex-basis: 100%;
+    flex-basis: 100%; /* Full-width input */
     padding: 0.5rem;
+  }
+
+  .knowledge-card {
+    width: 90%; /* Adjust card width for smaller screens */
+    max-width: 300px; /* Prevent cards from being too wide */
+    margin: 1rem auto; /* Add spacing and center-align cards */
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
   }
 }
 
@@ -422,47 +440,53 @@ section {
   margin-bottom: 2rem;
 }
 
-/* Responsive Grid Adjustments */
-@media (max-width: 768px) {
+/* Adjustments for Medium Screens */
+@media (min-width: 769px) and (max-width: 1199px) {
   .knowledge-grid {
-    grid-template-columns: 1fr; /* Single column for smaller screens */
-    gap: 1rem; /* Reduce spacing between items */
-  }
-
-  .filter-buttons {
-    flex-wrap: wrap;
-    gap: 0.5rem; /* Adjust spacing for buttons on smaller screens */
-  }
-
-  .knowledge-card {
-    width: 90%; /* Adjust card size for smaller screens */
-    margin: 1rem auto; /* Center and space out */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    padding: 1rem 2rem;
   }
 }
 
-  .nav-links {
-    position: absolute;
-    top: 70px;
-    right: 0;
-    width: 100%;
-    background-color: rgba(0, 0, 0, 0.9);
-    z-index: 1000;
+/* Adjustments for Larger Screens */
+@media (min-width: 1200px) {
+  .knowledge-grid {
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Flexible layout with consistent card size */
+    gap: 2rem; /* Increase spacing between cards for large screens */
+    padding: 2rem 3rem; /* Adjust grid padding for large screens */
   }
+}
 
-  .hero-text {
-    padding: 1rem;
-    font-size: 1rem; /* Reduce font size for smaller screens */
-  }
+/* Nav Links (Mobile Adjustments) */
+.nav-links {
+  position: absolute;
+  top: 70px;
+  right: 0;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.9);
+  z-index: 1000;
+}
 
-  .btn-primary {
-    width: 100%; /* Make buttons full-width */
-    margin-top: 0.5rem;
-  }
+.nav-links a {
+  margin-bottom: 1rem;
+  text-align: right; /* Align text to the right */
+}
 
-  .knowledge-card {
-    width: 90%; /* Adjust card size for smaller screens */
-    margin: 1rem auto; /* Center and space out */
-  }
+.nav-toggle {
+  display: block; /* Show toggle button only on mobile */
+}
+
+/* Hero Section */
+.hero-text {
+  padding: 1rem;
+  font-size: 1rem; /* Reduce font size for smaller screens */
+}
+
+/* Buttons */
+.btn-primary {
+  width: 100%; /* Make buttons full-width */
+  margin-top: 0.5rem;
 }
 
 /* Prevent overlap with map */
@@ -473,7 +497,6 @@ section {
   border-radius: 8px;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
 }
-
 
 /* Intro Cards Section */
 .intro-cards-grid {
