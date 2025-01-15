@@ -122,6 +122,7 @@ p {
     max-width: 300px; /* Limit menu width */
     padding: 1.5rem 1rem;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.5); /* Add shadow for mobile menu */
+    z-index: 1000; /* Ensure menu appears above other elements */
   }
 
   .nav-links.active {
@@ -135,6 +136,23 @@ p {
 
   .nav-toggle {
     display: block; /* Show toggle button on mobile */
+  }
+}
+
+/* Desktop Navigation */
+@media (min-width: 769px) {
+  .nav-links {
+    display: flex !important; /* Always visible on desktop */
+    flex-direction: row; /* Horizontal layout */
+    background: transparent; /* No background for desktop */
+    position: static; /* Inline with header */
+    box-shadow: none; /* Remove shadow for desktop */
+    width: auto;
+    padding: 0;
+  }
+
+  .nav-toggle {
+    display: none; /* Hide the hamburger menu on desktop */
   }
 }
 
