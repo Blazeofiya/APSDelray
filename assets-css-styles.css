@@ -124,7 +124,7 @@ p {
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.5); /* Add shadow for mobile menu */
   }
 
-  .nav-links.show {
+  .nav-links.active {
     display: flex; /* Show menu when toggled */
   }
 
@@ -315,21 +315,29 @@ p {
     transform: scale(1.05); /* Subtle zoom effect on hover */
 }
 
-/* Knowledge Grid Layout */
+/* Knowledge Card Container */
 .knowledge-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Ensure consistent card size and flexible layout */
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Flexible grid layout */
   gap: 1.5rem; /* Space between cards */
   justify-content: center; /* Center the grid */
-  max-width: 1200px; /* Limit grid width on desktop */
+  max-width: 1200px; /* Limit grid width */
   margin: 0 auto; /* Center grid within the page */
   padding: 2rem; /* Add spacing around the grid */
 }
 
-/* Knowledge Card */
+/* Ensure 4 Cards per Row */
+@media (min-width: 1024px) {
+  .knowledge-grid {
+    grid-template-columns: repeat(4, 1fr); /* Four cards per row */
+  }
+}
+
+/* Knowledge Card Styling */
 .knowledge-card {
   width: 300px; /* Fixed size for all cards */
   height: 200px; /* Maintain consistent height */
+  perspective: 1000px; /* Enable perspective for 3D flip */
   margin: auto; /* Center-align each card */
   border: 1px solid #ccc; /* Border for definition */
   border-radius: 8px; /* Rounded edges */
@@ -339,26 +347,25 @@ p {
 
 .knowledge-card:hover {
   transform: scale(1.05); /* Subtle zoom effect */
-  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2); /* Enhanced shadow on hover */
+  box-shadow: 0 12px 18px rgba(0, 0, 0, 0.3); /* Enhanced shadow on hover */
 }
 
-.knowledge-card:hover .knowledge-card-inner {
-  transform: translateY(-5px); /* Simple hover effect for unsupported devices */
-}
-
-/* Knowledge Card with Flip Effect */
+/* Flip Effect */
 .knowledge-card-inner {
   position: relative;
   width: 100%;
   height: 100%;
   transform-style: preserve-3d;
-  transition: transform 0.6s;
+  transition: transform 0.6s ease; /* Smooth flip effect */
 }
 
-.knowledge-card:hover .knowledge-card-inner {
-  transform: rotateY(180deg); /* Flip on hover */
+/* Flip when hovered (PC) or when 'flipped' class is added (touch devices) */
+.knowledge-card:hover .knowledge-card-inner,
+.knowledge-card-inner.flipped {
+  transform: rotateY(180deg);
 }
 
+/* Front and Back of the Card */
 .knowledge-card-front,
 .knowledge-card-back {
   position: absolute;
@@ -385,7 +392,7 @@ p {
 .knowledge-card-back {
   background: var(--background-dark); /* Back side background */
   color: var(--text-light);
-  transform: rotateY(180deg); /* Flip effect */
+  transform: rotateY(180deg); /* Hide the back initially */
 }
 
 /* Card Content */
