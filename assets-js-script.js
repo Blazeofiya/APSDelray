@@ -6,7 +6,7 @@ window.addEventListener("load", () => {
     }
     // Ensure preloader hides after 5 seconds regardless
     setTimeout(() => {
-        preloader.style.display = "none";
+        if (preloader) preloader.style.display = "none";
     }, 5000);
 });
 
@@ -129,4 +129,9 @@ if (typeof L !== 'undefined' && document.getElementById("map")) {
         .openPopup();
 
     L.control.zoom({ position: "bottomright" }).addTo(map);
+
+    // Ensure map responsiveness
+    window.addEventListener("resize", () => {
+        map.invalidateSize();
+    });
 }
