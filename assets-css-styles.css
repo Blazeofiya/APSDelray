@@ -116,6 +116,9 @@ p {
 
 /* Mobile Navigation */
 @media (max-width: 768px) {
+  .nav-toggle {
+    display: block; /* Show hamburger button */
+  }
   .nav-links {
     display: none; /* Hidden by default */
     flex-direction: column; /* Stack links vertically */
@@ -139,22 +142,19 @@ p {
     margin-bottom: 1rem;
     text-align: left; /* Align text to the left */
   }
-
-  .nav-toggle {
-    display: block; /* Show hamburger button */
-    font-size: 1.5rem;
-    color: var(--text-light);
-    background: none;
-    border: none;
-    cursor: pointer;
-    z-index: 1001;
-  }
 }
 
 /* Desktop View */
 @media (min-width: 769px) {
   .nav-toggle {
     display: none; /* Hide hamburger menu on desktop */
+  }
+  .nav-links {
+    display: flex; /* Show on desktop */
+    flex-direction: row;
+    position: static;
+    background: transparent;
+    box-shadow: none;
   }
 }
 
