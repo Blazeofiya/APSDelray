@@ -16,20 +16,14 @@ document.addEventListener("DOMContentLoaded", () => {
     const navLinks = document.getElementById("navLinks");
 
     if (navToggle && navLinks) {
-        // Toggle menu visibility when the hamburger menu is clicked
         navToggle.addEventListener("click", () => {
-            navLinks.classList.toggle("active"); // Show/hide the menu
+            navLinks.classList.toggle("active");
         });
 
         // Close the menu when clicking outside of it
         document.addEventListener("click", (event) => {
-            // Check if the click was outside of navLinks and navToggle
-            if (
-                !navLinks.contains(event.target) &&
-                !navToggle.contains(event.target) &&
-                navLinks.classList.contains("active")
-            ) {
-                navLinks.classList.remove("active"); // Hide the menu
+            if (!navLinks.contains(event.target) && !navToggle.contains(event.target) && navLinks.classList.contains("active")) {
+                navLinks.classList.remove("active");
             }
         });
     } else {
