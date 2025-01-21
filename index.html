@@ -182,7 +182,7 @@
       margin-bottom: 1rem;
     }
 
-    /* Toggle headings (Hidden Histories, Manuals, Repositories) */
+    /* Toggle headings (Hidden Histories, Manuals, Repositories, etc.) */
     .important-links h3 {
       cursor: pointer;
       background-color: var(--primary-color);
@@ -192,10 +192,27 @@
       margin-bottom: 0.5rem;
       text-align: center;
       transition: background-color 0.3s ease-in-out;
+      position: relative; /* for arrow icon */
     }
 
     .important-links h3:hover {
       background-color: var(--accent-color);
+    }
+
+    /* Add caret (▼) after each heading */
+    .important-links h3::after {
+      content: "▼";
+      position: absolute;
+      right: 1.5rem;
+      top: 50%;
+      transform: translateY(-50%);
+      transition: transform 0.3s;
+      font-size: 1rem;
+    }
+
+    /* Rotate arrow when open */
+    .important-links h3.open::after {
+      transform: translateY(-50%) rotate(180deg);
     }
 
     /* Dropdown Container */
@@ -205,16 +222,22 @@
       border-left: 2px solid var(--primary-color);
       margin-bottom: 1rem;
       transition: all 0.3s ease-in-out;
+
+      /* We want the knowledge cards side by side on desktop */
+      display: flex; /* Switch to flex layout */
+      flex-wrap: wrap;
+      justify-content: center; /* center them by default */
+      gap: 1rem;
     }
 
     /*--------------------------------------------------------------
-      KNOWLEDGE CARDS (for link previews)
+      KNOWLEDGE CARDS
     --------------------------------------------------------------*/
     .knowledge-card {
-      width: 300px;
+      width: 100%;
+      max-width: 300px; /* set a max width */
       height: 200px;
       perspective: 1000px;
-      margin: 1rem auto;
       border: 1px solid #ccc;
       border-radius: 8px;
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -301,7 +324,7 @@
     }
 
     /*--------------------------------------------------------------
-      MAP SECTION (optional if you want an event/meetup map)
+      MAP SECTION (optional)
     --------------------------------------------------------------*/
     .map-section {
       max-width: 1000px;
@@ -347,7 +370,19 @@
       color: #777;
     }
 
-    /* Responsive adjustments */
+    /* Responsive adjustments:
+       On smaller screens (tablet/mobile), keep cards stacked one by one.
+       On larger screens, 3 cards per row if space allows.
+    */
+    @media (min-width: 992px) {
+      .important-links .dropdown-content {
+        justify-content: space-between;
+      }
+      .knowledge-card {
+        flex: 0 0 calc(33.333% - 1rem); /* 3 per row, minus gaps */
+      }
+    }
+
     @media (max-width: 768px) {
       .hero-text h1 {
         font-size: 2rem;
@@ -355,11 +390,8 @@
       .hero-text p {
         font-size: 1rem;
       }
-      .knowledge-card {
-        width: 90%;
-        max-width: 300px;
-      }
     }
+
   </style>
 </head>
 <body>
@@ -505,13 +537,37 @@
         </div>
       </div>
     </div>
+
+    <!-- Independent Chronicles (NEW SECTION) -->
+    <h3>Independent Chronicles</h3>
+    <div class="dropdown-content" id="independent-chronicles">
+      <div class="knowledge-card">
+        <div class="knowledge-card-inner">
+          <div class="knowledge-card-front">
+            <img
+              src="images/fallback.jpg"
+              alt="CuriosityStream"
+              class="dynamic-preview"
+              loading="lazy"
+              data-url="https://curiositystream.com/"
+            />
+          </div>
+          <div class="knowledge-card-back">
+            <h3>CuriosityStream</h3>
+            <p>Documentary streaming service with a wide range of educational topics.</p>
+            <a href="https://curiositystream.com/" target="_blank" rel="noopener noreferrer">
+              Visit Website
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
   </section>
 
   <hr class="section-divider" />
 
   <!-- ==============================
        OPTIONAL: MAP SECTION
-       Remove if you don't need it
   =============================== -->
   <section class="map-section">
     <h2>Interactive Event Map</h2>
@@ -557,10 +613,10 @@
     window.addEventListener("load", () => {
       const preloader = document.getElementById("preloader");
       if (preloader) {
-        // Hide preloader immediately once the page is fully loaded
+        // Hide preloader once the page is fully loaded
         preloader.style.display = "none";
       }
-      // Fallback: Hide after 5s in case 'load' doesn't fire
+      // Fallback: Hide after 5s if for some reason 'load' event doesn't fire
       setTimeout(() => {
         if (preloader) preloader.style.display = "none";
       }, 5000);
@@ -577,8 +633,11 @@
           const nextContent = heading.nextElementSibling;
           if (nextContent && nextContent.classList.contains("dropdown-content")) {
             // Toggle display
-            nextContent.style.display =
-              nextContent.style.display === "block" ? "none" : "block";
+            const isOpen = nextContent.style.display === "block";
+            nextContent.style.display = isOpen ? "none" : "block";
+
+            // Toggle 'open' class for arrow rotation
+            heading.classList.toggle("open", !isOpen);
           }
         });
       });
