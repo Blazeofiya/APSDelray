@@ -47,6 +47,28 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   /*---------------------------------------------------------------------------
+    2. Dropdown Toggle Functionality for Important Links
+  ---------------------------------------------------------------------------*/
+  function toggleDropdown(sectionId) {
+    const section = document.getElementById(sectionId);
+    if (section.style.display === "none" || section.style.display === "") {
+      section.style.display = "block";
+    } else {
+      section.style.display = "none";
+    }
+  }
+
+  // Attach click listeners to dropdown headings
+  document.querySelectorAll(".important-links h2, .important-links h3").forEach((heading) => {
+    heading.addEventListener("click", () => {
+      const targetId = heading.nextElementSibling.id;
+      toggleDropdown(targetId);
+    });
+  });
+
+});
+
+  /*---------------------------------------------------------------------------
     2. Smooth Scrolling for Anchor Links
   ---------------------------------------------------------------------------*/
   document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
