@@ -2,8 +2,11 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="The Global Antiquity Society - Discover hidden truths, and practical skills for the modern world." />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta
+    name="description"
+    content="The Global Antiquity Society - Discover hidden truths, and practical skills for the modern world."
+  />
   <title>The Global Antiquity Society | One-Page Showcase</title>
 
   <!-- Google Fonts -->
@@ -12,7 +15,7 @@
     rel="stylesheet"
   />
 
-  <!-- Leaflet.js for Map (if you want to keep the map section) -->
+  <!-- Leaflet.js for Map (if you want to keep the map) -->
   <link
     rel="stylesheet"
     href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
@@ -89,7 +92,7 @@
       position: fixed;
       top: 0;
       left: 0;
-      z-index: 10000;
+      z-index: 9999;
       width: 100%;
       height: 100%;
       background: #ffffff;
@@ -108,12 +111,79 @@
     }
 
     @keyframes spin {
-      from {
-        transform: rotate(0deg);
-      }
       to {
         transform: rotate(360deg);
       }
+    }
+
+    /*--------------------------------------------------------------
+      POPUP MODAL
+    --------------------------------------------------------------*/
+    .popup-overlay {
+      position: fixed;
+      z-index: 10000;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+    .popup-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .popup-content {
+      background: var(--background-dark);
+      border: 2px solid var(--primary-color);
+      border-radius: 8px;
+      padding: 2rem;
+      max-width: 600px;
+      width: 90%;
+      text-align: center;
+      position: relative;
+    }
+
+    .popup-content h2 {
+      margin-bottom: 1rem;
+      font-size: 1.5rem;
+    }
+    .popup-content p {
+      margin-bottom: 1.5rem;
+    }
+    .popup-content input[type="email"] {
+      width: 80%;
+      padding: 0.5rem;
+      margin-bottom: 1rem;
+      border: 1px solid var(--primary-color);
+      border-radius: 4px;
+    }
+    .popup-content button {
+      background: var(--primary-color);
+      color: var(--text-light);
+      padding: 0.5rem 1rem;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .popup-content button:hover {
+      background: var(--accent-color);
+    }
+    .close-popup {
+      position: absolute;
+      top: 0.5rem;
+      right: 0.5rem;
+      background: none;
+      border: none;
+      color: var(--text-light);
+      font-size: 1.2rem;
+      cursor: pointer;
     }
 
     /*--------------------------------------------------------------
@@ -168,6 +238,60 @@
     }
 
     /*--------------------------------------------------------------
+      TOP SECTIONS (About Us, Discord, Form Your Own Crew)
+    --------------------------------------------------------------*/
+    .content-section {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem 1rem;
+      background-color: rgba(0, 0, 0, 0.6);
+      border-radius: 8px;
+      margin-bottom: 2rem;
+    }
+    .content-section h2 {
+      text-align: center;
+      margin-bottom: 1rem;
+      font-size: 2rem;
+    }
+    .content-section p {
+      margin-bottom: 1rem;
+      line-height: 1.6;
+    }
+    .content-section form {
+      display: flex;
+      flex-direction: column;
+      max-width: 500px;
+      margin: 1rem auto 0;
+    }
+    .content-section label {
+      margin-bottom: 0.5rem;
+      font-weight: bold;
+    }
+    .content-section input[type="text"],
+    .content-section input[type="email"],
+    .content-section textarea {
+      padding: 0.5rem;
+      margin-bottom: 1rem;
+      border: 1px solid var(--primary-color);
+      border-radius: 4px;
+      font-family: 'Roboto', sans-serif;
+    }
+    .content-section textarea {
+      resize: vertical;
+    }
+    .content-section button[type="submit"] {
+      background: var(--primary-color);
+      color: var(--text-light);
+      border: none;
+      border-radius: 4px;
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+    }
+    .content-section button[type="submit"]:hover {
+      background: var(--accent-color);
+    }
+
+    /*--------------------------------------------------------------
       IMPORTANT LINKS SECTION & DROPDOWNS
     --------------------------------------------------------------*/
     .important-links {
@@ -182,8 +306,8 @@
       margin-bottom: 1rem;
     }
 
-    /* Toggle headings (Hidden Histories, Manuals, Repositories, etc.) */
-    .important-links h3 {
+    /* Only place arrows on the main headings within .important-links (not nested card headings) */
+    .important-links > h3 {
       cursor: pointer;
       background-color: var(--primary-color);
       color: var(--text-light);
@@ -195,12 +319,12 @@
       position: relative; /* for arrow icon */
     }
 
-    .important-links h3:hover {
+    .important-links > h3:hover {
       background-color: var(--accent-color);
     }
 
-    /* Add caret (▼) after each heading */
-    .important-links h3::after {
+    /* Add caret (▼) only to top-level h3 inside .important-links */
+    .important-links > h3::after {
       content: "▼";
       position: absolute;
       right: 1.5rem;
@@ -211,7 +335,7 @@
     }
 
     /* Rotate arrow when open */
-    .important-links h3.open::after {
+    .important-links > h3.open::after {
       transform: translateY(-50%) rotate(180deg);
     }
 
@@ -224,27 +348,30 @@
       transition: all 0.3s ease-in-out;
 
       /* We want the knowledge cards side by side on desktop */
-      display: flex; /* Switch to flex layout */
+      display: flex;
       flex-wrap: wrap;
-      justify-content: center; /* center them by default */
       gap: 1rem;
+      justify-content: flex-start; /* align left so there's no big space in middle */
     }
 
     /*--------------------------------------------------------------
       KNOWLEDGE CARDS
     --------------------------------------------------------------*/
     .knowledge-card {
-      width: 100%;
       max-width: 300px; /* set a max width */
-      height: 200px;
+      width: 100%;
       perspective: 1000px;
       border: 1px solid #ccc;
       border-radius: 8px;
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
       transition: transform 0.3s ease, box-shadow 0.3s ease;
+      /* Remove fixed height to allow text to expand as needed */
+      min-height: 200px;
+      overflow: hidden; /* just in case */
     }
+
     .knowledge-card:hover {
-      transform: scale(1.05);
+      transform: scale(1.03);
       box-shadow: 0 12px 18px rgba(0, 0, 0, 0.3);
     }
 
@@ -256,7 +383,9 @@
       transition: transform 0.6s ease;
     }
 
-    /* Flip on hover or .flipped class */
+    /* Flip on card click OR .flipped class. 
+       If you only want flipping on click, remove :hover below.
+    */
     .knowledge-card:hover .knowledge-card-inner,
     .knowledge-card-inner.flipped {
       transform: rotateY(180deg);
@@ -275,6 +404,7 @@
       border-radius: 8px;
       padding: 1rem;
       text-align: center;
+      box-sizing: border-box;
     }
 
     .knowledge-card-front {
@@ -286,10 +416,12 @@
       background: var(--background-dark);
       color: var(--text-light);
       transform: rotateY(180deg);
+      /* ensure no hidden arrows or clickable heading states here */
     }
 
     .knowledge-card h3 {
       margin-bottom: 0.5rem;
+      pointer-events: none; /* so it doesn't behave like a clickable link */
     }
 
     .knowledge-card p {
@@ -318,7 +450,9 @@
       border-radius: 4px;
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
       transition: transform 0.3s ease;
+      pointer-events: none; /* make sure the image itself isn't clickable */
     }
+
     .dynamic-preview:hover {
       transform: scale(1.05);
     }
@@ -370,19 +504,9 @@
       color: #777;
     }
 
-    /* Responsive adjustments:
-       On smaller screens (tablet/mobile), keep cards stacked one by one.
-       On larger screens, 3 cards per row if space allows.
-    */
-    @media (min-width: 992px) {
-      .important-links .dropdown-content {
-        justify-content: space-between;
-      }
-      .knowledge-card {
-        flex: 0 0 calc(33.333% - 1rem); /* 3 per row, minus gaps */
-      }
-    }
-
+    /*--------------------------------------------------------------
+      MEDIA QUERIES
+    --------------------------------------------------------------*/
     @media (max-width: 768px) {
       .hero-text h1 {
         font-size: 2rem;
@@ -392,6 +516,11 @@
       }
     }
 
+    @media (min-width: 992px) {
+      .knowledge-card {
+        flex: 0 0 calc(33.333% - 1rem);
+      }
+    }
   </style>
 </head>
 <body>
@@ -400,6 +529,29 @@
   =============================== -->
   <div id="preloader">
     <div class="spinner"></div>
+  </div>
+
+  <!-- ==============================
+       POPUP MODAL (Hidden by default)
+  =============================== -->
+  <div class="popup-overlay" id="popupOverlay">
+    <div class="popup-content">
+      <button class="close-popup" id="closePopup" aria-label="Close popup">&times;</button>
+      <h2>Hey there, rebel!</h2>
+      <p>
+        Tired of the endless internet rabbit holes and corporate BS? We hear you.
+        Ready to flip the script? Learn how to fix things, trade killer ideas, and
+        build a real local community—no mindless scrolling or pinging app notifications required.
+      </p>
+      <p>
+        Join us and grab your free guide. It’s time to kick dependency to the curb
+        and shape life on your own terms. Drop your email below and step into a more
+        authentic, self-driven world!
+      </p>
+      <input type="email" placeholder="Your Email Here..." />
+      <br />
+      <button>Count Me In</button>
+    </div>
   </div>
 
   <!-- ==============================
@@ -416,7 +568,80 @@
   <hr class="section-divider" />
 
   <!-- ==============================
-       IMPORTANT LINKS SECTION
+       ABOUT US
+  =============================== -->
+  <section class="content-section" id="aboutUs">
+    <h2>About Us</h2>
+    <p>
+      The Global Antiquity Society (GAS) is a collective intelligence network on a
+      mission to rebuild genuine trust among people. We look back to a time when
+      communities grew naturally and everyone knew each other—when life was about
+      real connections, and extended families supported each other under one roof,
+      no insurance policies or glossy marketing needed.
+    </p>
+    <p>
+      Globalization has scattered us—some of us left in search of opportunity, others
+      driven by power or greed, and some simply disillusioned. As a result, our
+      families and communities feel more fragmented than ever. But all is not lost.
+      At GAS, we’re about rediscovering that raw, unfiltered sense of unity: hanging
+      out, sharing ideas, helping out, having fun, and forging genuine bonds.
+    </p>
+    <p>
+      Join us in reviving the timeless spirit of connection and rediscover what it’s
+      like to live on your own terms.
+    </p>
+  </section>
+
+  <!-- ==============================
+       DISCORD
+  =============================== -->
+  <section class="content-section" id="discordSection">
+    <h2>Discord</h2>
+    <p>
+      <strong>Set Sail With Our Crew!</strong><br />
+      Ready to take the next step? Join Delray Beach’s very own GAS (Global Antiquity
+      Society) Discord—a crew of free-thinkers mining the past to craft an inspiring future.
+    </p>
+    <p>
+      Come aboard and discover upcoming workshops, events, and more as we chart a new course together!
+    </p>
+    <!-- You might include a direct Discord invite link here if you have one -->
+    <button>Join Our Discord</button>
+  </section>
+
+  <!-- ==============================
+       FORM YOUR OWN CREW
+  =============================== -->
+  <section class="content-section" id="formCrew">
+    <h2>Form Your Own Crew</h2>
+    <p>
+      Thinking of starting your own GAS crew? We’d love to hear about it. Share your name,
+      email, and a quick note about your vision—whether it’s building a community garden,
+      launching a makerspace, or starting any initiative that brings people together.
+      Let’s chart your course together.
+    </p>
+    <form>
+      <label for="crewName">Your Name:</label>
+      <input type="text" id="crewName" name="crewName" placeholder="Enter your name" />
+
+      <label for="crewEmail">Your Email:</label>
+      <input type="email" id="crewEmail" name="crewEmail" placeholder="Enter your email" />
+
+      <label for="crewMessage">Why Do You Want to Build a Community?</label>
+      <textarea id="crewMessage" name="crewMessage" rows="4" placeholder="Tell us more..."></textarea>
+
+      <button type="submit">Submit &amp; Set Sail</button>
+    </form>
+    <p style="margin-top:1rem;">
+      Step away from the static. Embrace the adventure—and help shape a future built
+      on authenticity and shared learning!
+    </p>
+  </section>
+
+  <hr class="section-divider" />
+
+  <!-- ==============================
+       IMPORTANT LINKS
   =============================== -->
   <section class="important-links" id="linksSection">
     <h2>Important Links</h2>
@@ -445,6 +670,7 @@
           </div>
         </div>
       </div>
+
       <!-- Another Knowledge Card -->
       <div class="knowledge-card">
         <div class="knowledge-card-inner">
@@ -530,7 +756,11 @@
           <div class="knowledge-card-back">
             <h3>Free For Dev</h3>
             <p>A curated list of free services and resources for developers.</p>
-            <a href="https://github.com/ripienaar/free-for-dev" target="_blank" rel="noopener noreferrer">
+            <a
+              href="https://github.com/ripienaar/free-for-dev"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               Visit Website
             </a>
           </div>
@@ -538,7 +768,7 @@
       </div>
     </div>
 
-    <!-- Independent Chronicles (NEW SECTION) -->
+    <!-- Independent Chronicles -->
     <h3>Independent Chronicles</h3>
     <div class="dropdown-content" id="independent-chronicles">
       <div class="knowledge-card">
@@ -555,7 +785,11 @@
           <div class="knowledge-card-back">
             <h3>CuriosityStream</h3>
             <p>Documentary streaming service with a wide range of educational topics.</p>
-            <a href="https://curiositystream.com/" target="_blank" rel="noopener noreferrer">
+            <a
+              href="https://curiositystream.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               Visit Website
             </a>
           </div>
@@ -613,36 +847,45 @@
     window.addEventListener("load", () => {
       const preloader = document.getElementById("preloader");
       if (preloader) {
-        // Hide preloader once the page is fully loaded
         preloader.style.display = "none";
       }
-      // Fallback: Hide after 5s if for some reason 'load' event doesn't fire
+      // Fallback: Hide after 5s if 'load' doesn't fire
       setTimeout(() => {
         if (preloader) preloader.style.display = "none";
       }, 5000);
     });
 
     /*--------------------------------------------------------------
-      DOMContentLoaded SCRIPTS
+      DOMContentLoaded
     --------------------------------------------------------------*/
     document.addEventListener("DOMContentLoaded", () => {
-      // 1. Toggle dropdown for each subsection
-      const headings = document.querySelectorAll(".important-links h3");
+      // 1. Show popup once page loads (you can add logic to only show once if desired)
+      const popupOverlay = document.getElementById('popupOverlay');
+      const closePopupBtn = document.getElementById('closePopup');
+      if (popupOverlay) {
+        // Show it
+        popupOverlay.classList.add('active');
+
+        // Close on button click
+        closePopupBtn.addEventListener('click', () => {
+          popupOverlay.classList.remove('active');
+        });
+      }
+
+      // 2. Toggle dropdown for each subsection
+      const headings = document.querySelectorAll(".important-links > h3");
       headings.forEach((heading) => {
         heading.addEventListener("click", () => {
           const nextContent = heading.nextElementSibling;
           if (nextContent && nextContent.classList.contains("dropdown-content")) {
-            // Toggle display
             const isOpen = nextContent.style.display === "block";
             nextContent.style.display = isOpen ? "none" : "block";
-
-            // Toggle 'open' class for arrow rotation
             heading.classList.toggle("open", !isOpen);
           }
         });
       });
 
-      // 2. Lazy Load Dynamic Previews with IntersectionObserver
+      // 3. Lazy Load Dynamic Previews with IntersectionObserver
       const previewImages = document.querySelectorAll(".dynamic-preview");
       if ("IntersectionObserver" in window) {
         const observer = new IntersectionObserver((entries, obs) => {
@@ -679,7 +922,7 @@
         });
       }
 
-      // 3. Flip cards on click/tap (useful for touch devices)
+      // 4. Flip cards on click/tap (helpful on touch devices)
       const knowledgeCards = document.querySelectorAll(".knowledge-card");
       knowledgeCards.forEach((card) => {
         card.addEventListener("click", () => {
@@ -688,7 +931,7 @@
         });
       });
 
-      // Close flipped cards when clicking outside
+      // Close any flipped card if clicked outside
       document.addEventListener("click", (event) => {
         knowledgeCards.forEach((card) => {
           const cardInner = card.querySelector(".knowledge-card-inner");
@@ -702,12 +945,13 @@
         });
       });
 
-      // 4. Initialize Leaflet Map (if you’re keeping the map section)
+      // 5. Initialize Leaflet Map (if keeping map section)
       if (typeof L !== "undefined" && document.getElementById("map")) {
         const map = L.map("map").setView([26.4615, -80.0728], 13);
         L.tileLayer("https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png", {
           attribution:
-            "&copy; <a href='https://www.openstreetmap.org/copyright'>OpenStreetMap</a> contributors &copy; <a href='https://carto.com/'>CARTO</a>",
+            "&copy; <a href='https://www.openstreetmap.org/copyright'>OpenStreetMap</a> "
+            + "contributors &copy; <a href='https://carto.com/'>CARTO</a>",
           subdomains: "abcd",
           maxZoom: 19,
         }).addTo(map);
