@@ -92,20 +92,6 @@
     <div class="hero-text">
       <h1>Embark on the Adventure of Knowledge</h1>
       <p>Discover connections, hidden truths, and practical skills for the modern world.</p>
-      <form class="search-form" role="search" aria-label="Search events, resources, or projects">
-        <input 
-          type="text" 
-          placeholder="Search events, resources, or projects..." 
-          aria-label="Search input" 
-        />
-        <button 
-          type="submit" 
-          class="btn-primary" 
-          aria-label="Search"
-        >
-          Search
-        </button>
-      </form>
     </div>
   </section>
 
@@ -118,152 +104,84 @@
     <!-- Add Local Hub cards here -->
   </div>
 
-  <h2>Hidden Histories</h2>
-  <div class="knowledge-grid" data-category="hidden-histories">
-    <div class="knowledge-card" data-category="hidden-histories">
-      <div class="knowledge-card-inner">
-        <div class="knowledge-card-front">
-          <img src="images/fallback.jpg" alt="Library of Congress website preview" class="dynamic-preview" loading="lazy" data-url="https://www.loc.gov/" />
-        </div>
-        <div class="knowledge-card-back">
-          <h3>Library of Congress</h3>
-          <p>The largest library in the world with millions of items for research.</p>
-          <a href="https://www.loc.gov/" target="_blank" aria-label="Visit the Library of Congress website">Visit Website</a>
-        </div>
-      </div>
-    </div>
-    <div class="knowledge-card" data-category="hidden-histories">
-      <div class="knowledge-card-inner">
-        <div class="knowledge-card-front">
-          <img src="images/fallback.jpg" alt="UNESCO World Heritage website preview" class="dynamic-preview" loading="lazy" data-url="https://whc.unesco.org/" />
-        </div>
-        <div class="knowledge-card-back">
-          <h3>UNESCO World Heritage</h3>
-          <p>Discover the world’s cultural and natural heritage sites.</p>
-          <a href="https://whc.unesco.org/" target="_blank" aria-label="Visit the UNESCO World Heritage website">Visit Website</a>
-        </div>
-      </div>
-    </div>
-    <div class="knowledge-card" data-category="hidden-histories">
-      <div class="knowledge-card-inner">
-        <div class="knowledge-card-front">
-          <img src="images/fallback.jpg" alt="Peter Santenello's YouTube channel preview" class="dynamic-preview" loading="lazy" data-url="https://www.youtube.com/@PeterSantenello/videos" />
-        </div>
-        <div class="knowledge-card-back">
-          <h3>Peter Santenello</h3>
-          <p>Explore unique cultural stories through Peter Santenello’s videos.</p>
-          <a href="https://www.youtube.com/@PeterSantenello/videos" target="_blank" aria-label="Visit Peter Santenello's YouTube channel">Visit Website</a>
-        </div>
-      </div>
-    </div>
-    <div class="knowledge-card" data-category="hidden-histories">
-      <div class="knowledge-card-inner">
-        <div class="knowledge-card-front">
-          <img src="images/fallback.jpg" alt="Weird Explorer YouTube channel preview" class="dynamic-preview" loading="lazy" data-url="https://www.youtube.com/@WeirdExplorer" />
-        </div>
-        <div class="knowledge-card-back">
-          <h3>Weird Explorer</h3>
-          <p>Discover rare fruits and cultural food explorations.</p>
-          <a href="https://www.youtube.com/@WeirdExplorer" target="_blank" aria-label="Visit Weird Explorer's YouTube channel">Visit Website</a>
-        </div>
-      </div>
-    </div>
-    <div class="knowledge-card" data-category="hidden-histories">
-      <div class="knowledge-card-inner">
-        <div class="knowledge-card-front">
-          <img src="images/fallback.jpg" alt="Wikipedia website preview" class="dynamic-preview" loading="lazy" data-url="https://www.wikipedia.org/" />
-        </div>
-        <div class="knowledge-card-back">
-          <h3>Wikipedia</h3>
-          <p>Explore a vast encyclopedia.</p>
-          <a href="https://www.wikipedia.org/" target="_blank" aria-label="Visit Wikipedia, a free open content online encyclopedia">Visit Website</a>
-        </div>
-      </div>
-    </div>
-  </div>
+<section class="important-links">
+  <h2 onclick="toggleDropdown('links-container')">Important Links</h2>
+  <div id="links-container" style="display: none;">
 
-  <h2>Manuals</h2>
-  <div class="knowledge-grid" data-category="practical-guides">
-    <div class="knowledge-card" data-category="practical-guides">
-      <div class="knowledge-card-inner">
-        <div class="knowledge-card-front">
-          <img src="images/fallback.jpg" alt="FMHY website preview" class="dynamic-preview" loading="lazy" data-url="https://fmhy.net/" />
-        </div>
-        <div class="knowledge-card-back">
-          <h3>FMHY</h3>
-          <p>A collection of free resources for modern living and learning.</p>
-          <a href="https://fmhy.net/" target="_blank" aria-label="Visit the FMHY website">Visit Website</a>
-        </div>
-      </div>
-    </div>
-    <div class="knowledge-card" data-category="practical-guides">
-      <div class="knowledge-card-inner">
-        <div class="knowledge-card-front">
-          <img src="images/fallback.jpg" alt="Alternative To website preview" class="dynamic-preview" loading="lazy" data-url="https://alternativeto.net/" />
-        </div>
-        <div class="knowledge-card-back">
-          <h3>Alternative To</h3>
-          <p>Discover software and application alternatives.</p>
-          <a href="https://alternativeto.net/" target="_blank" aria-label="Visit the Alternative To website">Visit Website</a>
+    <h3 onclick="toggleDropdown('hidden-histories')">Hidden Histories</h3>
+    <div id="hidden-histories" style="display: none;">
+      <div class="knowledge-card">
+        <div class="knowledge-card-inner">
+          <div class="knowledge-card-front">
+            <img src="images/fallback.jpg" alt="Library of Congress" class="dynamic-preview" loading="lazy" data-url="https://www.loc.gov/" />
+          </div>
+          <div class="knowledge-card-back">
+            <h3>Library of Congress</h3>
+            <p>The largest library in the world with millions of items.</p>
+            <a href="https://www.loc.gov/" target="_blank">Visit Website</a>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="knowledge-card" data-category="practical-guides">
-      <div class="knowledge-card-inner">
-        <div class="knowledge-card-front">
-          <img src="images/fallback.jpg" alt="Privacy Guides website preview" class="dynamic-preview" loading="lazy" data-url="https://discuss.privacyguides.net/" />
-        </div>
-        <div class="knowledge-card-back">
-          <h3>Privacy Guides</h3>
-          <p>Explore resources to protect your online privacy.</p>
-          <a href="https://discuss.privacyguides.net/" target="_blank" aria-label="Visit the Privacy Guides discussion forum">Visit Website</a>
-        </div>
-      </div>
-    </div>
-  </div>
 
-  <h2>Repositories</h2>
-  <div class="knowledge-grid" data-category="repositories">
-    <div class="knowledge-card" data-category="repositories">
-      <div class="knowledge-card-inner">
-        <div class="knowledge-card-front">
-          <img src="images/fallback.jpg" alt="Free For Dev repository preview" class="dynamic-preview" loading="lazy" data-url="https://github.com/ripienaar/free-for-dev?tab=readme-ov-file" />
-        </div>
-        <div class="knowledge-card-back">
-          <h3>Free For Dev</h3>
-          <p>A curated list of free resources for developers.</p>
-          <a href="https://github.com/ripienaar/free-for-dev?tab=readme-ov-file" target="_blank" aria-label="Visit Free For Dev repository">Visit Website</a>
-        </div>
-      </div>
-    </div>
-    <div class="knowledge-card" data-category="repositories">
-      <div class="knowledge-card-inner">
-        <div class="knowledge-card-front">
-          <img src="images/fallback.jpg" alt="Awesome Lists repository preview" class="dynamic-preview" loading="lazy" data-url="https://github.com/sindresorhus/awesome?tab=readme-ov-file" />
-        </div>
-        <div class="knowledge-card-back">
-          <h3>Awesome Lists</h3>
-          <p>A curated list of awesome tools and resources.</p>
-          <a href="https://github.com/sindresorhus/awesome?tab=readme-ov-file" target="_blank" aria-label="Visit Awesome Lists repository">Visit Website</a>
+      <div class="knowledge-card">
+        <div class="knowledge-card-inner">
+          <div class="knowledge-card-front">
+            <img src="images/fallback.jpg" alt="UNESCO World Heritage" class="dynamic-preview" loading="lazy" data-url="https://whc.unesco.org/" />
+          </div>
+          <div class="knowledge-card-back">
+            <h3>UNESCO World Heritage</h3>
+            <p>Discover cultural and natural heritage sites.</p>
+            <a href="https://whc.unesco.org/" target="_blank">Visit Website</a>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <h2>Independent Chronicles</h2>
-  <div class="knowledge-grid" data-category="independent-chronicles">
-    <div class="knowledge-card" data-category="independent-chronicles">
-      <div class="knowledge-card-inner">
-        <div class="knowledge-card-front">
-          <img src="images/fallback.jpg" alt="Channel 5 website preview" class="dynamic-preview" loading="lazy" data-url="https://www.youtube.com/@Channel5YouTube/videos" />
+    <h3 onclick="toggleDropdown('manuals')">Manuals</h3>
+    <div id="manuals" style="display: none;">
+      <div class="knowledge-card">
+        <div class="knowledge-card-inner">
+          <div class="knowledge-card-front">
+            <img src="images/fallback.jpg" alt="FMHY" class="dynamic-preview" loading="lazy" data-url="https://fmhy.net/" />
+          </div>
+          <div class="knowledge-card-back">
+            <h3>FMHY</h3>
+            <p>A collection of free resources for modern living.</p>
+            <a href="https://fmhy.net/" target="_blank">Visit Website</a>
+          </div>
         </div>
-        <div class="knowledge-card-back">
-          <h3>Channel 5</h3>
-          <p>Explore unconventional news and documentaries.</p>
-          <a href="https://www.youtube.com/@Channel5YouTube/videos" target="_blank" aria-label="Visit Channel 5's YouTube channel">Visit Website</a>
+      </div>
+
+      <div class="knowledge-card">
+        <div class="knowledge-card-inner">
+          <div class="knowledge-card-front">
+            <img src="images/fallback.jpg" alt="Alternative To" class="dynamic-preview" loading="lazy" data-url="https://alternativeto.net/" />
+          </div>
+          <div class="knowledge-card-back">
+            <h3>Alternative To</h3>
+            <p>Discover software and application alternatives.</p>
+            <a href="https://alternativeto.net/" target="_blank">Visit Website</a>
+          </div>
         </div>
       </div>
     </div>
+
+    <h3 onclick="toggleDropdown('repositories')">Repositories</h3>
+    <div id="repositories" style="display: none;">
+      <div class="knowledge-card">
+        <div class="knowledge-card-inner">
+          <div class="knowledge-card-front">
+            <img src="images/fallback.jpg" alt="Free For Dev" class="dynamic-preview" loading="lazy" data-url="https://github.com/ripienaar/free-for-dev" />
+          </div>
+          <div class="knowledge-card-back">
+            <h3>Free For Dev</h3>
+            <p>A curated list of free resources for developers.</p>
+            <a href="https://github.com/ripienaar/free-for-dev" target="_blank">Visit Website</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </div>
 </section>
 
