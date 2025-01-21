@@ -3,34 +3,101 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="The Global Antiquity Society - Embark on a journey of knowledge, discover hidden truths, and practical skills for the modern world." />
-  <title>The Global Antiquity Society | Explore Knowledge & Adventure</title>
+  <meta name="description" content="The Global Antiquity Society - Discover hidden truths, and practical skills for the modern world." />
+  <title>The Global Antiquity Society | One-Page Showcase</title>
 
   <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Roboto:wght@400;700&display=swap"
+    rel="stylesheet"
+  />
 
-  <!-- CSS -->
-  <link rel="stylesheet" href="assets-css-styles.css" />
+  <!-- Leaflet.js for Map (if you want to keep the map section) -->
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+  />
+  <script
+    defer
+    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+  ></script>
 
-  <!-- Leaflet.js for Map -->
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-  <script defer src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-
-  <!-- Preloader Styles -->
+  <!-- Inline CSS -->
   <style>
+    /*--------------------------------------------------------------
+      RESET & ROOT VARIABLES
+    --------------------------------------------------------------*/
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary-color: #a63a00;
+      --secondary-color: #f2e4ca;
+      --background-dark: #1c1c1c;
+      --text-light: #f9f9f9;
+      --text-dark: #333333;
+      --accent-color: #c79b53;
+    }
+
+    /*--------------------------------------------------------------
+      GLOBAL STYLES
+    --------------------------------------------------------------*/
+    html {
+      scroll-behavior: smooth; /* Smooth scrolling for the entire page */
+    }
+
+    body {
+      background: url('images/dark-parchment-texture.jpg') no-repeat center center fixed;
+      background-size: cover;
+      color: var(--text-light);
+      font-family: 'Roboto', Arial, Helvetica, sans-serif;
+      line-height: 1.6;
+      overflow-x: hidden; /* Prevent horizontal scroll if content extends */
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    a {
+      color: var(--primary-color);
+      text-decoration: none;
+    }
+
+    a:hover {
+      opacity: 0.8;
+    }
+
+    h1, h2, h3 {
+      font-family: 'Cinzel', serif;
+      margin-bottom: 0.5rem;
+    }
+
+    p {
+      margin-bottom: 1rem;
+    }
+
+    /*--------------------------------------------------------------
+      PRELOADER
+    --------------------------------------------------------------*/
     #preloader {
       position: fixed;
       top: 0;
       left: 0;
+      z-index: 10000;
       width: 100%;
       height: 100%;
-      background: #fff;
+      background: #ffffff;
       display: flex;
       align-items: center;
       justify-content: center;
-      z-index: 1000;
-      display: none;
     }
+
     .spinner {
       width: 50px;
       height: 50px;
@@ -39,6 +106,7 @@
       border-radius: 50%;
       animation: spin 1s linear infinite;
     }
+
     @keyframes spin {
       from {
         transform: rotate(0deg);
@@ -47,168 +115,567 @@
         transform: rotate(360deg);
       }
     }
-    .knowledge-card {
-      min-height: 200px;
-      min-width: 300px;
-      aspect-ratio: 3 / 2;
+
+    /*--------------------------------------------------------------
+      HERO SECTION
+    --------------------------------------------------------------*/
+    .hero {
+      position: relative;
+      min-height: 70vh;
       display: flex;
       align-items: center;
       justify-content: center;
+      text-align: center;
+      padding: 2rem;
+      color: var(--text-light);
+    }
+
+    .hero-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.4);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .hero-text {
+      position: relative; /* ensures it's above overlay */
+      z-index: 1;
+      max-width: 800px;
+      padding: 1rem;
+    }
+
+    .hero-text h1 {
+      font-size: 2.5rem;
+      text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+      margin-bottom: 1rem;
+    }
+
+    .hero-text p {
+      font-size: 1.2rem;
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+    }
+
+    /* Section Divider */
+    .section-divider {
+      margin: 2rem 0;
+      border: none;
+      height: 2px;
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    /*--------------------------------------------------------------
+      IMPORTANT LINKS SECTION & DROPDOWNS
+    --------------------------------------------------------------*/
+    .important-links {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem 1rem;
+    }
+
+    .important-links h2 {
+      text-align: center;
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    /* Toggle headings (Hidden Histories, Manuals, Repositories) */
+    .important-links h3 {
+      cursor: pointer;
+      background-color: var(--primary-color);
+      color: var(--text-light);
+      padding: 1rem;
+      border-radius: 5px;
+      margin-bottom: 0.5rem;
+      text-align: center;
+      transition: background-color 0.3s ease-in-out;
+    }
+
+    .important-links h3:hover {
+      background-color: var(--accent-color);
+    }
+
+    /* Dropdown Container */
+    .important-links .dropdown-content {
+      display: none; /* hidden by default */
+      padding-left: 1rem;
+      border-left: 2px solid var(--primary-color);
+      margin-bottom: 1rem;
+      transition: all 0.3s ease-in-out;
+    }
+
+    /*--------------------------------------------------------------
+      KNOWLEDGE CARDS (for link previews)
+    --------------------------------------------------------------*/
+    .knowledge-card {
+      width: 300px;
+      height: 200px;
+      perspective: 1000px;
+      margin: 1rem auto;
       border: 1px solid #ccc;
       border-radius: 8px;
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      overflow: hidden;
-      transition: transform 0.3s, box-shadow 0.3s;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
     .knowledge-card:hover {
       transform: scale(1.05);
-      box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 12px 18px rgba(0, 0, 0, 0.3);
+    }
+
+    .knowledge-card-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transform-style: preserve-3d;
+      transition: transform 0.6s ease;
+    }
+
+    /* Flip on hover or .flipped class */
+    .knowledge-card:hover .knowledge-card-inner,
+    .knowledge-card-inner.flipped {
+      transform: rotateY(180deg);
+    }
+
+    .knowledge-card-front,
+    .knowledge-card-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px;
+      padding: 1rem;
+      text-align: center;
+    }
+
+    .knowledge-card-front {
+      background: var(--primary-color);
+      color: var(--text-light);
+    }
+
+    .knowledge-card-back {
+      background: var(--background-dark);
+      color: var(--text-light);
+      transform: rotateY(180deg);
+    }
+
+    .knowledge-card h3 {
+      margin-bottom: 0.5rem;
+    }
+
+    .knowledge-card p {
+      margin-bottom: 1rem;
+    }
+
+    .knowledge-card a {
+      margin-top: auto;
+      padding: 0.5rem 1rem;
+      background: var(--primary-color);
+      color: var(--text-light);
+      border-radius: 4px;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .knowledge-card a:hover {
+      background: #9b3702;
+    }
+
+    /* Dynamic preview images */
+    .dynamic-preview {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 4px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+    }
+    .dynamic-preview:hover {
+      transform: scale(1.05);
+    }
+
+    /*--------------------------------------------------------------
+      MAP SECTION (optional if you want an event/meetup map)
+    --------------------------------------------------------------*/
+    .map-section {
+      max-width: 1000px;
+      margin: 2rem auto;
+      padding: 1rem;
+      border-radius: 8px;
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+      background-color: rgba(0, 0, 0, 0.7);
+    }
+
+    .map-section h2 {
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+
+    #map {
+      width: 100%;
+      height: 400px;
+      margin-top: 20px;
+      border-radius: 8px;
+    }
+
+    /*--------------------------------------------------------------
+      FOOTER
+    --------------------------------------------------------------*/
+    footer.contact-block {
+      background-color: var(--background-dark);
+      text-align: center;
+      padding: 2rem 1rem;
+    }
+
+    .contact-info {
+      margin-bottom: 1rem;
+    }
+
+    .contact-info p a {
+      color: var(--primary-color);
+      text-decoration: underline;
+    }
+
+    .footer-copy {
+      font-size: 0.9rem;
+      color: #777;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .hero-text h1 {
+        font-size: 2rem;
+      }
+      .hero-text p {
+        font-size: 1rem;
+      }
+      .knowledge-card {
+        width: 90%;
+        max-width: 300px;
+      }
     }
   </style>
 </head>
 <body>
-  <!-- Preloader -->
+  <!-- ==============================
+       PRELOADER
+  =============================== -->
   <div id="preloader">
     <div class="spinner"></div>
   </div>
 
-  <!-- Navigation -->
-<header class="main-header">
-    <div class="logo" aria-label="Global Antiquity Society Home">The Global Antiquity Society</div>
-    <nav>
-        <ul class="nav-links" id="navLinks">
-            <li><a href="#home" aria-label="Home">Home</a></li>
-            <li><a href="#big-picture" aria-label="The Big Picture">The Big Picture</a></li>
-            <li><a href="#roots-horizons" aria-label="Roots & Horizons">Roots & Horizons</a></li>
-            <li><a href="#toolkits" aria-label="Toolkits">Toolkits</a></li>
-        </ul>
-        <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation menu">☰</button>
-    </nav>
-</header>
-
-  <!-- Hero Section with Parallax Effect -->
+  <!-- ==============================
+       HERO SECTION
+  =============================== -->
   <section class="hero">
     <div class="hero-overlay"></div>
     <div class="hero-text">
       <h1>Embark on the Adventure of Knowledge</h1>
-      <p>Discover connections, hidden truths, and practical skills for the modern world.</p>
+      <p>Explore hidden truths and practical skills for the modern world, all in one place.</p>
     </div>
   </section>
 
-  <hr class="section-divider">
+  <hr class="section-divider" />
 
-<section class="knowledge-grid-section">
+  <!-- ==============================
+       IMPORTANT LINKS SECTION
+  =============================== -->
+  <section class="important-links" id="linksSection">
+    <h2>Important Links</h2>
 
-  <h2>Join a Crew</h2>
-  <div class="knowledge-grid" data-category="local-hubs">
-    <!-- Add Local Hub cards here -->
-  </div>
-
-<section class="important-links">
-  <h2 onclick="toggleDropdown('links-container')">Important Links</h2>
-  <div id="links-container" style="display: none;">
-
-    <h3 onclick="toggleDropdown('hidden-histories')">Hidden Histories</h3>
-    <div id="hidden-histories" style="display: none;">
+    <!-- Hidden Histories -->
+    <h3>Hidden Histories</h3>
+    <div class="dropdown-content" id="hidden-histories">
+      <!-- Example Knowledge Card -->
       <div class="knowledge-card">
         <div class="knowledge-card-inner">
           <div class="knowledge-card-front">
-            <img src="images/fallback.jpg" alt="Library of Congress" class="dynamic-preview" loading="lazy" data-url="https://www.loc.gov/" />
+            <img
+              src="images/fallback.jpg"
+              alt="Library of Congress"
+              class="dynamic-preview"
+              loading="lazy"
+              data-url="https://www.loc.gov/"
+            />
           </div>
           <div class="knowledge-card-back">
             <h3>Library of Congress</h3>
             <p>The largest library in the world with millions of items.</p>
-            <a href="https://www.loc.gov/" target="_blank">Visit Website</a>
+            <a href="https://www.loc.gov/" target="_blank" rel="noopener noreferrer">
+              Visit Website
+            </a>
           </div>
         </div>
       </div>
-
+      <!-- Another Knowledge Card -->
       <div class="knowledge-card">
         <div class="knowledge-card-inner">
           <div class="knowledge-card-front">
-            <img src="images/fallback.jpg" alt="UNESCO World Heritage" class="dynamic-preview" loading="lazy" data-url="https://whc.unesco.org/" />
+            <img
+              src="images/fallback.jpg"
+              alt="UNESCO World Heritage"
+              class="dynamic-preview"
+              loading="lazy"
+              data-url="https://whc.unesco.org/"
+            />
           </div>
           <div class="knowledge-card-back">
             <h3>UNESCO World Heritage</h3>
-            <p>Discover cultural and natural heritage sites.</p>
-            <a href="https://whc.unesco.org/" target="_blank">Visit Website</a>
+            <p>Discover cultural and natural heritage sites around the globe.</p>
+            <a href="https://whc.unesco.org/" target="_blank" rel="noopener noreferrer">
+              Visit Website
+            </a>
           </div>
         </div>
       </div>
     </div>
 
-    <h3 onclick="toggleDropdown('manuals')">Manuals</h3>
-    <div id="manuals" style="display: none;">
+    <!-- Manuals -->
+    <h3>Manuals</h3>
+    <div class="dropdown-content" id="manuals">
       <div class="knowledge-card">
         <div class="knowledge-card-inner">
           <div class="knowledge-card-front">
-            <img src="images/fallback.jpg" alt="FMHY" class="dynamic-preview" loading="lazy" data-url="https://fmhy.net/" />
+            <img
+              src="images/fallback.jpg"
+              alt="FMHY"
+              class="dynamic-preview"
+              loading="lazy"
+              data-url="https://fmhy.net/"
+            />
           </div>
           <div class="knowledge-card-back">
             <h3>FMHY</h3>
-            <p>A collection of free resources for modern living.</p>
-            <a href="https://fmhy.net/" target="_blank">Visit Website</a>
+            <p>A massive, crowdsourced library of modern “how-to” resources.</p>
+            <a href="https://fmhy.net/" target="_blank" rel="noopener noreferrer">
+              Visit Website
+            </a>
           </div>
         </div>
       </div>
-
       <div class="knowledge-card">
         <div class="knowledge-card-inner">
           <div class="knowledge-card-front">
-            <img src="images/fallback.jpg" alt="Alternative To" class="dynamic-preview" loading="lazy" data-url="https://alternativeto.net/" />
+            <img
+              src="images/fallback.jpg"
+              alt="Alternative To"
+              class="dynamic-preview"
+              loading="lazy"
+              data-url="https://alternativeto.net/"
+            />
           </div>
           <div class="knowledge-card-back">
-            <h3>Alternative To</h3>
-            <p>Discover software and application alternatives.</p>
-            <a href="https://alternativeto.net/" target="_blank">Visit Website</a>
+            <h3>AlternativeTo</h3>
+            <p>Discover software and app alternatives for just about anything.</p>
+            <a href="https://alternativeto.net/" target="_blank" rel="noopener noreferrer">
+              Visit Website
+            </a>
           </div>
         </div>
       </div>
     </div>
 
-    <h3 onclick="toggleDropdown('repositories')">Repositories</h3>
-    <div id="repositories" style="display: none;">
+    <!-- Repositories -->
+    <h3>Repositories</h3>
+    <div class="dropdown-content" id="repositories">
       <div class="knowledge-card">
         <div class="knowledge-card-inner">
           <div class="knowledge-card-front">
-            <img src="images/fallback.jpg" alt="Free For Dev" class="dynamic-preview" loading="lazy" data-url="https://github.com/ripienaar/free-for-dev" />
+            <img
+              src="images/fallback.jpg"
+              alt="Free For Dev"
+              class="dynamic-preview"
+              loading="lazy"
+              data-url="https://github.com/ripienaar/free-for-dev"
+            />
           </div>
           <div class="knowledge-card-back">
             <h3>Free For Dev</h3>
-            <p>A curated list of free resources for developers.</p>
-            <a href="https://github.com/ripienaar/free-for-dev" target="_blank">Visit Website</a>
+            <p>A curated list of free services and resources for developers.</p>
+            <a href="https://github.com/ripienaar/free-for-dev" target="_blank" rel="noopener noreferrer">
+              Visit Website
+            </a>
           </div>
         </div>
       </div>
     </div>
-
-  </div>
-</section>
-
-  <!-- Interactive Event Map Section -->
-  <section class="map-section">
-    <h2>Interactive Event Map</h2>
-    <p>Find events and meetups happening near you.</p>
-    <div id="map" style="height: 400px; margin-top: 20px;" aria-label="Interactive map displaying events and meetups"></div>
   </section>
 
-  <hr class="section-divider">
+  <hr class="section-divider" />
 
-  <!-- Footer with Decorative Compass Rose -->
+  <!-- ==============================
+       OPTIONAL: MAP SECTION
+       Remove if you don't need it
+  =============================== -->
+  <section class="map-section">
+    <h2>Interactive Event Map</h2>
+    <p style="text-align: center; color: #fff;">Find events and meetups happening near you.</p>
+    <div id="map" aria-label="Interactive map for events"></div>
+  </section>
+
+  <hr class="section-divider" />
+
+  <!-- ==============================
+       FOOTER
+  =============================== -->
   <footer class="contact-block">
     <div class="contact-info">
       <h3>Contact Us</h3>
       <p>123 Ancient Road, Knowledge City, Earth</p>
       <p>
         Email:
-        <a href="mailto:info@globalantiquity.org" aria-label="Send an email to info@globalantiquity.org">info@globalantiquity.org</a>
+        <a
+          href="mailto:info@globalantiquity.org"
+          aria-label="Send an email to info@globalantiquity.org"
+        >info@globalantiquity.org</a>
       </p>
-      <img src="images/compass-rose.png" alt="Decorative compass rose" style="width: 50px; margin-top: 10px;" />
+      <!-- Decorative compass (optional) -->
+      <img
+        src="images/compass-rose.png"
+        alt="Decorative compass rose"
+        style="width: 50px; margin-top: 10px;"
+      />
     </div>
-    <p class="footer-copy">&copy; 2025 The Global Antiquity Society. All rights reserved.</p>
+    <p class="footer-copy">
+      &copy; 2025 The Global Antiquity Society. All rights reserved.
+    </p>
   </footer>
 
-  <!-- Main Script -->
-<script defer src="assets-js-script.js"></script>
+  <!-- ==============================
+       MAIN SCRIPT
+  =============================== -->
+  <script>
+    /*--------------------------------------------------------------
+      PRELOADER LOGIC
+    --------------------------------------------------------------*/
+    window.addEventListener("load", () => {
+      const preloader = document.getElementById("preloader");
+      if (preloader) {
+        // Hide preloader immediately once the page is fully loaded
+        preloader.style.display = "none";
+      }
+      // Fallback: Hide after 5s in case 'load' doesn't fire
+      setTimeout(() => {
+        if (preloader) preloader.style.display = "none";
+      }, 5000);
+    });
+
+    /*--------------------------------------------------------------
+      DOMContentLoaded SCRIPTS
+    --------------------------------------------------------------*/
+    document.addEventListener("DOMContentLoaded", () => {
+      // 1. Toggle dropdown for each subsection
+      const headings = document.querySelectorAll(".important-links h3");
+      headings.forEach((heading) => {
+        heading.addEventListener("click", () => {
+          const nextContent = heading.nextElementSibling;
+          if (nextContent && nextContent.classList.contains("dropdown-content")) {
+            // Toggle display
+            nextContent.style.display =
+              nextContent.style.display === "block" ? "none" : "block";
+          }
+        });
+      });
+
+      // 2. Lazy Load Dynamic Previews with IntersectionObserver
+      const previewImages = document.querySelectorAll(".dynamic-preview");
+      if ("IntersectionObserver" in window) {
+        const observer = new IntersectionObserver((entries, obs) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              const img = entry.target;
+              const card = img.closest(".knowledge-card");
+              // Use data-url if provided, or fallback to any link in the card
+              const link = img.dataset.url || card?.querySelector("a")?.href;
+              if (link) {
+                img.src = `https://api.microlink.io/?url=${link}&screenshot=true&embed=screenshot.url`;
+                img.onerror = () => {
+                  img.src = "images/fallback.jpg";
+                };
+              }
+              obs.unobserve(img);
+            }
+          });
+        }, { threshold: 0.1 });
+        previewImages.forEach((img) => observer.observe(img));
+      } else {
+        // Fallback: load all previews at once
+        previewImages.forEach((img, index) => {
+          const card = img.closest(".knowledge-card");
+          const link = img.dataset.url || card?.querySelector("a")?.href;
+          if (link) {
+            setTimeout(() => {
+              img.src = `https://api.microlink.io/?url=${link}&screenshot=true&embed=screenshot.url`;
+              img.onerror = () => {
+                img.src = "images/fallback.jpg";
+              };
+            }, index * 50);
+          }
+        });
+      }
+
+      // 3. Flip cards on click/tap (useful for touch devices)
+      const knowledgeCards = document.querySelectorAll(".knowledge-card");
+      knowledgeCards.forEach((card) => {
+        card.addEventListener("click", () => {
+          const cardInner = card.querySelector(".knowledge-card-inner");
+          if (cardInner) cardInner.classList.toggle("flipped");
+        });
+      });
+
+      // Close flipped cards when clicking outside
+      document.addEventListener("click", (event) => {
+        knowledgeCards.forEach((card) => {
+          const cardInner = card.querySelector(".knowledge-card-inner");
+          if (
+            cardInner &&
+            cardInner.classList.contains("flipped") &&
+            !card.contains(event.target)
+          ) {
+            cardInner.classList.remove("flipped");
+          }
+        });
+      });
+
+      // 4. Initialize Leaflet Map (if you’re keeping the map section)
+      if (typeof L !== "undefined" && document.getElementById("map")) {
+        const map = L.map("map").setView([26.4615, -80.0728], 13);
+        L.tileLayer("https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png", {
+          attribution:
+            "&copy; <a href='https://www.openstreetmap.org/copyright'>OpenStreetMap</a> contributors &copy; <a href='https://carto.com/'>CARTO</a>",
+          subdomains: "abcd",
+          maxZoom: 19,
+        }).addTo(map);
+
+        // Optional custom marker
+        const customIcon = L.icon({
+          iconUrl: "images/custom-marker.png", /* Replace with your marker image */
+          iconSize: [38, 38],
+          iconAnchor: [19, 38],
+          popupAnchor: [0, -38],
+        });
+
+        // Example marker
+        L.marker([26.4615, -80.0728], { icon: customIcon })
+          .addTo(map)
+          .bindPopup("<b>Community Event:</b> Beach Cleanup<br><b>Date:</b> Jan 15, 10 AM")
+          .openPopup();
+
+        // Move zoom controls if desired
+        L.control.zoom({ position: "bottomright" }).addTo(map);
+
+        // Keep map responsive
+        window.addEventListener("resize", () => {
+          map.invalidateSize();
+        });
+      }
+    });
+  </script>
 </body>
 </html>
