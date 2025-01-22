@@ -9,7 +9,7 @@
   />
   <title>The Global Antiquity Society | One-Page Showcase</title>
 
-  <!-- Google Fonts -->
+  <!-- Google Fonts (Cinzel for headings, Roboto for body) -->
   <link
     href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Roboto:wght@400;700&display=swap"
     rel="stylesheet"
@@ -29,7 +29,6 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 
-  <!-- Inline CSS -->
   <style>
     /*--------------------------------------------------------------
       RESET & ROOT VARIABLES
@@ -52,15 +51,16 @@
       GLOBAL STYLES
     --------------------------------------------------------------*/
     html {
-      scroll-behavior: smooth; /* Smooth scrolling for the entire page */
+      scroll-behavior: smooth;
     }
     body {
+      font-family: 'Roboto', Arial, Helvetica, sans-serif;
+      color: var(--text-light);
+      overflow-x: hidden;
+      line-height: 1.6;
+      /* The main background (dark-parchment) is applied AFTER the pinned container finishes */
       background: url('images/dark-parchment-texture.jpg') no-repeat center center fixed;
       background-size: cover;
-      color: var(--text-light);
-      font-family: 'Roboto', Arial, Helvetica, sans-serif;
-      line-height: 1.6;
-      overflow-x: hidden; /* Prevent horizontal scroll if content extends */
     }
     img {
       max-width: 100%;
@@ -83,13 +83,37 @@
     }
 
     /*--------------------------------------------------------------
+      TOP BAR (Logo + Title)
+    --------------------------------------------------------------*/
+    .top-bar {
+      width: 100%;
+      background: rgba(0,0,0,0.8);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      padding: 0.5rem 1rem;
+      position: relative;
+      z-index: 9999;
+    }
+    .top-bar img {
+      width: 40px;
+      height: auto;
+      margin-right: 1rem;
+    }
+    .top-bar h1 {
+      font-family: 'Cinzel', serif;
+      font-size: 1.5rem;
+      letter-spacing: 1px;
+    }
+
+    /*--------------------------------------------------------------
       PRELOADER
     --------------------------------------------------------------*/
     #preloader {
       position: fixed;
       top: 0;
       left: 0;
-      z-index: 9999;
+      z-index: 9998;
       width: 100%;
       height: 100%;
       background: #ffffff;
@@ -106,9 +130,7 @@
       animation: spin 1s linear infinite;
     }
     @keyframes spin {
-      to {
-        transform: rotate(360deg);
-      }
+      to { transform: rotate(360deg); }
     }
 
     /*--------------------------------------------------------------
@@ -180,74 +202,89 @@
     }
 
     /*--------------------------------------------------------------
-      HERO SECTION (Book Animation)
+      PINNED BOOK CONTAINER (Black BG)
     --------------------------------------------------------------*/
-    .hero {
+    .pinned-book-section {
       position: relative;
-      height: 100vh; /* Full viewport height for the pinned book animation */
-      overflow: hidden;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .hero-overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
       width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.4);
-      pointer-events: none;
-      z-index: 0;
+      height: 100vh;
+      background: #000; /* black background so about section won't show behind */
+      /* We will pin this section in place for the book animation */
+      overflow: hidden;
     }
-    /* Container to be pinned during scroll */
+
     .book-animation-container {
       width: 100%;
       height: 100%;
       position: relative;
     }
-    /* Images of the closed/open book */
-    .book-image {
+
+    /* ========== CLOSED BOOK (5.5"x8.5" ~ ratio 0.647) ========== */
+    #bookClosed {
       position: absolute;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      width: auto;
-      max-width: 60vw;
-      aspect-ratio: 16 / 9; /* helps preserve a 16:9 aspect ratio */
-    }
-    /* Book pages container (links inside) */
-    .book-pages {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 50vw; /* Adjust as needed */
+      aspect-ratio: 0.647;  /* ~ (5.5 / 8.5) */
+      max-width: 25vw;      /* Adjust as needed, or use px */
       height: auto;
-      padding: 2rem;
-      background: rgba(255,255,255, 0.8);
-      border: 2px solid #999;
-      text-align: center;
-      opacity: 0;
+    }
+
+    /* ========== OPEN BOOK (11"x8.5" ratio ~1.294) ========== */
+    #bookOpen {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      aspect-ratio: 1.294;  /* ~ (11 / 8.5) => 2 pages wide */
+      max-width: 50vw;      /* bigger since it's open (two pages) */
+      height: auto;
+      opacity: 0;           /* initially hidden */
+    }
+
+    /* Overlays on the open book for left & right "pages" */
+    .book-page {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 50%;     /* each page is half of the open book width */
+      height: 60%;    /* approximate height, adjust as needed */
+      background: rgba(255,255,255,0.7);
+      border: 1px solid #999;
+      color: var(--text-dark);
+      padding: 1rem;
+      font-family: 'Cinzel', serif;
+      overflow: auto;
+      opacity: 0;    /* hidden until we fade in the pages */
       pointer-events: none;
     }
-    .book-pages h2 {
-      margin-bottom: 1rem;
-      font-size: 2rem;
-      font-family: 'Cinzel', serif;
-      color: var(--text-dark);
+    .book-page h2 {
+      margin-bottom: 0.5rem;
+      font-size: 1.2rem;
+      text-align: center;
     }
-    .book-pages a {
+    .book-page a {
       display: block;
-      margin-bottom: 1rem;
-      font-size: 1.1rem;
-      font-family: 'Cinzel', serif;
+      margin-bottom: 0.5rem;
+      font-size: 1rem;
       color: var(--text-dark);
       text-decoration: none;
+      text-align: left;
     }
-    .book-pages a:hover {
+    .book-page a:hover {
       text-decoration: underline;
     }
+
+    /* Left page (page 1) -> position left half of open book */
+    .book-page-left {
+      left: 25%; /* (50% of parent's width / 2) => 25% offset from center */
+    }
+    /* Right page (page 2) -> position right half */
+    .book-page-right {
+      right: 25%;
+    }
+
+    /* We'll further handle the x-translation in JS or we can do top & left more precisely if needed */
 
     /* Section Divider */
     .section-divider {
@@ -258,7 +295,8 @@
     }
 
     /*--------------------------------------------------------------
-      CONTENT SECTIONS (About Us, Discord, Form Your Own Crew)
+      CONTENT SECTIONS (About, Discord, Crew, Map, Footer)
+      These are revealed AFTER pinned book container.
     --------------------------------------------------------------*/
     .content-section {
       max-width: 1200px;
@@ -312,9 +350,7 @@
       background: var(--accent-color);
     }
 
-    /*--------------------------------------------------------------
-      MAP SECTION (optional)
-    --------------------------------------------------------------*/
+    /* MAP SECTION */
     .map-section {
       max-width: 1000px;
       margin: 2rem auto;
@@ -335,9 +371,7 @@
       border-radius: 8px;
     }
 
-    /*--------------------------------------------------------------
-      FOOTER
-    --------------------------------------------------------------*/
+    /* FOOTER */
     footer.contact-block {
       background-color: var(--background-dark);
       text-align: center;
@@ -355,31 +389,43 @@
       color: #777;
     }
 
-    /*--------------------------------------------------------------
-      MEDIA QUERIES
-    --------------------------------------------------------------*/
+    /* MEDIA QUERIES */
     @media (max-width: 768px) {
-      .book-pages {
-        width: 80vw; /* Make the 'pages' smaller on mobile */
-        padding: 1rem;
+      .top-bar h1 {
+        font-size: 1.2rem;
       }
-      .book-pages h2 {
-        font-size: 1.5rem;
+      #bookClosed, #bookOpen {
+        max-width: 60vw;  /* smaller for mobile */
+      }
+      .book-page {
+        width: 40%;
+        font-size: 0.9rem;
+      }
+      .book-page h2 {
+        font-size: 1rem;
       }
     }
   </style>
 </head>
 <body>
-  <!-- ==============================
+  <!-- ============================
+       TOP BAR (Logo + Title)
+  ============================ -->
+  <div class="top-bar">
+    <img src="logo.png" alt="Placeholder Logo" />
+    <h1>Global Antiquity Society</h1>
+  </div>
+
+  <!-- ============================
        PRELOADER
-  =============================== -->
+  ============================ -->
   <div id="preloader">
     <div class="spinner"></div>
   </div>
 
-  <!-- ==============================
+  <!-- ============================
        POPUP MODAL
-  =============================== -->
+  ============================ -->
   <div class="popup-overlay" id="popupOverlay">
     <div class="popup-content">
       <button class="close-popup" id="closePopup" aria-label="Close popup">&times;</button>
@@ -400,62 +446,53 @@
     </div>
   </div>
 
-  <!-- ==============================
-       HERO SECTION (Book Animation)
-  =============================== -->
-  <section class="hero">
-    <div class="hero-overlay"></div>
-
-    <!-- Book animation container to be pinned by ScrollTrigger -->
+  <!-- ============================
+       PINNED BOOK SECTION
+       (Black background)
+  ============================ -->
+  <section class="pinned-book-section" id="pinnedBookSection">
     <div class="book-animation-container" id="bookAnimation">
-      <!-- Closed Book Image (initially visible) -->
+      <!-- CLOSED BOOK -->
       <img
         src="images/book-closed.png"
-        alt="Antique Closed Book"
-        class="book-image"
+        alt="Closed Book (5.5 x 8.5)"
         id="bookClosed"
-        style="opacity: 1;"
       />
 
-      <!-- Open Book Image (initially hidden) -->
+      <!-- OPEN BOOK -->
       <img
         src="images/book-open.png"
-        alt="Antique Open Book"
-        class="book-image"
+        alt="Open Book (11 x 8.5)"
         id="bookOpen"
-        style="opacity: 0;"
       />
 
-      <!-- Book Pages with Links -->
-      <div class="book-pages" id="bookPages">
-        <h2>Embark on the Adventure of Knowledge</h2>
-        <a href="https://www.loc.gov/" target="_blank" rel="noopener noreferrer">
-          Library of Congress
-        </a>
-        <a href="https://whc.unesco.org/" target="_blank" rel="noopener noreferrer">
-          UNESCO World Heritage
-        </a>
-        <a href="https://fmhy.net/" target="_blank" rel="noopener noreferrer">
-          FMHY
-        </a>
-        <a href="https://alternativeto.net/" target="_blank" rel="noopener noreferrer">
-          AlternativeTo
-        </a>
-        <a href="https://github.com/ripienaar/free-for-dev" target="_blank" rel="noopener noreferrer">
-          Free For Dev
-        </a>
-        <a href="https://curiositystream.com/" target="_blank" rel="noopener noreferrer">
-          CuriosityStream
-        </a>
+      <!-- Overlays for left and right "pages" on the open book -->
+      <div class="book-page book-page-left" id="leftPage">
+        <!-- Left page content / Table of Contents Part 1 -->
+        <h2>Table of Contents (Page 1)</h2>
+        <a href="https://www.loc.gov/" target="_blank" rel="noopener noreferrer">Library of Congress</a>
+        <a href="https://whc.unesco.org/" target="_blank" rel="noopener noreferrer">UNESCO</a>
+        <a href="https://fmhy.net/" target="_blank" rel="noopener noreferrer">FMHY</a>
+      </div>
+
+      <div class="book-page book-page-right" id="rightPage">
+        <!-- Right page content / Table of Contents Part 2 -->
+        <h2>Table of Contents (Page 2)</h2>
+        <a href="https://alternativeto.net/" target="_blank" rel="noopener noreferrer">AlternativeTo</a>
+        <a href="https://github.com/ripienaar/free-for-dev" target="_blank" rel="noopener noreferrer">Free For Dev</a>
+        <a href="https://curiositystream.com/" target="_blank" rel="noopener noreferrer">CuriosityStream</a>
       </div>
     </div>
   </section>
 
+  <!-- ============================
+       REST OF THE PAGE
+       (Dark Parchment Background)
+  ============================ -->
+
   <hr class="section-divider" />
 
-  <!-- ==============================
-       ABOUT US
-  =============================== -->
+  <!-- ABOUT US -->
   <section class="content-section" id="aboutUs">
     <h2>About Us</h2>
     <p>
@@ -478,9 +515,7 @@
     </p>
   </section>
 
-  <!-- ==============================
-       DISCORD
-  =============================== -->
+  <!-- DISCORD -->
   <section class="content-section" id="discordSection">
     <h2>Discord</h2>
     <p>
@@ -494,9 +529,7 @@
     <button>Join Our Discord</button>
   </section>
 
-  <!-- ==============================
-       FORM YOUR OWN CREW
-  =============================== -->
+  <!-- FORM YOUR OWN CREW -->
   <section class="content-section" id="formCrew">
     <h2>Form Your Own Crew</h2>
     <p>
@@ -525,9 +558,7 @@
 
   <hr class="section-divider" />
 
-  <!-- ==============================
-       MAP SECTION
-  =============================== -->
+  <!-- MAP SECTION -->
   <section class="map-section">
     <h2>Interactive Event Map</h2>
     <p style="text-align: center; color: #fff;">Find events and meetups happening near you.</p>
@@ -536,9 +567,7 @@
 
   <hr class="section-divider" />
 
-  <!-- ==============================
-       FOOTER
-  =============================== -->
+  <!-- FOOTER -->
   <footer class="contact-block">
     <div class="contact-info">
       <h3>Contact Us</h3>
@@ -562,9 +591,9 @@
     </p>
   </footer>
 
-  <!-- ==============================
+  <!-- ============================
        MAIN SCRIPT
-  =============================== -->
+  ============================ -->
   <script>
     /*--------------------------------------------------------------
       PRELOADER LOGIC
@@ -574,14 +603,14 @@
       if (preloader) {
         preloader.style.display = "none";
       }
-      // Fallback: Hide after 5s if 'load' doesn't fire
+      // Fallback: Hide after 5s
       setTimeout(() => {
         if (preloader) preloader.style.display = "none";
       }, 5000);
     });
 
     /*--------------------------------------------------------------
-      SCROLL-BASED BOOK ANIMATION (GSAP + ScrollTrigger)
+      POPUP MODAL & MAP
     --------------------------------------------------------------*/
     gsap.registerPlugin(ScrollTrigger);
 
@@ -596,13 +625,13 @@
         });
       }
 
-      // 2. Leaflet Map Initialization (if map is used)
+      // 2. Initialize Leaflet Map (if you keep the map)
       if (typeof L !== "undefined" && document.getElementById("map")) {
         const map = L.map("map").setView([26.4615, -80.0728], 13);
         L.tileLayer("https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png", {
           attribution:
-            "&copy; <a href='https://www.openstreetmap.org/copyright'>OpenStreetMap</a> "
-            + "contributors &copy; <a href='https://carto.com/'>CARTO</a>",
+            "&copy; <a href='https://www.openstreetmap.org/copyright'>OpenStreetMap</a>"
+            + " contributors &copy; <a href='https://carto.com/'>CARTO</a>",
           subdomains: "abcd",
           maxZoom: 19,
         }).addTo(map);
@@ -614,7 +643,6 @@
           iconAnchor: [19, 38],
           popupAnchor: [0, -38],
         });
-
         // Example marker
         L.marker([26.4615, -80.0728], { icon: customIcon })
           .addTo(map)
@@ -630,36 +658,40 @@
         });
       }
 
-      // 3. Book Open/Close Animation
+      // 3. Book Scroll Animation
       gsap.set("#bookClosed", { opacity: 1 });
       gsap.set("#bookOpen", { opacity: 0 });
-      gsap.set("#bookPages", { opacity: 0, pointerEvents: "none" });
+      gsap.set(".book-page", { opacity: 0, pointerEvents: "none" });
 
-      const tl = gsap.timeline({
+      const timeline = gsap.timeline({
         scrollTrigger: {
-          trigger: "#bookAnimation",
+          trigger: "#pinnedBookSection",  // The black background container
           start: "top top",
-          end: "+=200%", // Adjust how many scroll lengths this animation should take
+          end: "+=200%",                 // how long the pinned effect lasts
           scrub: true,
-          pin: true,     // Keep the hero pinned during the book animation
+          pin: true,                     // keep it pinned
+          // markers: true,              // debug if needed
         }
       });
 
-      // Fade out closed book, fade in open book
-      tl.to("#bookClosed", { opacity: 0, duration: 1 }, "phase1")
+      // 1) Fade in closed book (already set to 1)
+      // 2) Fade out closed book, fade in open book
+      timeline
+        .to("#bookClosed", { opacity: 0, duration: 1 }, "phase1")
         .to("#bookOpen", { opacity: 1, duration: 1 }, "phase1+=1");
 
-      // Reveal pages (links)
-      tl.to("#bookPages", {
+      // 3) Reveal left & right pages
+      timeline.to(".book-page", {
         opacity: 1,
         pointerEvents: "auto",
-        duration: 1
+        duration: 1,
       }, "phase2");
 
-      // Fade out open book & pages (simulate closing)
-      tl.to("#bookOpen", { opacity: 0, duration: 1 }, "phase3")
-        .to("#bookPages", { opacity: 0, pointerEvents: "none", duration: 1 }, "phase3");
-      // After finishing, the container unpins, revealing the About Us section, etc.
+      // 4) Fade out open book & pages (simulate closing)
+      timeline.to("#bookOpen", { opacity: 0, duration: 1 }, "phase3")
+        .to(".book-page", { opacity: 0, pointerEvents: "none", duration: 1 }, "phase3");
+
+      // once timeline ends, pinned container unpins, revealing the about section
     });
   </script>
 </body>
