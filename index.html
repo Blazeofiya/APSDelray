@@ -25,6 +25,10 @@
     src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
   ></script>
 
+  <!-- GSAP + ScrollTrigger (for the book animation) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
   <!-- Inline CSS -->
   <style>
     /*--------------------------------------------------------------
@@ -35,7 +39,6 @@
       padding: 0;
       box-sizing: border-box;
     }
-
     :root {
       --primary-color: #a63a00;
       --secondary-color: #f2e4ca;
@@ -51,7 +54,6 @@
     html {
       scroll-behavior: smooth; /* Smooth scrolling for the entire page */
     }
-
     body {
       background: url('images/dark-parchment-texture.jpg') no-repeat center center fixed;
       background-size: cover;
@@ -60,27 +62,22 @@
       line-height: 1.6;
       overflow-x: hidden; /* Prevent horizontal scroll if content extends */
     }
-
     img {
       max-width: 100%;
       height: auto;
       display: block;
     }
-
     a {
       color: var(--primary-color);
       text-decoration: none;
     }
-
     a:hover {
       opacity: 0.8;
     }
-
     h1, h2, h3 {
       font-family: 'Cinzel', serif;
       margin-bottom: 0.5rem;
     }
-
     p {
       margin-bottom: 1rem;
     }
@@ -183,40 +180,15 @@
     }
 
     /*--------------------------------------------------------------
-      TOP LINKS SECTION (ABOVE HERO TEXT)
-    --------------------------------------------------------------*/
-    .top-links {
-      background-color: rgba(0, 0, 0, 0.6);
-      padding: 1rem;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1rem;
-      justify-content: center;
-    }
-    .top-links a {
-      background: var(--primary-color);
-      color: var(--text-light);
-      padding: 0.75rem 1.25rem;
-      border-radius: 4px;
-      font-weight: bold;
-      transition: background 0.3s;
-    }
-    .top-links a:hover {
-      background: var(--accent-color);
-    }
-
-    /*--------------------------------------------------------------
-      HERO SECTION
+      HERO SECTION (Book Animation)
     --------------------------------------------------------------*/
     .hero {
       position: relative;
-      min-height: 70vh;
+      height: 100vh; /* Full viewport height for the pinned book animation */
+      overflow: hidden;
       display: flex;
       align-items: center;
       justify-content: center;
-      text-align: center;
-      padding: 2rem;
-      color: var(--text-light);
     }
     .hero-overlay {
       position: absolute;
@@ -228,20 +200,53 @@
       pointer-events: none;
       z-index: 0;
     }
-    .hero-text {
+    /* Container to be pinned during scroll */
+    .book-animation-container {
+      width: 100%;
+      height: 100%;
       position: relative;
-      z-index: 1;
-      max-width: 800px;
-      padding: 1rem;
     }
-    .hero-text h1 {
-      font-size: 2.5rem;
-      text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+    /* Images of the closed/open book */
+    .book-image {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: auto;
+      max-width: 60vw;
+      aspect-ratio: 16 / 9; /* helps preserve a 16:9 aspect ratio */
+    }
+    /* Book pages container (links inside) */
+    .book-pages {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 50vw; /* Adjust as needed */
+      height: auto;
+      padding: 2rem;
+      background: rgba(255,255,255, 0.8);
+      border: 2px solid #999;
+      text-align: center;
+      opacity: 0;
+      pointer-events: none;
+    }
+    .book-pages h2 {
       margin-bottom: 1rem;
+      font-size: 2rem;
+      font-family: 'Cinzel', serif;
+      color: var(--text-dark);
     }
-    .hero-text p {
-      font-size: 1.2rem;
-      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+    .book-pages a {
+      display: block;
+      margin-bottom: 1rem;
+      font-size: 1.1rem;
+      font-family: 'Cinzel', serif;
+      color: var(--text-dark);
+      text-decoration: none;
+    }
+    .book-pages a:hover {
+      text-decoration: underline;
     }
 
     /* Section Divider */
@@ -253,7 +258,7 @@
     }
 
     /*--------------------------------------------------------------
-      TOP SECTIONS (About Us, Discord, Form Your Own Crew)
+      CONTENT SECTIONS (About Us, Discord, Form Your Own Crew)
     --------------------------------------------------------------*/
     .content-section {
       max-width: 1200px;
@@ -267,6 +272,7 @@
       text-align: center;
       margin-bottom: 1rem;
       font-size: 2rem;
+      font-family: 'Cinzel', serif;
     }
     .content-section p {
       margin-bottom: 1rem;
@@ -320,6 +326,7 @@
     .map-section h2 {
       text-align: center;
       margin-bottom: 1rem;
+      font-family: 'Cinzel', serif;
     }
     #map {
       width: 100%;
@@ -352,11 +359,12 @@
       MEDIA QUERIES
     --------------------------------------------------------------*/
     @media (max-width: 768px) {
-      .hero-text h1 {
-        font-size: 2rem;
+      .book-pages {
+        width: 80vw; /* Make the 'pages' smaller on mobile */
+        padding: 1rem;
       }
-      .hero-text p {
-        font-size: 1rem;
+      .book-pages h2 {
+        font-size: 1.5rem;
       }
     }
   </style>
@@ -370,7 +378,7 @@
   </div>
 
   <!-- ==============================
-       POPUP MODAL (Hidden by default)
+       POPUP MODAL
   =============================== -->
   <div class="popup-overlay" id="popupOverlay">
     <div class="popup-content">
@@ -393,26 +401,53 @@
   </div>
 
   <!-- ==============================
-       TOP LINKS (ABOVE HERO)
-  =============================== -->
-  <section class="top-links">
-    <!-- Original "card" links, now simple buttons (or text links) -->
-    <a href="https://www.loc.gov/" target="_blank" rel="noopener noreferrer">Library of Congress</a>
-    <a href="https://whc.unesco.org/" target="_blank" rel="noopener noreferrer">UNESCO World Heritage</a>
-    <a href="https://fmhy.net/" target="_blank" rel="noopener noreferrer">FMHY</a>
-    <a href="https://alternativeto.net/" target="_blank" rel="noopener noreferrer">AlternativeTo</a>
-    <a href="https://github.com/ripienaar/free-for-dev" target="_blank" rel="noopener noreferrer">Free For Dev</a>
-    <a href="https://curiositystream.com/" target="_blank" rel="noopener noreferrer">CuriosityStream</a>
-  </section>
-
-  <!-- ==============================
-       HERO SECTION
+       HERO SECTION (Book Animation)
   =============================== -->
   <section class="hero">
     <div class="hero-overlay"></div>
-    <div class="hero-text">
-      <h1>Embark on the Adventure of Knowledge</h1>
-      <p>Explore hidden truths and practical skills for the modern world, all in one place.</p>
+
+    <!-- Book animation container to be pinned by ScrollTrigger -->
+    <div class="book-animation-container" id="bookAnimation">
+      <!-- Closed Book Image (initially visible) -->
+      <img
+        src="images/book-closed.png"
+        alt="Antique Closed Book"
+        class="book-image"
+        id="bookClosed"
+        style="opacity: 1;"
+      />
+
+      <!-- Open Book Image (initially hidden) -->
+      <img
+        src="images/book-open.png"
+        alt="Antique Open Book"
+        class="book-image"
+        id="bookOpen"
+        style="opacity: 0;"
+      />
+
+      <!-- Book Pages with Links -->
+      <div class="book-pages" id="bookPages">
+        <h2>Embark on the Adventure of Knowledge</h2>
+        <a href="https://www.loc.gov/" target="_blank" rel="noopener noreferrer">
+          Library of Congress
+        </a>
+        <a href="https://whc.unesco.org/" target="_blank" rel="noopener noreferrer">
+          UNESCO World Heritage
+        </a>
+        <a href="https://fmhy.net/" target="_blank" rel="noopener noreferrer">
+          FMHY
+        </a>
+        <a href="https://alternativeto.net/" target="_blank" rel="noopener noreferrer">
+          AlternativeTo
+        </a>
+        <a href="https://github.com/ripienaar/free-for-dev" target="_blank" rel="noopener noreferrer">
+          Free For Dev
+        </a>
+        <a href="https://curiositystream.com/" target="_blank" rel="noopener noreferrer">
+          CuriosityStream
+        </a>
+      </div>
     </div>
   </section>
 
@@ -456,7 +491,6 @@
     <p>
       Come aboard and discover upcoming workshops, events, and more as we chart a new course together!
     </p>
-    <!-- Add your direct Discord invite link here, if you like -->
     <button>Join Our Discord</button>
   </section>
 
@@ -492,7 +526,7 @@
   <hr class="section-divider" />
 
   <!-- ==============================
-       MAP SECTION (optional)
+       MAP SECTION
   =============================== -->
   <section class="map-section">
     <h2>Interactive Event Map</h2>
@@ -547,23 +581,22 @@
     });
 
     /*--------------------------------------------------------------
-      DOMContentLoaded
+      SCROLL-BASED BOOK ANIMATION (GSAP + ScrollTrigger)
     --------------------------------------------------------------*/
+    gsap.registerPlugin(ScrollTrigger);
+
     document.addEventListener("DOMContentLoaded", () => {
-      // 1. Show popup once page loads (you can adjust logic if you want it only once)
+      // 1. Show popup once page loads
       const popupOverlay = document.getElementById('popupOverlay');
       const closePopupBtn = document.getElementById('closePopup');
       if (popupOverlay) {
-        // Show it
         popupOverlay.classList.add('active');
-
-        // Close on button click
         closePopupBtn.addEventListener('click', () => {
           popupOverlay.classList.remove('active');
         });
       }
 
-      // 2. Initialize Leaflet Map (if you keep map section)
+      // 2. Leaflet Map Initialization (if map is used)
       if (typeof L !== "undefined" && document.getElementById("map")) {
         const map = L.map("map").setView([26.4615, -80.0728], 13);
         L.tileLayer("https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png", {
@@ -596,6 +629,37 @@
           map.invalidateSize();
         });
       }
+
+      // 3. Book Open/Close Animation
+      gsap.set("#bookClosed", { opacity: 1 });
+      gsap.set("#bookOpen", { opacity: 0 });
+      gsap.set("#bookPages", { opacity: 0, pointerEvents: "none" });
+
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: "#bookAnimation",
+          start: "top top",
+          end: "+=200%", // Adjust how many scroll lengths this animation should take
+          scrub: true,
+          pin: true,     // Keep the hero pinned during the book animation
+        }
+      });
+
+      // Fade out closed book, fade in open book
+      tl.to("#bookClosed", { opacity: 0, duration: 1 }, "phase1")
+        .to("#bookOpen", { opacity: 1, duration: 1 }, "phase1+=1");
+
+      // Reveal pages (links)
+      tl.to("#bookPages", {
+        opacity: 1,
+        pointerEvents: "auto",
+        duration: 1
+      }, "phase2");
+
+      // Fade out open book & pages (simulate closing)
+      tl.to("#bookOpen", { opacity: 0, duration: 1 }, "phase3")
+        .to("#bookPages", { opacity: 0, pointerEvents: "none", duration: 1 }, "phase3");
+      // After finishing, the container unpins, revealing the About Us section, etc.
     });
   </script>
 </body>
