@@ -45,6 +45,7 @@
       --text-light: #f9f9f9;
       --text-dark: #333333;
       --accent-color: #c79b53;
+      --book-page-bg: rgba(255, 255, 255, 0.0); /* Transparent so text appears on the open-book image */
     }
 
     /*--------------------------------------------------------------
@@ -58,9 +59,10 @@
       color: var(--text-light);
       overflow-x: hidden;
       line-height: 1.6;
-      /* The main background (dark-parchment) is applied AFTER the pinned container finishes */
       background: url('images/dark-parchment-texture.jpg') no-repeat center center fixed;
       background-size: cover;
+      /* Add top padding to avoid overlap with fixed top bar */
+      padding-top: 60px;
     }
     img {
       max-width: 100%;
@@ -80,20 +82,23 @@
     }
     p {
       margin-bottom: 1rem;
+      line-height: 1.6;
     }
 
     /*--------------------------------------------------------------
-      TOP BAR (Logo + Title)
+      FIXED TOP BAR (Logo + Title)
     --------------------------------------------------------------*/
     .top-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
       width: 100%;
       background: rgba(0,0,0,0.8);
       color: #fff;
       display: flex;
       align-items: center;
       padding: 0.5rem 1rem;
-      position: relative;
-      z-index: 9999;
+      z-index: 9999; /* stays on top */
     }
     .top-bar img {
       width: 40px;
@@ -168,6 +173,7 @@
     .popup-content h2 {
       margin-bottom: 1rem;
       font-size: 1.5rem;
+      font-family: 'Cinzel', serif;
     }
     .popup-content p {
       margin-bottom: 1.5rem;
@@ -178,6 +184,7 @@
       margin-bottom: 1rem;
       border: 1px solid var(--primary-color);
       border-radius: 4px;
+      font-family: 'Roboto', sans-serif;
     }
     .popup-content button {
       background: var(--primary-color);
@@ -186,6 +193,7 @@
       border: none;
       border-radius: 4px;
       cursor: pointer;
+      font-family: 'Cinzel', serif;
     }
     .popup-content button:hover {
       background: var(--accent-color);
@@ -219,135 +227,109 @@
       position: relative;
     }
 
-    /* ========== CLOSED BOOK (5.5"x8.5" ~ ratio 0.647) ========== */
+    /* CLOSED BOOK */
     #bookClosed {
       position: absolute;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      aspect-ratio: 0.647;  /* ~ (5.5 / 8.5) */
-      max-width: 25vw;      /* Adjust as needed, or use px */
+      max-width: 20vw;
       height: auto;
+      opacity: 1; /* visible initially */
     }
 
-    /* ========== OPEN BOOK (11"x8.5" ratio ~1.294) ========== */
+    /* OPEN BOOK */
     #bookOpen {
       position: absolute;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      aspect-ratio: 1.294;  /* ~ (11 / 8.5) => 2 pages wide */
-      max-width: 50vw;      /* bigger since it's open (two pages) */
+      max-width: 40vw;
       height: auto;
-      opacity: 0;           /* initially hidden */
+      opacity: 0; /* hidden initially */
     }
 
-    /* Overlays on the open book for left & right "pages" */
-    .book-page {
+    /*--------------------------------------------------------------
+      TABLE OF CONTENTS ON THE OPEN BOOK
+      2x2 grid to match your specification:
+       - Row 1, Col 1: Title
+       - Row 1, Col 2: List of links
+       - Row 2, Col 1: "Table of Contents Continued"
+       - Row 2, Col 2: Continuation of links
+      Positioned so it appears on the right-center of the open book.
+    --------------------------------------------------------------*/
+    .table-of-contents-container {
       position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 50%;     /* each page is half of the open book width */
-      height: 60%;    /* approximate height, adjust as needed */
-      background: rgba(255,255,255,0.7);
-      border: 1px solid #999;
+      top: 50%;    /* same center as bookOpen */
+      left: 50%;
+      transform: translate(-40%, -50%); /* shift it right so it appears more on the right page */
+      width: 60%;  /* adjust as needed */
+      height: 60%; /* adjust as needed */
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: auto auto;
+      gap: 1rem;
+      pointer-events: none; /* We'll enable pointer-events once fully visible in the timeline */
       color: var(--text-dark);
-      padding: 1rem;
       font-family: 'Cinzel', serif;
-      overflow: auto;
-      opacity: 0;    /* hidden until we fade in the pages */
-      pointer-events: none;
     }
-    .book-page h2 {
-      margin-bottom: 0.5rem;
-      font-size: 1.2rem;
+
+    .table-of-contents-container div {
+      background: var(--book-page-bg); /* transparent to show the book underneath */
+      border: none;
+      padding: 0.5rem;
+    }
+
+    .table-of-contents-container h2 {
       text-align: center;
-    }
-    .book-page a {
-      display: block;
+      font-size: 1.4rem;
       margin-bottom: 0.5rem;
-      font-size: 1rem;
+    }
+
+    .table-of-contents-container ul {
+      list-style: none;
+    }
+    .table-of-contents-container ul li {
+      margin-bottom: 0.5rem;
+    }
+    .table-of-contents-container ul li a {
       color: var(--text-dark);
       text-decoration: none;
-      text-align: left;
     }
-    .book-page a:hover {
+    .table-of-contents-container ul li a:hover {
       text-decoration: underline;
     }
-
-    /* Left page (page 1) -> position left half of open book */
-    .book-page-left {
-      left: 25%; /* (50% of parent's width / 2) => 25% offset from center */
-    }
-    /* Right page (page 2) -> position right half */
-    .book-page-right {
-      right: 25%;
-    }
-
-    /* We'll further handle the x-translation in JS or we can do top & left more precisely if needed */
-
-    /* Section Divider */
-    .section-divider {
-      margin: 2rem 0;
-      border: none;
-      height: 2px;
-      background: rgba(255, 255, 255, 0.2);
+    .toc-continued {
+      font-size: 0.9rem;
+      text-align: left;
     }
 
     /*--------------------------------------------------------------
       CONTENT SECTIONS (About, Discord, Crew, Map, Footer)
-      These are revealed AFTER pinned book container.
     --------------------------------------------------------------*/
-    .content-section {
+    .content-section,
+    .about-section {
       max-width: 1200px;
-      margin: 0 auto;
+      margin: 2rem auto;
       padding: 2rem 1rem;
       background-color: rgba(0, 0, 0, 0.6);
       border-radius: 8px;
-      margin-bottom: 2rem;
     }
-    .content-section h2 {
+    .content-section h2,
+    .about-section h2 {
       text-align: center;
       margin-bottom: 1rem;
       font-size: 2rem;
       font-family: 'Cinzel', serif;
     }
-    .content-section p {
-      margin-bottom: 1rem;
-      line-height: 1.6;
-    }
-    .content-section form {
-      display: flex;
-      flex-direction: column;
-      max-width: 500px;
-      margin: 1rem auto 0;
-    }
-    .content-section label {
-      margin-bottom: 0.5rem;
-      font-weight: bold;
-    }
-    .content-section input[type="text"],
-    .content-section input[type="email"],
-    .content-section textarea {
-      padding: 0.5rem;
-      margin-bottom: 1rem;
-      border: 1px solid var(--primary-color);
-      border-radius: 4px;
-      font-family: 'Roboto', sans-serif;
-    }
-    .content-section textarea {
-      resize: vertical;
-    }
-    .content-section button[type="submit"] {
-      background: var(--primary-color);
-      color: var(--text-light);
+
+    /* Section Divider */
+    .section-divider {
+      margin: 2rem auto;
+      width: 90%;
       border: none;
-      border-radius: 4px;
-      padding: 0.5rem 1rem;
-      cursor: pointer;
-    }
-    .content-section button[type="submit"]:hover {
-      background: var(--accent-color);
+      height: 2px;
+      background: rgba(255, 255, 255, 0.2);
     }
 
     /* MAP SECTION */
@@ -389,27 +371,63 @@
       color: #777;
     }
 
+    /* FORMS */
+    .content-section form {
+      display: flex;
+      flex-direction: column;
+      max-width: 500px;
+      margin: 1rem auto 0;
+    }
+    .content-section label {
+      margin-bottom: 0.5rem;
+      font-weight: bold;
+    }
+    .content-section input[type="text"],
+    .content-section input[type="email"],
+    .content-section textarea {
+      padding: 0.5rem;
+      margin-bottom: 1rem;
+      border: 1px solid var(--primary-color);
+      border-radius: 4px;
+      font-family: 'Roboto', sans-serif;
+    }
+    .content-section button[type="submit"],
+    #discordSection button {
+      background: var(--primary-color);
+      color: var(--text-light);
+      border: none;
+      border-radius: 4px;
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+      font-family: 'Cinzel', serif;
+    }
+    .content-section button[type="submit"]:hover,
+    #discordSection button:hover {
+      background: var(--accent-color);
+    }
+
     /* MEDIA QUERIES */
     @media (max-width: 768px) {
       .top-bar h1 {
         font-size: 1.2rem;
       }
-      #bookClosed, #bookOpen {
-        max-width: 60vw;  /* smaller for mobile */
+      #bookClosed,
+      #bookOpen {
+        max-width: 60vw;
       }
-      .book-page {
-        width: 40%;
-        font-size: 0.9rem;
+      .table-of-contents-container {
+        width: 80%;
+        transform: translate(-50%, -50%);
       }
-      .book-page h2 {
-        font-size: 1rem;
+      .table-of-contents-container h2 {
+        font-size: 1.1rem;
       }
     }
   </style>
 </head>
 <body>
   <!-- ============================
-       TOP BAR (Logo + Title)
+       FIXED TOP BAR
   ============================ -->
   <div class="top-bar">
     <img src="logo.png" alt="Placeholder Logo" />
@@ -455,44 +473,51 @@
       <!-- CLOSED BOOK -->
       <img
         src="images/book-closed.png"
-        alt="Closed Book (5.5 x 8.5)"
+        alt="Closed Book"
         id="bookClosed"
       />
 
       <!-- OPEN BOOK -->
       <img
         src="images/book-open.png"
-        alt="Open Book (11 x 8.5)"
+        alt="Open Book"
         id="bookOpen"
       />
 
-      <!-- Overlays for left and right "pages" on the open book -->
-      <div class="book-page book-page-left" id="leftPage">
-        <!-- Left page content / Table of Contents Part 1 -->
-        <h2>Table of Contents (Page 1)</h2>
-        <a href="https://www.loc.gov/" target="_blank" rel="noopener noreferrer">Library of Congress</a>
-        <a href="https://whc.unesco.org/" target="_blank" rel="noopener noreferrer">UNESCO</a>
-        <a href="https://fmhy.net/" target="_blank" rel="noopener noreferrer">FMHY</a>
-      </div>
-
-      <div class="book-page book-page-right" id="rightPage">
-        <!-- Right page content / Table of Contents Part 2 -->
-        <h2>Table of Contents (Page 2)</h2>
-        <a href="https://alternativeto.net/" target="_blank" rel="noopener noreferrer">AlternativeTo</a>
-        <a href="https://github.com/ripienaar/free-for-dev" target="_blank" rel="noopener noreferrer">Free For Dev</a>
-        <a href="https://curiositystream.com/" target="_blank" rel="noopener noreferrer">CuriosityStream</a>
+      <!-- 2x2 Grid for Table of Contents on the open book -->
+      <div class="table-of-contents-container" id="tableContents">
+        <!-- Row 1, Col 1 -->
+        <div>
+          <h2>Table of Contents</h2>
+        </div>
+        <!-- Row 1, Col 2 -->
+        <div>
+          <ul>
+            <li><a href="https://www.loc.gov/" target="_blank">Library of Congress</a></li>
+            <li><a href="https://whc.unesco.org/" target="_blank">UNESCO</a></li>
+            <li><a href="https://fmhy.net/" target="_blank">FMHY</a></li>
+          </ul>
+        </div>
+        <!-- Row 2, Col 1 -->
+        <div class="toc-continued">
+          Table of Contents Continued...
+        </div>
+        <!-- Row 2, Col 2 -->
+        <div>
+          <ul>
+            <li><a href="https://alternativeto.net/" target="_blank">AlternativeTo</a></li>
+            <li><a href="https://github.com/ripienaar/free-for-dev" target="_blank">Free For Dev</a></li>
+            <li><a href="https://curiositystream.com/" target="_blank">CuriosityStream</a></li>
+          </ul>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- ============================
-       REST OF THE PAGE
-       (Dark Parchment Background)
-  ============================ -->
-
+  <!-- SECTION DIVIDER -->
   <hr class="section-divider" />
 
-  <!-- ===========================
+  <!-- ============================
        ABOUT GAS SECTION
   ============================ -->
   <section class="about-section" id="aboutGAS">
@@ -529,7 +554,7 @@
       prosperity.
     </p>
   </section>
-  
+
   <!-- DISCORD -->
   <section class="content-section" id="discordSection">
     <h2>Discord</h2>
@@ -653,7 +678,7 @@
 
         // Optional custom marker
         const customIcon = L.icon({
-          iconUrl: "images/custom-marker.png", /* Replace with your marker image */
+          iconUrl: "images/custom-marker.png", /* Replace with your marker image if desired */
           iconSize: [38, 38],
           iconAnchor: [19, 38],
           popupAnchor: [0, -38],
@@ -673,40 +698,43 @@
         });
       }
 
-      // 3. Book Scroll Animation
+      /*--------------------------------------------------------------
+        BOOK SCROLL ANIMATION
+      --------------------------------------------------------------*/
+      // Initial states
       gsap.set("#bookClosed", { opacity: 1 });
       gsap.set("#bookOpen", { opacity: 0 });
-      gsap.set(".book-page", { opacity: 0, pointerEvents: "none" });
+      gsap.set("#tableContents", { opacity: 0, pointerEvents: "none" });
 
       const timeline = gsap.timeline({
         scrollTrigger: {
-          trigger: "#pinnedBookSection",  // The black background container
+          trigger: "#pinnedBookSection",
           start: "top top",
-          end: "+=200%",                 // how long the pinned effect lasts
+          end: "+=200%",  // how long the pinned effect lasts
           scrub: true,
-          pin: true,                     // keep it pinned
-          // markers: true,              // debug if needed
+          pin: true
+          // markers: true // for debugging
         }
       });
 
-      // 1) Fade in closed book (already set to 1)
-      // 2) Fade out closed book, fade in open book
+      // 1) Fade out closed book, fade in open book
       timeline
         .to("#bookClosed", { opacity: 0, duration: 1 }, "phase1")
-        .to("#bookOpen", { opacity: 1, duration: 1 }, "phase1+=1");
+        .to("#bookOpen", { opacity: 1, duration: 1 }, "phase1+=0.5");
 
-      // 3) Reveal left & right pages
-      timeline.to(".book-page", {
+      // 2) Fade in table of contents
+      timeline.to("#tableContents", {
         opacity: 1,
         pointerEvents: "auto",
-        duration: 1,
+        duration: 1
       }, "phase2");
 
-      // 4) Fade out open book & pages (simulate closing)
-      timeline.to("#bookOpen", { opacity: 0, duration: 1 }, "phase3")
-        .to(".book-page", { opacity: 0, pointerEvents: "none", duration: 1 }, "phase3");
+      // 3) Fade out open book & table of contents (simulate closing)
+      timeline
+        .to("#bookOpen", { opacity: 0, duration: 1 }, "phase3")
+        .to("#tableContents", { opacity: 0, pointerEvents: "none", duration: 1 }, "phase3");
 
-      // once timeline ends, pinned container unpins, revealing the about section
+      // After timeline ends, pinned container unpins, revealing the About section.
     });
   </script>
 </body>
