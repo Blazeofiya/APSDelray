@@ -15,7 +15,7 @@
     rel="stylesheet"
   />
 
-  <!-- Leaflet.js for Map (if you want to keep the map) -->
+  <!-- Leaflet.js for Map (if you keep the map) -->
   <link
     rel="stylesheet"
     href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
@@ -100,7 +100,6 @@
       align-items: center;
       justify-content: center;
     }
-
     .spinner {
       width: 50px;
       height: 50px;
@@ -109,7 +108,6 @@
       border-radius: 50%;
       animation: spin 1s linear infinite;
     }
-
     @keyframes spin {
       to {
         transform: rotate(360deg);
@@ -138,7 +136,6 @@
       opacity: 1;
       visibility: visible;
     }
-
     .popup-content {
       background: var(--background-dark);
       border: 2px solid var(--primary-color);
@@ -149,7 +146,6 @@
       text-align: center;
       position: relative;
     }
-
     .popup-content h2 {
       margin-bottom: 1rem;
       font-size: 1.5rem;
@@ -187,6 +183,29 @@
     }
 
     /*--------------------------------------------------------------
+      TOP LINKS SECTION (ABOVE HERO TEXT)
+    --------------------------------------------------------------*/
+    .top-links {
+      background-color: rgba(0, 0, 0, 0.6);
+      padding: 1rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+    }
+    .top-links a {
+      background: var(--primary-color);
+      color: var(--text-light);
+      padding: 0.75rem 1.25rem;
+      border-radius: 4px;
+      font-weight: bold;
+      transition: background 0.3s;
+    }
+    .top-links a:hover {
+      background: var(--accent-color);
+    }
+
+    /*--------------------------------------------------------------
       HERO SECTION
     --------------------------------------------------------------*/
     .hero {
@@ -199,7 +218,6 @@
       padding: 2rem;
       color: var(--text-light);
     }
-
     .hero-overlay {
       position: absolute;
       top: 0;
@@ -210,20 +228,17 @@
       pointer-events: none;
       z-index: 0;
     }
-
     .hero-text {
-      position: relative; /* ensures it's above overlay */
+      position: relative;
       z-index: 1;
       max-width: 800px;
       padding: 1rem;
     }
-
     .hero-text h1 {
       font-size: 2.5rem;
       text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
       margin-bottom: 1rem;
     }
-
     .hero-text p {
       font-size: 1.2rem;
       text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
@@ -292,172 +307,6 @@
     }
 
     /*--------------------------------------------------------------
-      IMPORTANT LINKS SECTION & DROPDOWNS
-    --------------------------------------------------------------*/
-    .important-links {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 2rem 1rem;
-    }
-
-    .important-links h2 {
-      text-align: center;
-      font-size: 2rem;
-      margin-bottom: 1rem;
-    }
-
-    /* Only place arrows on the main headings within .important-links (not nested card headings) */
-    .important-links > h3 {
-      cursor: pointer;
-      background-color: var(--primary-color);
-      color: var(--text-light);
-      padding: 1rem;
-      border-radius: 5px;
-      margin-bottom: 0.5rem;
-      text-align: center;
-      transition: background-color 0.3s ease-in-out;
-      position: relative; /* for arrow icon */
-    }
-
-    .important-links > h3:hover {
-      background-color: var(--accent-color);
-    }
-
-    /* Add caret (▼) only to top-level h3 inside .important-links */
-    .important-links > h3::after {
-      content: "▼";
-      position: absolute;
-      right: 1.5rem;
-      top: 50%;
-      transform: translateY(-50%);
-      transition: transform 0.3s;
-      font-size: 1rem;
-    }
-
-    /* Rotate arrow when open */
-    .important-links > h3.open::after {
-      transform: translateY(-50%) rotate(180deg);
-    }
-
-    /* Dropdown Container */
-    .important-links .dropdown-content {
-      display: none; /* hidden by default */
-      padding-left: 1rem;
-      border-left: 2px solid var(--primary-color);
-      margin-bottom: 1rem;
-      transition: all 0.3s ease-in-out;
-
-      /* We want the knowledge cards side by side on desktop */
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1rem;
-      justify-content: flex-start; /* align left so there's no big space in middle */
-    }
-
-    /*--------------------------------------------------------------
-      KNOWLEDGE CARDS
-    --------------------------------------------------------------*/
-    .knowledge-card {
-      max-width: 150px; /* set a max width */
-      width: 100%;
-      perspective: 1000px;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      /* Remove fixed height to allow text to expand as needed */
-      min-height: 100px;
-      overflow: hidden; /* just in case */
-    }
-
-    .knowledge-card:hover {
-      transform: scale(1.03);
-      box-shadow: 0 12px 18px rgba(0, 0, 0, 0.3);
-    }
-
-    .knowledge-card-inner {
-      position: relative;
-      width: 100%;
-      height: 100%;
-      transform-style: preserve-3d;
-      transition: transform 0.6s ease;
-    }
-
-    /* Flip on card click OR .flipped class. 
-       If you only want flipping on click, remove :hover below.
-    */
-    .knowledge-card:hover .knowledge-card-inner,
-    .knowledge-card-inner.flipped {
-      transform: rotateY(180deg);
-    }
-
-    .knowledge-card-front,
-    .knowledge-card-back {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      backface-visibility: hidden;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      border-radius: 8px;
-      padding: 1rem;
-      text-align: center;
-      box-sizing: border-box;
-    }
-
-    .knowledge-card-front {
-      background: var(--primary-color);
-      color: var(--text-light);
-    }
-
-    .knowledge-card-back {
-      background: var(--background-dark);
-      color: var(--text-light);
-      transform: rotateY(180deg);
-      /* ensure no hidden arrows or clickable heading states here */
-    }
-
-    .knowledge-card h3 {
-      margin-bottom: 0.5rem;
-      pointer-events: none; /* so it doesn't behave like a clickable link */
-    }
-
-    .knowledge-card p {
-      margin-bottom: 1rem;
-    }
-
-    .knowledge-card a {
-      margin-top: auto;
-      padding: 0.5rem 1rem;
-      background: var(--primary-color);
-      color: var(--text-light);
-      border-radius: 4px;
-      text-decoration: none;
-      display: inline-block;
-    }
-
-    .knowledge-card a:hover {
-      background: #9b3702;
-    }
-
-    /* Dynamic preview images */
-    .dynamic-preview {
-      width: 100%;
-      height: 150px;
-      object-fit: cover;
-      border-radius: 4px;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      transition: transform 0.3s ease;
-      pointer-events: none; /* make sure the image itself isn't clickable */
-    }
-
-    .dynamic-preview:hover {
-      transform: scale(1.05);
-    }
-
-    /*--------------------------------------------------------------
       MAP SECTION (optional)
     --------------------------------------------------------------*/
     .map-section {
@@ -468,12 +317,10 @@
       box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
       background-color: rgba(0, 0, 0, 0.7);
     }
-
     .map-section h2 {
       text-align: center;
       margin-bottom: 1rem;
     }
-
     #map {
       width: 100%;
       height: 400px;
@@ -489,16 +336,13 @@
       text-align: center;
       padding: 2rem 1rem;
     }
-
     .contact-info {
       margin-bottom: 1rem;
     }
-
     .contact-info p a {
       color: var(--primary-color);
       text-decoration: underline;
     }
-
     .footer-copy {
       font-size: 0.9rem;
       color: #777;
@@ -513,12 +357,6 @@
       }
       .hero-text p {
         font-size: 1rem;
-      }
-    }
-
-    @media (min-width: 992px) {
-      .knowledge-card {
-        flex: 0 0 calc(33.333% - 1rem);
       }
     }
   </style>
@@ -555,6 +393,19 @@
   </div>
 
   <!-- ==============================
+       TOP LINKS (ABOVE HERO)
+  =============================== -->
+  <section class="top-links">
+    <!-- Original "card" links, now simple buttons (or text links) -->
+    <a href="https://www.loc.gov/" target="_blank" rel="noopener noreferrer">Library of Congress</a>
+    <a href="https://whc.unesco.org/" target="_blank" rel="noopener noreferrer">UNESCO World Heritage</a>
+    <a href="https://fmhy.net/" target="_blank" rel="noopener noreferrer">FMHY</a>
+    <a href="https://alternativeto.net/" target="_blank" rel="noopener noreferrer">AlternativeTo</a>
+    <a href="https://github.com/ripienaar/free-for-dev" target="_blank" rel="noopener noreferrer">Free For Dev</a>
+    <a href="https://curiositystream.com/" target="_blank" rel="noopener noreferrer">CuriosityStream</a>
+  </section>
+
+  <!-- ==============================
        HERO SECTION
   =============================== -->
   <section class="hero">
@@ -570,37 +421,25 @@
   <!-- ==============================
        ABOUT US
   =============================== -->
-  <section class="content-section" id="aboutGAS">
-    <h2>About GAS</h2>
+  <section class="content-section" id="aboutUs">
+    <h2>About Us</h2>
     <p>
-      Globalization has connected us like never before. Our trade systems have created 
-      unprecedented prosperity through specialization, comparative advantage, and access 
-      to resources across the globe. Yet, in the process, we've lost touch with essential 
-      skills that once defined our day-to-day lives—skills like growing our own food, 
-      craftsmanship, and truly understanding nature.
+      The Global Antiquity Society (GAS) is a collective intelligence network on a
+      mission to rebuild genuine trust among people. We look back to a time when
+      communities grew naturally and everyone knew each other—when life was about
+      real connections, and extended families supported each other under one roof,
+      no insurance policies or glossy marketing needed.
     </p>
     <p>
-      We've become accustomed to a world where help is always expected to come with a price, 
-      and where industries—like agriculture, supported by cheap labor—highlight the uneven 
-      distribution of wealth.
+      Globalization has scattered us—some of us left in search of opportunity, others
+      driven by power or greed, and some simply disillusioned. As a result, our
+      families and communities feel more fragmented than ever. But all is not lost.
+      At GAS, we’re about rediscovering that raw, unfiltered sense of unity: hanging
+      out, sharing ideas, helping out, having fun, and forging genuine bonds.
     </p>
     <p>
-      At GAS, we’re challenging this modern narrative. We’re not just about bringing people 
-      together—we’re committed to rediscovering the wisdom of the past and reawakening 
-      time-tested, practical skills that foster genuine, real-life communities. By educating 
-      people on the ways of antiquity, we’re building networks centered on sharing resources, 
-      mutual support, and hands-on learning.
-    </p>
-    <p>
-      While globalization has gifted us with remarkable connectivity and prosperity, it has 
-      also diluted authentic human connection. We believe that real wealth lies not only in 
-      what our global systems produce but in the ability to nurture sustainable, 
-      self-reliant communities that value cooperation over profit.
-    </p>
-    <p>
-      At GAS, we’re here to restore that balance—honoring tradition while embracing the 
-      opportunities of today. Welcome to GAS—where reconnecting with our roots empowers us 
-      to build a future that values genuine connection, self-sufficiency, and shared prosperity.
+      Join us in reviving the timeless spirit of connection and rediscover what it’s
+      like to live on your own terms.
     </p>
   </section>
 
@@ -617,7 +456,7 @@
     <p>
       Come aboard and discover upcoming workshops, events, and more as we chart a new course together!
     </p>
-    <!-- You might include a direct Discord invite link here if you have one -->
+    <!-- Add your direct Discord invite link here, if you like -->
     <button>Join Our Discord</button>
   </section>
 
@@ -653,167 +492,7 @@
   <hr class="section-divider" />
 
   <!-- ==============================
-       IMPORTANT LINKS
-  =============================== -->
-  <section class="important-links" id="linksSection">
-    <h2>Important Links</h2>
-
-    <!-- Hidden Histories -->
-    <h3>Hidden Histories</h3>
-    <div class="dropdown-content" id="hidden-histories">
-      <!-- Example Knowledge Card -->
-      <div class="knowledge-card">
-        <div class="knowledge-card-inner">
-          <div class="knowledge-card-front">
-            <img
-              src="images/fallback.jpg"
-              alt="Library of Congress"
-              class="dynamic-preview"
-              loading="lazy"
-              data-url="https://www.loc.gov/"
-            />
-          </div>
-          <div class="knowledge-card-back">
-            <h3>Library of Congress</h3>
-            <p>The largest library in the world with millions of items.</p>
-            <a href="https://www.loc.gov/" target="_blank" rel="noopener noreferrer">
-              Visit Website
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Another Knowledge Card -->
-      <div class="knowledge-card">
-        <div class="knowledge-card-inner">
-          <div class="knowledge-card-front">
-            <img
-              src="images/fallback.jpg"
-              alt="UNESCO World Heritage"
-              class="dynamic-preview"
-              loading="lazy"
-              data-url="https://whc.unesco.org/"
-            />
-          </div>
-          <div class="knowledge-card-back">
-            <h3>UNESCO World Heritage</h3>
-            <p>Discover cultural and natural heritage sites around the globe.</p>
-            <a href="https://whc.unesco.org/" target="_blank" rel="noopener noreferrer">
-              Visit Website
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Manuals -->
-    <h3>Manuals</h3>
-    <div class="dropdown-content" id="manuals">
-      <div class="knowledge-card">
-        <div class="knowledge-card-inner">
-          <div class="knowledge-card-front">
-            <img
-              src="images/fallback.jpg"
-              alt="FMHY"
-              class="dynamic-preview"
-              loading="lazy"
-              data-url="https://fmhy.net/"
-            />
-          </div>
-          <div class="knowledge-card-back">
-            <h3>FMHY</h3>
-            <p>A massive, crowdsourced library of modern “how-to” resources.</p>
-            <a href="https://fmhy.net/" target="_blank" rel="noopener noreferrer">
-              Visit Website
-            </a>
-          </div>
-        </div>
-      </div>
-      <div class="knowledge-card">
-        <div class="knowledge-card-inner">
-          <div class="knowledge-card-front">
-            <img
-              src="images/fallback.jpg"
-              alt="Alternative To"
-              class="dynamic-preview"
-              loading="lazy"
-              data-url="https://alternativeto.net/"
-            />
-          </div>
-          <div class="knowledge-card-back">
-            <h3>AlternativeTo</h3>
-            <p>Discover software and app alternatives for just about anything.</p>
-            <a href="https://alternativeto.net/" target="_blank" rel="noopener noreferrer">
-              Visit Website
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Repositories -->
-    <h3>Repositories</h3>
-    <div class="dropdown-content" id="repositories">
-      <div class="knowledge-card">
-        <div class="knowledge-card-inner">
-          <div class="knowledge-card-front">
-            <img
-              src="images/fallback.jpg"
-              alt="Free For Dev"
-              class="dynamic-preview"
-              loading="lazy"
-              data-url="https://github.com/ripienaar/free-for-dev"
-            />
-          </div>
-          <div class="knowledge-card-back">
-            <h3>Free For Dev</h3>
-            <p>A curated list of free services and resources for developers.</p>
-            <a
-              href="https://github.com/ripienaar/free-for-dev"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Visit Website
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Independent Chronicles -->
-    <h3>Independent Chronicles</h3>
-    <div class="dropdown-content" id="independent-chronicles">
-      <div class="knowledge-card">
-        <div class="knowledge-card-inner">
-          <div class="knowledge-card-front">
-            <img
-              src="images/fallback.jpg"
-              alt="CuriosityStream"
-              class="dynamic-preview"
-              loading="lazy"
-              data-url="https://curiositystream.com/"
-            />
-          </div>
-          <div class="knowledge-card-back">
-            <h3>CuriosityStream</h3>
-            <p>Documentary streaming service with a wide range of educational topics.</p>
-            <a
-              href="https://curiositystream.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Visit Website
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <hr class="section-divider" />
-
-  <!-- ==============================
-       OPTIONAL: MAP SECTION
+       MAP SECTION (optional)
   =============================== -->
   <section class="map-section">
     <h2>Interactive Event Map</h2>
@@ -871,7 +550,7 @@
       DOMContentLoaded
     --------------------------------------------------------------*/
     document.addEventListener("DOMContentLoaded", () => {
-      // 1. Show popup once page loads (you can add logic to only show once if desired)
+      // 1. Show popup once page loads (you can adjust logic if you want it only once)
       const popupOverlay = document.getElementById('popupOverlay');
       const closePopupBtn = document.getElementById('closePopup');
       if (popupOverlay) {
@@ -884,80 +563,7 @@
         });
       }
 
-      // 2. Toggle dropdown for each subsection
-      const headings = document.querySelectorAll(".important-links > h3");
-      headings.forEach((heading) => {
-        heading.addEventListener("click", () => {
-          const nextContent = heading.nextElementSibling;
-          if (nextContent && nextContent.classList.contains("dropdown-content")) {
-            const isOpen = nextContent.style.display === "block";
-            nextContent.style.display = isOpen ? "none" : "block";
-            heading.classList.toggle("open", !isOpen);
-          }
-        });
-      });
-
-      // 3. Lazy Load Dynamic Previews with IntersectionObserver
-      const previewImages = document.querySelectorAll(".dynamic-preview");
-      if ("IntersectionObserver" in window) {
-        const observer = new IntersectionObserver((entries, obs) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              const img = entry.target;
-              const card = img.closest(".knowledge-card");
-              // Use data-url if provided, or fallback to any link in the card
-              const link = img.dataset.url || card?.querySelector("a")?.href;
-              if (link) {
-                img.src = `https://api.microlink.io/?url=${link}&screenshot=true&embed=screenshot.url`;
-                img.onerror = () => {
-                  img.src = "images/fallback.jpg";
-                };
-              }
-              obs.unobserve(img);
-            }
-          });
-        }, { threshold: 0.1 });
-        previewImages.forEach((img) => observer.observe(img));
-      } else {
-        // Fallback: load all previews at once
-        previewImages.forEach((img, index) => {
-          const card = img.closest(".knowledge-card");
-          const link = img.dataset.url || card?.querySelector("a")?.href;
-          if (link) {
-            setTimeout(() => {
-              img.src = `https://api.microlink.io/?url=${link}&screenshot=true&embed=screenshot.url`;
-              img.onerror = () => {
-                img.src = "images/fallback.jpg";
-              };
-            }, index * 50);
-          }
-        });
-      }
-
-      // 4. Flip cards on click/tap (helpful on touch devices)
-      const knowledgeCards = document.querySelectorAll(".knowledge-card");
-      knowledgeCards.forEach((card) => {
-        card.addEventListener("click", () => {
-          const cardInner = card.querySelector(".knowledge-card-inner");
-          if (cardInner) cardInner.classList.toggle("flipped");
-        });
-      });
-
-      // Close any flipped card if clicked outside
-      document.addEventListener("click", (event) => {
-        knowledgeCards.forEach((card) => {
-          const cardInner = card.querySelector(".knowledge-card-inner");
-          if (
-            cardInner &&
-            cardInner.classList.contains("flipped") &&
-            !card.contains(event.target)
-          ) {
-            cardInner.classList.remove("flipped");
-          }
-        });
-      });
-
-      // 5. Initialize Leaflet Map (if keeping map section)
+      // 2. Initialize Leaflet Map (if you keep map section)
       if (typeof L !== "undefined" && document.getElementById("map")) {
         const map = L.map("map").setView([26.4615, -80.0728], 13);
         L.tileLayer("https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png", {
