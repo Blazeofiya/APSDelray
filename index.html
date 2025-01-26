@@ -15,7 +15,7 @@
     rel="stylesheet"
   />
 
-  <!-- Leaflet.js for Map (if you keep the map) -->
+  <!-- Leaflet.js for Map (optional) -->
   <link
     rel="stylesheet"
     href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
@@ -45,7 +45,6 @@
       --text-light: #f9f9f9;
       --text-dark: #333333;
       --accent-color: #c79b53;
-      --book-page-bg: rgba(255, 255, 255, 0.0); /* Transparent so text appears on the open-book image */
     }
 
     /*--------------------------------------------------------------
@@ -61,8 +60,7 @@
       line-height: 1.6;
       background: url('images/dark-parchment-texture.jpg') no-repeat center center fixed;
       background-size: cover;
-      /* Add top padding to avoid overlap with fixed top bar */
-      padding-top: 60px;
+      padding-top: 60px; /* Prevents content from hiding behind fixed header */
     }
     img {
       max-width: 100%;
@@ -86,7 +84,7 @@
     }
 
     /*--------------------------------------------------------------
-      FIXED TOP BAR (Logo + Title)
+      FIXED TOP BAR
     --------------------------------------------------------------*/
     .top-bar {
       position: fixed;
@@ -98,7 +96,7 @@
       display: flex;
       align-items: center;
       padding: 0.5rem 1rem;
-      z-index: 9999; /* stays on top */
+      z-index: 9999; /* keeps header above all content */
     }
     .top-bar img {
       width: 40px;
@@ -210,15 +208,15 @@
     }
 
     /*--------------------------------------------------------------
-      PINNED BOOK CONTAINER (Black BG)
+      PINNED BOOK SECTION
     --------------------------------------------------------------*/
     .pinned-book-section {
       position: relative;
       width: 100%;
       height: 100vh;
-      background: #000; /* black background so about section won't show behind */
-      /* We will pin this section in place for the book animation */
+      background: #000;
       overflow: hidden;
+      margin-top: 60px; /* Ensures top bar won't overlap images on mobile */
     }
 
     .book-animation-container {
@@ -227,81 +225,56 @@
       position: relative;
     }
 
-    /* CLOSED BOOK */
-    #bookClosed {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      max-width: 20vw;
-      height: auto;
-      opacity: 1; /* visible initially */
-    }
-
-    /* OPEN BOOK */
+    /* Both images share the same size to keep consistency */
+    #bookClosed,
     #bookOpen {
       position: absolute;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      max-width: 40vw;
+      max-width: 35vw; /* Adjust as desired for desktop */
       height: auto;
-      opacity: 0; /* hidden initially */
+      opacity: 0;      /* We'll toggle via GSAP */
     }
 
     /*--------------------------------------------------------------
-      TABLE OF CONTENTS ON THE OPEN BOOK
-      2x2 grid to match your specification:
-       - Row 1, Col 1: Title
-       - Row 1, Col 2: List of links
-       - Row 2, Col 1: "Table of Contents Continued"
-       - Row 2, Col 2: Continuation of links
-      Positioned so it appears on the right-center of the open book.
+      TABLE OF CONTENTS ON OPEN BOOK (Single-page format)
     --------------------------------------------------------------*/
-    .table-of-contents-container {
+    .table-of-contents {
       position: absolute;
-      top: 50%;    /* same center as bookOpen */
+      top: 50%;       /* same center as the open book */
       left: 50%;
-      transform: translate(-40%, -50%); /* shift it right so it appears more on the right page */
-      width: 60%;  /* adjust as needed */
-      height: 60%; /* adjust as needed */
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      grid-template-rows: auto auto;
-      gap: 1rem;
-      pointer-events: none; /* We'll enable pointer-events once fully visible in the timeline */
+      transform: translate(-50%, -50%);
+      width: 50%;     /* adjust to fit your design */
       color: var(--text-dark);
       font-family: 'Cinzel', serif;
-    }
-
-    .table-of-contents-container div {
-      background: var(--book-page-bg); /* transparent to show the book underneath */
-      border: none;
-      padding: 0.5rem;
-    }
-
-    .table-of-contents-container h2 {
       text-align: center;
-      font-size: 1.4rem;
+      pointer-events: none; /* GSAP will enable pointer-events when visible */
+      opacity: 0;           /* hidden initially (GSAP fade-in) */
+    }
+    .table-of-contents h2 {
+      font-size: 2rem; /* increased for emphasis */
       margin-bottom: 0.5rem;
     }
-
-    .table-of-contents-container ul {
+    .table-of-contents .toc-divider {
+      margin: 1rem auto;
+      width: 50%;
+      border: none;
+      border-top: 2px solid var(--text-dark);
+    }
+    .table-of-contents ul {
       list-style: none;
+      padding: 0;
     }
-    .table-of-contents-container ul li {
+    .table-of-contents ul li {
       margin-bottom: 0.5rem;
     }
-    .table-of-contents-container ul li a {
+    .table-of-contents ul li a {
       color: var(--text-dark);
       text-decoration: none;
     }
-    .table-of-contents-container ul li a:hover {
+    .table-of-contents ul li a:hover {
       text-decoration: underline;
-    }
-    .toc-continued {
-      font-size: 0.9rem;
-      text-align: left;
     }
 
     /*--------------------------------------------------------------
@@ -323,7 +296,6 @@
       font-family: 'Cinzel', serif;
     }
 
-    /* Section Divider */
     .section-divider {
       margin: 2rem auto;
       width: 90%;
@@ -371,41 +343,6 @@
       color: #777;
     }
 
-    /* FORMS */
-    .content-section form {
-      display: flex;
-      flex-direction: column;
-      max-width: 500px;
-      margin: 1rem auto 0;
-    }
-    .content-section label {
-      margin-bottom: 0.5rem;
-      font-weight: bold;
-    }
-    .content-section input[type="text"],
-    .content-section input[type="email"],
-    .content-section textarea {
-      padding: 0.5rem;
-      margin-bottom: 1rem;
-      border: 1px solid var(--primary-color);
-      border-radius: 4px;
-      font-family: 'Roboto', sans-serif;
-    }
-    .content-section button[type="submit"],
-    #discordSection button {
-      background: var(--primary-color);
-      color: var(--text-light);
-      border: none;
-      border-radius: 4px;
-      padding: 0.5rem 1rem;
-      cursor: pointer;
-      font-family: 'Cinzel', serif;
-    }
-    .content-section button[type="submit"]:hover,
-    #discordSection button:hover {
-      background: var(--accent-color);
-    }
-
     /* MEDIA QUERIES */
     @media (max-width: 768px) {
       .top-bar h1 {
@@ -413,14 +350,10 @@
       }
       #bookClosed,
       #bookOpen {
-        max-width: 60vw;
+        max-width: 70vw; /* smaller for mobile */
       }
-      .table-of-contents-container {
+      .table-of-contents {
         width: 80%;
-        transform: translate(-50%, -50%);
-      }
-      .table-of-contents-container h2 {
-        font-size: 1.1rem;
       }
     }
   </style>
@@ -466,50 +399,35 @@
 
   <!-- ============================
        PINNED BOOK SECTION
-       (Black background)
   ============================ -->
   <section class="pinned-book-section" id="pinnedBookSection">
     <div class="book-animation-container" id="bookAnimation">
-      <!-- CLOSED BOOK -->
+      <!-- CLOSED BOOK (hidden initially via GSAP) -->
       <img
         src="images/book-closed.png"
         alt="Closed Book"
         id="bookClosed"
       />
 
-      <!-- OPEN BOOK -->
+      <!-- OPEN BOOK (hidden initially via GSAP) -->
       <img
         src="images/book-open.png"
         alt="Open Book"
         id="bookOpen"
       />
 
-      <!-- 2x2 Grid for Table of Contents on the open book -->
-      <div class="table-of-contents-container" id="tableContents">
-        <!-- Row 1, Col 1 -->
-        <div>
-          <h2>Table of Contents</h2>
-        </div>
-        <!-- Row 1, Col 2 -->
-        <div>
-          <ul>
-            <li><a href="https://www.loc.gov/" target="_blank">Library of Congress</a></li>
-            <li><a href="https://whc.unesco.org/" target="_blank">UNESCO</a></li>
-            <li><a href="https://fmhy.net/" target="_blank">FMHY</a></li>
-          </ul>
-        </div>
-        <!-- Row 2, Col 1 -->
-        <div class="toc-continued">
-          Table of Contents Continued...
-        </div>
-        <!-- Row 2, Col 2 -->
-        <div>
-          <ul>
-            <li><a href="https://alternativeto.net/" target="_blank">AlternativeTo</a></li>
-            <li><a href="https://github.com/ripienaar/free-for-dev" target="_blank">Free For Dev</a></li>
-            <li><a href="https://curiositystream.com/" target="_blank">CuriosityStream</a></li>
-          </ul>
-        </div>
+      <!-- Single-page Table of Contents overlay -->
+      <div class="table-of-contents" id="tableContents">
+        <h2>TABLE OF CONTENTS</h2>
+        <hr class="toc-divider" />
+        <ul>
+          <li><a href="https://www.loc.gov/" target="_blank">Library of Congress</a></li>
+          <li><a href="https://whc.unesco.org/" target="_blank">UNESCO</a></li>
+          <li><a href="https://fmhy.net/" target="_blank">FMHY</a></li>
+          <li><a href="https://alternativeto.net/" target="_blank">AlternativeTo</a></li>
+          <li><a href="https://github.com/ripienaar/free-for-dev" target="_blank">Free For Dev</a></li>
+          <li><a href="https://curiositystream.com/" target="_blank">CuriosityStream</a></li>
+        </ul>
       </div>
     </div>
   </section>
@@ -569,34 +487,52 @@
     <button>Join Our Discord</button>
   </section>
 
-  <!-- FORM YOUR OWN CREW -->
-  <section class="content-section" id="formCrew">
-    <h2>Form Your Own Crew</h2>
-    <p>
-      Thinking of starting your own GAS crew? We’d love to hear about it. Share your name,
-      email, and a quick note about your vision—whether it’s building a community garden,
-      launching a makerspace, or starting any initiative that brings people together.
-      Let’s chart your course together.
-    </p>
-    <form>
-      <label for="crewName">Your Name:</label>
-      <input type="text" id="crewName" name="crewName" placeholder="Enter your name" />
+<!-- FORM YOUR OWN CREW -->
+<section class="content-section" id="formCrew">
+  <h2>Form Your Own Crew</h2>
+  <p>
+    Thinking of starting your own GAS crew? We’d love to hear about it. Share your name,
+    email, and a quick note about your vision—whether it’s building a community garden,
+    launching a makerspace, or starting any initiative that brings people together.
+    Let’s chart your course together.
+  </p>
 
-      <label for="crewEmail">Your Email:</label>
-      <input type="email" id="crewEmail" name="crewEmail" placeholder="Enter your email" />
+  <!-- The form posts to process_form.php -->
+  <form action="process_form.php" method="post">
+    <label for="crewName">Your Name:</label>
+    <input
+      type="text"
+      id="crewName"
+      name="crewName"
+      placeholder="Enter your name"
+      required
+    />
 
-      <label for="crewMessage">Why Do You Want to Build a Community?</label>
-      <textarea id="crewMessage" name="crewMessage" rows="4" placeholder="Tell us more..."></textarea>
+    <label for="crewEmail">Your Email:</label>
+    <input
+      type="email"
+      id="crewEmail"
+      name="crewEmail"
+      placeholder="Enter your email"
+      required
+    />
 
-      <button type="submit">Submit &amp; Set Sail</button>
-    </form>
-    <p style="margin-top:1rem;">
-      Step away from the static. Embrace the adventure—and help shape a future built
-      on authenticity and shared learning!
-    </p>
-  </section>
+    <label for="crewMessage">Why Do You Want to Build a Community?</label>
+    <textarea
+      id="crewMessage"
+      name="crewMessage"
+      rows="4"
+      placeholder="Tell us more..."
+    ></textarea>
 
-  <hr class="section-divider" />
+    <button type="submit">Submit &amp; Set Sail</button>
+  </form>
+
+  <p style="margin-top:1rem;">
+    Step away from the static. Embrace the adventure—and help shape a future built
+    on authenticity and shared learning!
+  </p>
+</section>
 
   <!-- MAP SECTION -->
   <section class="map-section">
@@ -650,12 +586,12 @@
     });
 
     /*--------------------------------------------------------------
-      POPUP MODAL & MAP
+      POPUP MODAL & GSAP ANIMATION
     --------------------------------------------------------------*/
     gsap.registerPlugin(ScrollTrigger);
 
     document.addEventListener("DOMContentLoaded", () => {
-      // 1. Show popup once page loads
+      // 1. Popup
       const popupOverlay = document.getElementById('popupOverlay');
       const closePopupBtn = document.getElementById('closePopup');
       if (popupOverlay) {
@@ -665,7 +601,7 @@
         });
       }
 
-      // 2. Initialize Leaflet Map (if you keep the map)
+      // 2. Leaflet Map (if using)
       if (typeof L !== "undefined" && document.getElementById("map")) {
         const map = L.map("map").setView([26.4615, -80.0728], 13);
         L.tileLayer("https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png", {
@@ -676,20 +612,25 @@
           maxZoom: 19,
         }).addTo(map);
 
-        // Optional custom marker
+        // Custom marker (optional)
         const customIcon = L.icon({
-          iconUrl: "images/custom-marker.png", /* Replace with your marker image if desired */
+          iconUrl: "images/custom-marker.png", /* Replace if desired */
           iconSize: [38, 38],
           iconAnchor: [19, 38],
           popupAnchor: [0, -38],
         });
-        // Example marker
+
+        // Updated event details
         L.marker([26.4615, -80.0728], { icon: customIcon })
           .addTo(map)
-          .bindPopup("<b>Community Event:</b> Beach Cleanup<br><b>Date:</b> Jan 15, 10 AM")
+          .bindPopup(
+            "<b>Location:</b> 64-10 N Ocean Blvd, Delray Beach, FL 33483<br>"
+            + "<b>Date & Time:</b> Thursday at 4:30 PM<br>"
+            + "<b>Description:</b> Meet and greet to discuss who inspires us in history and why."
+          )
           .openPopup();
 
-        // Move zoom controls if desired
+        // Position zoom controls
         L.control.zoom({ position: "bottomright" }).addTo(map);
 
         // Keep map responsive
@@ -698,43 +639,37 @@
         });
       }
 
-      /*--------------------------------------------------------------
-        BOOK SCROLL ANIMATION
-      --------------------------------------------------------------*/
+      // 3. GSAP Book Scroll Animation
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: "#pinnedBookSection",
+          start: "top top",
+          end: "+=200%",
+          scrub: true,
+          pin: true
+        }
+      });
+
       // Initial states
       gsap.set("#bookClosed", { opacity: 1 });
       gsap.set("#bookOpen", { opacity: 0 });
       gsap.set("#tableContents", { opacity: 0, pointerEvents: "none" });
 
-      const timeline = gsap.timeline({
-        scrollTrigger: {
-          trigger: "#pinnedBookSection",
-          start: "top top",
-          end: "+=200%",  // how long the pinned effect lasts
-          scrub: true,
-          pin: true
-          // markers: true // for debugging
-        }
-      });
-
-      // 1) Fade out closed book, fade in open book
-      timeline
-        .to("#bookClosed", { opacity: 0, duration: 1 }, "phase1")
+      // Sequence:
+      // Fade out closed book, fade in open book
+      tl.to("#bookClosed", { opacity: 0, duration: 1 }, "phase1")
         .to("#bookOpen", { opacity: 1, duration: 1 }, "phase1+=0.5");
 
-      // 2) Fade in table of contents
-      timeline.to("#tableContents", {
+      // Fade in table of contents
+      tl.to("#tableContents", {
         opacity: 1,
         pointerEvents: "auto",
         duration: 1
       }, "phase2");
 
-      // 3) Fade out open book & table of contents (simulate closing)
-      timeline
-        .to("#bookOpen", { opacity: 0, duration: 1 }, "phase3")
+      // Fade out open book & TOC (simulate closing)
+      tl.to("#bookOpen", { opacity: 0, duration: 1 }, "phase3")
         .to("#tableContents", { opacity: 0, pointerEvents: "none", duration: 1 }, "phase3");
-
-      // After timeline ends, pinned container unpins, revealing the About section.
     });
   </script>
 </body>
