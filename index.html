@@ -39,12 +39,12 @@
       box-sizing: border-box;
     }
     :root {
-      --primary-color: #a63a00;
-      --secondary-color: #f2e4ca;
-      --background-dark: #1c1c1c;
-      --text-light: #f9f9f9;
-      --text-dark: #333333;
-      --accent-color: #c79b53;
+      --primary-color: #b73a3a;       /* Rich antiquity-inspired red */
+      --secondary-color: #faf3e0;     /* Parchment-like background */
+      --background-dark: #2c2c2c;     /* Dark overlay background */
+      --text-light: #fafafa;         /* Light text color */
+      --text-dark: #333333;          /* Dark text for lighter backgrounds */
+      --accent-color: #704214;       /* Earthy brown accent */
     }
 
     /*--------------------------------------------------------------
@@ -56,11 +56,10 @@
     body {
       font-family: 'Roboto', Arial, Helvetica, sans-serif;
       color: var(--text-light);
-      overflow-x: hidden;
-      line-height: 1.6;
       background: url('images/dark-parchment-texture.jpg') no-repeat center center fixed;
       background-size: cover;
-      padding-top: 60px; /* Prevents content from hiding behind fixed header */
+      overflow-x: hidden;
+      line-height: 1.6;
     }
     img {
       max-width: 100%;
@@ -91,22 +90,29 @@
       top: 0;
       left: 0;
       width: 100%;
-      background: rgba(0,0,0,0.8);
+      background: rgba(0, 0, 0, 0.85);
       color: #fff;
       display: flex;
       align-items: center;
-      padding: 0.5rem 1rem;
+      padding: 0.75rem 1rem;
       z-index: 9999; /* keeps header above all content */
     }
     .top-bar img {
-      width: 40px;
+      width: 50px;
       height: auto;
       margin-right: 1rem;
     }
     .top-bar h1 {
-      font-family: 'Cinzel', serif;
-      font-size: 1.5rem;
+      font-size: 1.7rem;
       letter-spacing: 1px;
+      margin: 0;
+    }
+
+    /*--------------------------------------------------------------
+      OFFSET CONTENT TO AVOID TOP BAR OVERLAP
+    --------------------------------------------------------------*/
+    .offset-top {
+      margin-top: 70px; /* Enough to clear the fixed header */
     }
 
     /*--------------------------------------------------------------
@@ -170,7 +176,7 @@
     }
     .popup-content h2 {
       margin-bottom: 1rem;
-      font-size: 1.5rem;
+      font-size: 1.6rem;
       font-family: 'Cinzel', serif;
     }
     .popup-content p {
@@ -216,16 +222,12 @@
       height: 100vh;
       background: #000;
       overflow: hidden;
-      margin-top: 60px; /* Ensures top bar won't overlap images on mobile */
     }
-
     .book-animation-container {
       width: 100%;
       height: 100%;
       position: relative;
     }
-
-    /* Both images share the same size to keep consistency */
     #bookClosed,
     #bookOpen {
       position: absolute;
@@ -242,18 +244,18 @@
     --------------------------------------------------------------*/
     .table-of-contents {
       position: absolute;
-      top: 50%;       /* same center as the open book */
+      top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      width: 50%;     /* adjust to fit your design */
+      width: 50%;
       color: var(--text-dark);
       font-family: 'Cinzel', serif;
       text-align: center;
-      pointer-events: none; /* GSAP will enable pointer-events when visible */
-      opacity: 0;           /* hidden initially (GSAP fade-in) */
+      pointer-events: none;
+      opacity: 0;
     }
     .table-of-contents h2 {
-      font-size: 2rem; /* increased for emphasis */
+      font-size: 2rem;
       margin-bottom: 0.5rem;
     }
     .table-of-contents .toc-divider {
@@ -278,14 +280,14 @@
     }
 
     /*--------------------------------------------------------------
-      CONTENT SECTIONS (About, Discord, Crew, Map, Footer)
+      CONTENT SECTIONS (About, Discord, Form, Map, Footer)
     --------------------------------------------------------------*/
     .content-section,
     .about-section {
       max-width: 1200px;
       margin: 2rem auto;
       padding: 2rem 1rem;
-      background-color: rgba(0, 0, 0, 0.6);
+      background-color: rgba(0, 0, 0, 0.65);
       border-radius: 8px;
     }
     .content-section h2,
@@ -295,7 +297,6 @@
       font-size: 2rem;
       font-family: 'Cinzel', serif;
     }
-
     .section-divider {
       margin: 2rem auto;
       width: 90%;
@@ -325,13 +326,71 @@
       border-radius: 8px;
     }
 
+    /* FORM STYLING */
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      max-width: 600px;
+      margin: 1rem auto 0 auto;
+    }
+    form label {
+      font-weight: 700;
+    }
+    form input[type="text"],
+    form input[type="email"],
+    form textarea {
+      width: 100%;
+      padding: 0.75rem;
+      border: 1px solid var(--accent-color);
+      border-radius: 4px;
+      font-family: 'Roboto', sans-serif;
+      font-size: 1rem;
+      color: var(--text-dark);
+    }
+    form textarea {
+      resize: vertical;
+    }
+    form button[type="submit"] {
+      align-self: flex-start;
+      background: var(--primary-color);
+      color: var(--text-light);
+      padding: 0.75rem 1.5rem;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-family: 'Cinzel', serif;
+      font-size: 1rem;
+    }
+    form button[type="submit"]:hover {
+      background: var(--accent-color);
+    }
+
+    /* BUTTONS */
+    button,
+    .content-section button {
+      background: var(--primary-color);
+      color: var(--text-light);
+      padding: 0.5rem 1rem;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-family: 'Cinzel', serif;
+      font-size: 1rem;
+    }
+    button:hover,
+    .content-section button:hover {
+      background: var(--accent-color);
+    }
+
     /* FOOTER */
     footer.contact-block {
       background-color: var(--background-dark);
       text-align: center;
       padding: 2rem 1rem;
     }
-    .contact-info {
+    .contact-info h3 {
+      font-family: 'Cinzel', serif;
       margin-bottom: 1rem;
     }
     .contact-info p a {
@@ -340,7 +399,8 @@
     }
     .footer-copy {
       font-size: 0.9rem;
-      color: #777;
+      color: #bbb;
+      margin-top: 1rem;
     }
 
     /* MEDIA QUERIES */
@@ -348,9 +408,12 @@
       .top-bar h1 {
         font-size: 1.2rem;
       }
+      .top-bar img {
+        width: 40px;
+      }
       #bookClosed,
       #bookOpen {
-        max-width: 70vw; /* smaller for mobile */
+        max-width: 70vw;
       }
       .table-of-contents {
         width: 80%;
@@ -363,209 +426,212 @@
        FIXED TOP BAR
   ============================ -->
   <div class="top-bar">
-    <img src="logo.png" alt="Placeholder Logo" />
+    <img src="logo.png" alt="Global Antiquity Society Logo" />
     <h1>Global Antiquity Society</h1>
   </div>
 
-  <!-- ============================
-       PRELOADER
-  ============================ -->
-  <div id="preloader">
-    <div class="spinner"></div>
-  </div>
-
-  <!-- ============================
-       POPUP MODAL
-  ============================ -->
-  <div class="popup-overlay" id="popupOverlay">
-    <div class="popup-content">
-      <button class="close-popup" id="closePopup" aria-label="Close popup">&times;</button>
-      <h2>Hey there, rebel!</h2>
-      <p>
-        Tired of the endless internet rabbit holes and corporate BS? We hear you.
-        Ready to flip the script? Learn how to fix things, trade killer ideas, and
-        build a real local community—no mindless scrolling or pinging app notifications required.
-      </p>
-      <p>
-        Join us and grab your free guide. It’s time to kick dependency to the curb
-        and shape life on your own terms. Drop your email below and step into a more
-        authentic, self-driven world!
-      </p>
-      <input type="email" placeholder="Your Email Here..." />
-      <br />
-      <button>Count Me In</button>
+  <!-- Apply offset to content so it's not hidden under fixed top bar -->
+  <div class="offset-top">
+    <!-- ============================
+         PRELOADER
+    ============================ -->
+    <div id="preloader">
+      <div class="spinner"></div>
     </div>
-  </div>
 
-  <!-- ============================
-       PINNED BOOK SECTION
-  ============================ -->
-  <section class="pinned-book-section" id="pinnedBookSection">
-    <div class="book-animation-container" id="bookAnimation">
-      <!-- CLOSED BOOK (hidden initially via GSAP) -->
-      <img
-        src="images/book-closed.png"
-        alt="Closed Book"
-        id="bookClosed"
-      />
-
-      <!-- OPEN BOOK (hidden initially via GSAP) -->
-      <img
-        src="images/book-open.png"
-        alt="Open Book"
-        id="bookOpen"
-      />
-
-      <!-- Single-page Table of Contents overlay -->
-      <div class="table-of-contents" id="tableContents">
-        <h2>TABLE OF CONTENTS</h2>
-        <hr class="toc-divider" />
-        <ul>
-          <li><a href="https://www.loc.gov/" target="_blank">Library of Congress</a></li>
-          <li><a href="https://whc.unesco.org/" target="_blank">UNESCO</a></li>
-          <li><a href="https://fmhy.net/" target="_blank">FMHY</a></li>
-          <li><a href="https://alternativeto.net/" target="_blank">AlternativeTo</a></li>
-          <li><a href="https://github.com/ripienaar/free-for-dev" target="_blank">Free For Dev</a></li>
-          <li><a href="https://curiositystream.com/" target="_blank">CuriosityStream</a></li>
-        </ul>
+    <!-- ============================
+         POPUP MODAL
+    ============================ -->
+    <div class="popup-overlay" id="popupOverlay">
+      <div class="popup-content">
+        <button class="close-popup" id="closePopup" aria-label="Close popup">&times;</button>
+        <h2>Hey there, rebel!</h2>
+        <p>
+          Tired of the endless internet rabbit holes and corporate BS? We hear you.
+          Ready to flip the script? Learn how to fix things, trade killer ideas, and
+          build a real local community—no mindless scrolling or pinging app notifications required.
+        </p>
+        <p>
+          Join us and grab your free guide. It’s time to kick dependency to the curb
+          and shape life on your own terms. Drop your email below and step into a more
+          authentic, self-driven world!
+        </p>
+        <input type="email" placeholder="Your Email Here..." />
+        <br />
+        <button>Count Me In</button>
       </div>
     </div>
-  </section>
 
-  <!-- SECTION DIVIDER -->
-  <hr class="section-divider" />
+    <!-- ============================
+         PINNED BOOK SECTION
+    ============================ -->
+    <section class="pinned-book-section" id="pinnedBookSection">
+      <div class="book-animation-container" id="bookAnimation">
+        <!-- CLOSED BOOK -->
+        <img
+          src="images/book-closed.png"
+          alt="Closed Book"
+          id="bookClosed"
+        />
 
-  <!-- ============================
-       ABOUT GAS SECTION
-  ============================ -->
-  <section class="about-section" id="aboutGAS">
-    <h2>About GAS</h2>
-    <p>
-      Globalization has connected us like never before. Our trade systems have created
-      unprecedented prosperity through specialization, comparative advantage, and access
-      to resources across the globe. Yet, in the process, we've lost touch with essential
-      skills that once defined our day-to-day lives—skills like growing our own food,
-      craftsmanship, and truly understanding nature.
-    </p>
-    <p>
-      We've become accustomed to a world where help is always expected to come with a
-      price, and where industries—like agriculture, supported by cheap labor—highlight
-      the uneven distribution of wealth.
-    </p>
-    <p>
-      At GAS, we’re challenging this modern narrative. We’re not just about bringing
-      people together—we’re committed to rediscovering the wisdom of the past and
-      reawakening time-tested, practical skills that foster genuine, real-life
-      communities. By educating people on the ways of antiquity, we’re building networks
-      centered on sharing resources, mutual support, and hands-on learning.
-    </p>
-    <p>
-      While globalization has gifted us with remarkable connectivity and prosperity, it
-      has also diluted authentic human connection. We believe that real wealth lies not
-      only in what our global systems produce but in the ability to nurture sustainable,
-      self-reliant communities that value cooperation over profit.
-    </p>
-    <p>
-      At GAS, we’re here to restore that balance—honoring tradition while embracing the
-      opportunities of today. Welcome to GAS—where reconnecting with our roots empowers
-      us to build a future that values genuine connection, self-sufficiency, and shared
-      prosperity.
-    </p>
-  </section>
+        <!-- OPEN BOOK -->
+        <img
+          src="images/book-open.png"
+          alt="Open Book"
+          id="bookOpen"
+        />
 
-  <!-- DISCORD -->
-  <section class="content-section" id="discordSection">
-    <h2>Discord</h2>
-    <p>
-      <strong>Set Sail With Our Crew!</strong><br />
-      Ready to take the next step? Join Delray Beach’s very own GAS (Global Antiquity
-      Society) Discord—a crew of free-thinkers mining the past to craft an inspiring future.
-    </p>
-    <p>
-      Come aboard and discover upcoming workshops, events, and more as we chart a new course together!
-    </p>
-    <button>Join Our Discord</button>
-  </section>
+        <!-- Single-page Table of Contents overlay -->
+        <div class="table-of-contents" id="tableContents">
+          <h2>TABLE OF CONTENTS</h2>
+          <hr class="toc-divider" />
+          <ul>
+            <li><a href="https://www.loc.gov/" target="_blank">Library of Congress</a></li>
+            <li><a href="https://whc.unesco.org/" target="_blank">UNESCO</a></li>
+            <li><a href="https://fmhy.net/" target="_blank">FMHY</a></li>
+            <li><a href="https://alternativeto.net/" target="_blank">AlternativeTo</a></li>
+            <li><a href="https://github.com/ripienaar/free-for-dev" target="_blank">Free For Dev</a></li>
+            <li><a href="https://curiositystream.com/" target="_blank">CuriosityStream</a></li>
+          </ul>
+        </div>
+      </div>
+    </section>
 
-<!-- FORM YOUR OWN CREW -->
-<section class="content-section" id="formCrew">
-  <h2>Form Your Own Crew</h2>
-  <p>
-    Thinking of starting your own GAS crew? We’d love to hear about it. Share your name,
-    email, and a quick note about your vision—whether it’s building a community garden,
-    launching a makerspace, or starting any initiative that brings people together.
-    Let’s chart your course together.
-  </p>
+    <!-- SECTION DIVIDER -->
+    <hr class="section-divider" />
 
-  <!-- The form posts to process_form.php -->
-  <form action="process_form.php" method="post">
-    <label for="crewName">Your Name:</label>
-    <input
-      type="text"
-      id="crewName"
-      name="crewName"
-      placeholder="Enter your name"
-      required
-    />
-
-    <label for="crewEmail">Your Email:</label>
-    <input
-      type="email"
-      id="crewEmail"
-      name="crewEmail"
-      placeholder="Enter your email"
-      required
-    />
-
-    <label for="crewMessage">Why Do You Want to Build a Community?</label>
-    <textarea
-      id="crewMessage"
-      name="crewMessage"
-      rows="4"
-      placeholder="Tell us more..."
-    ></textarea>
-
-    <button type="submit">Submit &amp; Set Sail</button>
-  </form>
-
-  <p style="margin-top:1rem;">
-    Step away from the static. Embrace the adventure—and help shape a future built
-    on authenticity and shared learning!
-  </p>
-</section>
-
-  <!-- MAP SECTION -->
-  <section class="map-section">
-    <h2>Interactive Event Map</h2>
-    <p style="text-align: center; color: #fff;">Find events and meetups happening near you.</p>
-    <div id="map" aria-label="Interactive map for events"></div>
-  </section>
-
-  <hr class="section-divider" />
-
-  <!-- FOOTER -->
-  <footer class="contact-block">
-    <div class="contact-info">
-      <h3>Contact Us</h3>
-      <p>123 Ancient Road, Knowledge City, Earth</p>
+    <!-- ============================
+         ABOUT GAS SECTION
+    ============================ -->
+    <section class="about-section" id="aboutGAS">
+      <h2>About GAS</h2>
       <p>
-        Email:
-        <a
-          href="mailto:info@globalantiquity.org"
-          aria-label="Send an email to info@globalantiquity.org"
-        >info@globalantiquity.org</a>
+        Globalization has connected us like never before. Our trade systems have created
+        unprecedented prosperity through specialization, comparative advantage, and access
+        to resources across the globe. Yet, in the process, we've lost touch with essential
+        skills that once defined our day-to-day lives—skills like growing our own food,
+        craftsmanship, and truly understanding nature.
       </p>
-      <!-- Decorative compass (optional) -->
-      <img
-        src="images/compass-rose.png"
-        alt="Decorative compass rose"
-        style="width: 50px; margin-top: 10px;"
-      />
-    </div>
-    <p class="footer-copy">
-      &copy; 2025 The Global Antiquity Society. All rights reserved.
-    </p>
-  </footer>
+      <p>
+        We've become accustomed to a world where help is always expected to come with a
+        price, and where industries—like agriculture, supported by cheap labor—highlight
+        the uneven distribution of wealth.
+      </p>
+      <p>
+        At GAS, we’re challenging this modern narrative. We’re not just about bringing
+        people together—we’re committed to rediscovering the wisdom of the past and
+        reawakening time-tested, practical skills that foster genuine, real-life
+        communities. By educating people on the ways of antiquity, we’re building networks
+        centered on sharing resources, mutual support, and hands-on learning.
+      </p>
+      <p>
+        While globalization has gifted us with remarkable connectivity and prosperity, it
+        has also diluted authentic human connection. We believe that real wealth lies not
+        only in what our global systems produce but in the ability to nurture sustainable,
+        self-reliant communities that value cooperation over profit.
+      </p>
+      <p>
+        At GAS, we’re here to restore that balance—honoring tradition while embracing the
+        opportunities of today. Welcome to GAS—where reconnecting with our roots empowers
+        us to build a future that values genuine connection, self-sufficiency, and shared
+        prosperity.
+      </p>
+    </section>
+
+    <!-- DISCORD SECTION -->
+    <section class="content-section" id="discordSection">
+      <h2>Discord</h2>
+      <p>
+        <strong>Set Sail With Our Crew!</strong><br />
+        Ready to take the next step? Join Delray Beach’s very own GAS (Global Antiquity
+        Society) Discord—a crew of free-thinkers mining the past to craft an inspiring future.
+      </p>
+      <p>
+        Come aboard and discover upcoming workshops, events, and more as we chart a new course together!
+      </p>
+      <button>Join Our Discord</button>
+    </section>
+
+    <!-- FORM YOUR OWN CREW -->
+    <section class="content-section" id="formCrew">
+      <h2>Form Your Own Crew</h2>
+      <p>
+        Thinking of starting your own GAS crew? We’d love to hear about it. Share your name,
+        email, and a quick note about your vision—whether it’s building a community garden,
+        launching a makerspace, or starting any initiative that brings people together.
+        Let’s chart your course together.
+      </p>
+
+      <!-- The form posts to process_form.php -->
+      <form action="process_form.php" method="post">
+        <label for="crewName">Your Name:</label>
+        <input
+          type="text"
+          id="crewName"
+          name="crewName"
+          placeholder="Enter your name"
+          required
+        />
+
+        <label for="crewEmail">Your Email:</label>
+        <input
+          type="email"
+          id="crewEmail"
+          name="crewEmail"
+          placeholder="Enter your email"
+          required
+        />
+
+        <label for="crewMessage">Why Do You Want to Build a Community?</label>
+        <textarea
+          id="crewMessage"
+          name="crewMessage"
+          rows="4"
+          placeholder="Tell us more..."
+        ></textarea>
+
+        <button type="submit">Submit &amp; Set Sail</button>
+      </form>
+
+      <p style="margin-top:1rem;">
+        Step away from the static. Embrace the adventure—and help shape a future built
+        on authenticity and shared learning!
+      </p>
+    </section>
+
+    <!-- MAP SECTION -->
+    <section class="map-section">
+      <h2>Interactive Event Map</h2>
+      <p style="text-align: center; color: #fff;">Find events and meetups happening near you.</p>
+      <div id="map" aria-label="Interactive map for events"></div>
+    </section>
+
+    <hr class="section-divider" />
+
+    <!-- FOOTER -->
+    <footer class="contact-block">
+      <div class="contact-info">
+        <h3>Contact Us</h3>
+        <p>123 Ancient Road, Knowledge City, Earth</p>
+        <p>
+          Email:
+          <a
+            href="mailto:info@globalantiquity.org"
+            aria-label="Send an email to info@globalantiquity.org"
+          >info@globalantiquity.org</a>
+        </p>
+        <!-- Decorative compass (optional) -->
+        <img
+          src="images/compass-rose.png"
+          alt="Decorative compass rose"
+          style="width: 50px; margin-top: 10px;"
+        />
+      </div>
+      <p class="footer-copy">
+        &copy; 2025 The Global Antiquity Society. All rights reserved.
+      </p>
+    </footer>
+  </div> <!-- end offset-top -->
 
   <!-- ============================
        MAIN SCRIPT
@@ -591,7 +657,7 @@
     gsap.registerPlugin(ScrollTrigger);
 
     document.addEventListener("DOMContentLoaded", () => {
-      // 1. Popup
+      // Popup
       const popupOverlay = document.getElementById('popupOverlay');
       const closePopupBtn = document.getElementById('closePopup');
       if (popupOverlay) {
@@ -601,9 +667,9 @@
         });
       }
 
-      // 2. Leaflet Map (if using)
+      // Leaflet Map
       if (typeof L !== "undefined" && document.getElementById("map")) {
-        const map = L.map("map").setView([26.2755, -80.0327], 13);
+        const map = L.map("map").setView([26.46547, -80.05753], 13);
         L.tileLayer("https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png", {
           attribution:
             "&copy; <a href='https://www.openstreetmap.org/copyright'>OpenStreetMap</a>"
@@ -612,7 +678,7 @@
           maxZoom: 19,
         }).addTo(map);
 
-        // Custom marker (optional)
+        // Custom marker
         const customIcon = L.icon({
           iconUrl: "images/custom-marker.png", /* Replace if desired */
           iconSize: [38, 38],
@@ -620,11 +686,11 @@
           popupAnchor: [0, -38],
         });
 
-        // Updated event details
-        L.marker([26.4615, -80.0728], { icon: customIcon })
+        // Marker at updated coordinates
+        L.marker([26.46547, -80.05753], { icon: customIcon })
           .addTo(map)
           .bindPopup(
-            "<b>Location:</b> 64-10 N Ocean Blvd, Delray Beach, FL 33483<br>"
+            "<b>Location:</b> Delray Beach, FL<br>"
             + "<b>Date & Time:</b> Thursday at 4:30 PM<br>"
             + "<b>Description:</b> Sunset antiquity discussion."
           )
@@ -639,7 +705,7 @@
         });
       }
 
-      // 3. GSAP Book Scroll Animation
+      // GSAP Book Scroll Animation
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: "#pinnedBookSection",
@@ -655,8 +721,7 @@
       gsap.set("#bookOpen", { opacity: 0 });
       gsap.set("#tableContents", { opacity: 0, pointerEvents: "none" });
 
-      // Sequence:
-      // Fade out closed book, fade in open book
+      // Sequence: Fade out closed book, fade in open book
       tl.to("#bookClosed", { opacity: 0, duration: 1 }, "phase1")
         .to("#bookOpen", { opacity: 1, duration: 1 }, "phase1+=0.5");
 
