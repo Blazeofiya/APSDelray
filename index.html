@@ -3,31 +3,28 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta
-    name="description"
-    content="The Global Antiquity Society - Discover hidden truths, and practical skills for the modern world."
-  />
+  <meta name="description" content="The Global Antiquity Society - Discover hidden truths, and practical skills for the modern world." />
   <title>The Global Antiquity Society | One-Page Showcase</title>
 
+  <!-- Favicon and Social Meta Tags -->
+  <link rel="icon" href="images/favicon.ico" type="image/x-icon" />
+  <!-- Open Graph / Twitter -->
+  <meta property="og:title" content="The Global Antiquity Society" />
+  <meta property="og:description" content="Discover hidden truths and practical skills for the modern world." />
+  <meta property="og:image" content="images/preview.png" />
+  <meta property="og:url" content="https://www.yourwebsite.com" />
+  <meta name="twitter:card" content="summary_large_image" />
+
   <!-- Google Fonts (Cinzel for headings, Roboto for body) -->
-  <link
-    href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Roboto:wght@400;700&display=swap"
-    rel="stylesheet"
-  />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
 
   <!-- Leaflet.js for Map (optional) -->
-  <link
-    rel="stylesheet"
-    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-  />
-  <script
-    defer
-    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-  ></script>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script defer src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
   <!-- GSAP + ScrollTrigger (for the book animation) -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 
   <style>
     /*--------------------------------------------------------------
@@ -45,6 +42,8 @@
       --text-light: #fafafa;         /* Light text color */
       --text-dark: #333333;          /* Dark text for lighter backgrounds */
       --accent-color: #704214;       /* Earthy brown accent */
+      --transition-speed: 0.3s;
+      --spacing-unit: 1rem;
     }
 
     /*--------------------------------------------------------------
@@ -95,7 +94,7 @@
       display: flex;
       align-items: center;
       padding: 0.75rem 1rem;
-      z-index: 9999; /* keeps header above all content */
+      z-index: 9999;
     }
     .top-bar img {
       width: 50px;
@@ -112,7 +111,7 @@
       OFFSET CONTENT TO AVOID TOP BAR OVERLAP
     --------------------------------------------------------------*/
     .offset-top {
-      margin-top: 70px; /* Enough to clear the fixed header */
+      margin-top: 70px;
     }
 
     /*--------------------------------------------------------------
@@ -158,7 +157,7 @@
       justify-content: center;
       opacity: 0;
       visibility: hidden;
-      transition: opacity 0.3s ease, visibility 0.3s ease;
+      transition: opacity var(--transition-speed) ease, visibility var(--transition-speed) ease;
     }
     .popup-overlay.active {
       opacity: 1;
@@ -198,9 +197,11 @@
       border-radius: 4px;
       cursor: pointer;
       font-family: 'Cinzel', serif;
+      transition: background var(--transition-speed) ease, transform var(--transition-speed) ease;
     }
     .popup-content button:hover {
       background: var(--accent-color);
+      transform: scale(1.05);
     }
     .close-popup {
       position: absolute;
@@ -234,9 +235,9 @@
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      max-width: 35vw; /* Adjust as desired for desktop */
+      max-width: 35vw;
       height: auto;
-      opacity: 0;      /* We'll toggle via GSAP */
+      opacity: 0;
     }
 
     /*--------------------------------------------------------------
@@ -289,6 +290,7 @@
       padding: 2rem 1rem;
       background-color: rgba(0, 0, 0, 0.65);
       border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
     }
     .content-section h2,
     .about-section h2 {
@@ -361,9 +363,11 @@
       cursor: pointer;
       font-family: 'Cinzel', serif;
       font-size: 1rem;
+      transition: background var(--transition-speed) ease, transform var(--transition-speed) ease;
     }
     form button[type="submit"]:hover {
       background: var(--accent-color);
+      transform: scale(1.05);
     }
 
     /* BUTTONS */
@@ -377,10 +381,12 @@
       cursor: pointer;
       font-family: 'Cinzel', serif;
       font-size: 1rem;
+      transition: background var(--transition-speed) ease, transform var(--transition-speed) ease;
     }
     button:hover,
     .content-section button:hover {
       background: var(--accent-color);
+      transform: scale(1.05);
     }
 
     /* FOOTER */
@@ -401,6 +407,27 @@
       font-size: 0.9rem;
       color: #bbb;
       margin-top: 1rem;
+    }
+
+    /* BACK TO TOP BUTTON */
+    #backToTop {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      padding: 0.5rem 1rem;
+      border: none;
+      border-radius: 4px;
+      background: var(--primary-color);
+      color: #fff;
+      cursor: pointer;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+      z-index: 10001;
+    }
+    #backToTop.show {
+      opacity: 1;
+      pointer-events: auto;
     }
 
     /* MEDIA QUERIES */
@@ -426,7 +453,7 @@
        FIXED TOP BAR
   ============================ -->
   <div class="top-bar">
-    <img src="images/logo.png" alt="Global Antiquity Society Logo"/>
+    <img src="images/logo.png" alt="Global Antiquity Society Logo" loading="lazy"/>
     <h1>Global Antiquity Society</h1>
   </div>
 
@@ -442,7 +469,7 @@
     <!-- ============================
          POPUP MODAL
     ============================ -->
-    <div class="popup-overlay" id="popupOverlay">
+    <div class="popup-overlay" id="popupOverlay" role="dialog" aria-modal="true">
       <div class="popup-content">
         <button class="close-popup" id="closePopup" aria-label="Close popup">&times;</button>
         <h2>Hey there, rebel!</h2>
@@ -456,9 +483,11 @@
           and shape life on your own terms. Drop your email below and step into a more
           authentic, self-driven world!
         </p>
-        <input type="email" placeholder="Your Email Here..." />
-        <br />
-        <button>Count Me In</button>
+        <form id="subscribeForm" action="#" method="post">
+          <input type="email" name="subscriberEmail" id="subscriberEmail" placeholder="Your Email Here..." required />
+          <br />
+          <button type="submit">Count Me In</button>
+        </form>
       </div>
     </div>
 
@@ -468,30 +497,22 @@
     <section class="pinned-book-section" id="pinnedBookSection">
       <div class="book-animation-container" id="bookAnimation">
         <!-- CLOSED BOOK -->
-        <img
-          src="images/book-closed.png"
-          alt="Closed Book"
-          id="bookClosed"
-        />
+        <img src="images/book-closed.png" alt="Closed Book" id="bookClosed" loading="lazy" />
 
         <!-- OPEN BOOK -->
-        <img
-          src="images/book-open.png"
-          alt="Open Book"
-          id="bookOpen"
-        />
+        <img src="images/book-open.png" alt="Open Book" id="bookOpen" loading="lazy" />
 
         <!-- Single-page Table of Contents overlay -->
         <div class="table-of-contents" id="tableContents">
           <h2>TABLE OF CONTENTS</h2>
           <hr class="toc-divider" />
           <ul>
-            <li><a href="https://www.loc.gov/" target="_blank">Library of Congress</a></li>
-            <li><a href="https://whc.unesco.org/" target="_blank">UNESCO</a></li>
-            <li><a href="https://fmhy.net/" target="_blank">FMHY</a></li>
-            <li><a href="https://alternativeto.net/" target="_blank">AlternativeTo</a></li>
-            <li><a href="https://github.com/ripienaar/free-for-dev" target="_blank">Free For Dev</a></li>
-            <li><a href="https://curiositystream.com/" target="_blank">CuriosityStream</a></li>
+            <li><a href="https://www.loc.gov/" target="_blank" rel="noopener">Library of Congress</a></li>
+            <li><a href="https://whc.unesco.org/" target="_blank" rel="noopener">UNESCO</a></li>
+            <li><a href="https://fmhy.net/" target="_blank" rel="noopener">FMHY</a></li>
+            <li><a href="https://alternativeto.net/" target="_blank" rel="noopener">AlternativeTo</a></li>
+            <li><a href="https://github.com/ripienaar/free-for-dev" target="_blank" rel="noopener">Free For Dev</a></li>
+            <li><a href="https://curiositystream.com/" target="_blank" rel="noopener">CuriosityStream</a></li>
           </ul>
         </div>
       </div>
@@ -565,37 +586,19 @@
       <!-- The form posts to process_form.php -->
       <form action="process_form.php" method="post">
         <label for="crewName">Your Name:</label>
-        <input
-          type="text"
-          id="crewName"
-          name="crewName"
-          placeholder="Enter your name"
-          required
-        />
+        <input type="text" id="crewName" name="crewName" placeholder="Enter your name" required />
 
         <label for="crewEmail">Your Email:</label>
-        <input
-          type="email"
-          id="crewEmail"
-          name="crewEmail"
-          placeholder="Enter your email"
-          required
-        />
+        <input type="email" id="crewEmail" name="crewEmail" placeholder="Enter your email" required />
 
         <label for="crewMessage">Why Do You Want to Build a Community?</label>
-        <textarea
-          id="crewMessage"
-          name="crewMessage"
-          rows="4"
-          placeholder="Tell us more..."
-        ></textarea>
+        <textarea id="crewMessage" name="crewMessage" rows="4" placeholder="Tell us more..."></textarea>
 
         <button type="submit">Submit &amp; Set Sail</button>
       </form>
 
       <p style="margin-top:1rem;">
-        Step away from the static. Embrace the adventure—and help shape a future built
-        on authenticity and shared learning!
+        Step away from the static. Embrace the adventure—and help shape a future built on authenticity and shared learning!
       </p>
     </section>
 
@@ -615,17 +618,10 @@
         <p>123 Ancient Road, Knowledge City, Earth</p>
         <p>
           Email:
-          <a
-            href="mailto:info@globalantiquity.org"
-            aria-label="Send an email to info@globalantiquity.org"
-          >info@globalantiquity.org</a>
+          <a href="mailto:info@globalantiquity.org" aria-label="Send an email to info@globalantiquity.org">info@globalantiquity.org</a>
         </p>
         <!-- Decorative compass (optional) -->
-        <img
-          src="images/compass-rose.png"
-          alt="Decorative compass rose"
-          style="width: 50px; margin-top: 10px;"
-        />
+        <img src="images/compass-rose.png" alt="Decorative compass rose" loading="lazy" style="width: 50px; margin-top: 10px;"/>
       </div>
       <p class="footer-copy">
         &copy; 2025 The Global Antiquity Society. All rights reserved.
@@ -633,79 +629,84 @@
     </footer>
   </div> <!-- end offset-top -->
 
+  <!-- BACK TO TOP BUTTON -->
+  <button id="backToTop" aria-label="Back to top">↑</button>
+
   <!-- ============================
        MAIN SCRIPT
   ============================ -->
   <script>
-    /*--------------------------------------------------------------
-      PRELOADER LOGIC
-    --------------------------------------------------------------*/
-    window.addEventListener("load", () => {
+    document.addEventListener("DOMContentLoaded", () => {
+      // --- Enhanced Preloader Logic with GSAP fade-out ---
       const preloader = document.getElementById("preloader");
       if (preloader) {
-        preloader.style.display = "none";
+        window.addEventListener("load", () => {
+          gsap.to(preloader, { opacity: 0, duration: 0.8, onComplete: () => preloader.style.display = "none" });
+        });
+        // Fallback: Hide after 5 seconds
+        setTimeout(() => {
+          if (preloader && preloader.style.display !== "none") {
+            gsap.to(preloader, { opacity: 0, duration: 0.8, onComplete: () => preloader.style.display = "none" });
+          }
+        }, 5000);
       }
-      // Fallback: Hide after 5s
-      setTimeout(() => {
-        if (preloader) preloader.style.display = "none";
-      }, 5000);
-    });
 
-    /*--------------------------------------------------------------
-      POPUP MODAL & GSAP ANIMATION
-    --------------------------------------------------------------*/
-    gsap.registerPlugin(ScrollTrigger);
-
-    document.addEventListener("DOMContentLoaded", () => {
-      // Popup
+      // --- Popup Modal Logic with Focus Management & Escape Key Handling ---
       const popupOverlay = document.getElementById('popupOverlay');
       const closePopupBtn = document.getElementById('closePopup');
+      const subscriberEmail = document.getElementById('subscriberEmail');
       if (popupOverlay) {
         popupOverlay.classList.add('active');
+        // Move focus to the email input when the modal opens
+        if (subscriberEmail) {
+          subscriberEmail.focus();
+        }
         closePopupBtn.addEventListener('click', () => {
           popupOverlay.classList.remove('active');
         });
+        document.addEventListener('keydown', (e) => {
+          if (e.key === "Escape" && popupOverlay.classList.contains('active')) {
+            popupOverlay.classList.remove('active');
+          }
+        });
       }
 
-      // Leaflet Map
+      // --- Leaflet Map Initialization ---
       if (typeof L !== "undefined" && document.getElementById("map")) {
         const map = L.map("map").setView([26.46547, -80.05753], 13);
         L.tileLayer("https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png", {
           attribution:
-            "&copy; <a href='https://www.openstreetmap.org/copyright'>OpenStreetMap</a>"
-            + " contributors &copy; <a href='https://carto.com/'>CARTO</a>",
+            "&copy; <a href='https://www.openstreetmap.org/copyright'>OpenStreetMap</a> contributors &copy; <a href='https://carto.com/'>CARTO</a>",
           subdomains: "abcd",
           maxZoom: 19,
         }).addTo(map);
 
         // Custom marker
         const customIcon = L.icon({
-          iconUrl: "images/custom-marker.png", /* Replace if desired */
+          iconUrl: "images/custom-marker.png",
           iconSize: [38, 38],
           iconAnchor: [19, 38],
           popupAnchor: [0, -38],
         });
 
-        // Marker at updated coordinates
         L.marker([26.46547, -80.05753], { icon: customIcon })
           .addTo(map)
           .bindPopup(
-            "<b>Location:</b> Delray Beach, FL<br>"
-            + "<b>Date & Time:</b> Thursdays at 4:30 PM<br>"
-            + "<b>Description:</b> Sunset antiquity discussion."
+            "<b>Location:</b> Delray Beach, FL<br>" +
+            "<b>Date & Time:</b> Thursdays at 4:30 PM<br>" +
+            "<b>Description:</b> Sunset antiquity discussion."
           )
           .openPopup();
 
-        // Position zoom controls
         L.control.zoom({ position: "bottomright" }).addTo(map);
 
-        // Keep map responsive
         window.addEventListener("resize", () => {
           map.invalidateSize();
         });
       }
 
-      // GSAP Book Scroll Animation
+      // --- GSAP Book Scroll Animation ---
+      gsap.registerPlugin(ScrollTrigger);
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: "#pinnedBookSection",
@@ -715,26 +716,27 @@
           pin: true
         }
       });
-
-      // Initial states
       gsap.set("#bookClosed", { opacity: 1 });
       gsap.set("#bookOpen", { opacity: 0 });
       gsap.set("#tableContents", { opacity: 0, pointerEvents: "none" });
-
-      // Sequence: Fade out closed book, fade in open book
       tl.to("#bookClosed", { opacity: 0, duration: 1 }, "phase1")
-        .to("#bookOpen", { opacity: 1, duration: 1 }, "phase1+=0.5");
-
-      // Fade in table of contents
-      tl.to("#tableContents", {
-        opacity: 1,
-        pointerEvents: "auto",
-        duration: 1
-      }, "phase2");
-
-      // Fade out open book & TOC (simulate closing)
-      tl.to("#bookOpen", { opacity: 0, duration: 1 }, "phase3")
+        .to("#bookOpen", { opacity: 1, duration: 1 }, "phase1+=0.5")
+        .to("#tableContents", { opacity: 1, pointerEvents: "auto", duration: 1 }, "phase2")
+        .to("#bookOpen", { opacity: 0, duration: 1 }, "phase3")
         .to("#tableContents", { opacity: 0, pointerEvents: "none", duration: 1 }, "phase3");
+
+      // --- Back To Top Button Logic ---
+      const backToTop = document.getElementById("backToTop");
+      window.addEventListener("scroll", () => {
+        if (window.scrollY > 400) {
+          backToTop.classList.add("show");
+        } else {
+          backToTop.classList.remove("show");
+        }
+      });
+      backToTop.addEventListener("click", () => {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      });
     });
   </script>
 </body>
