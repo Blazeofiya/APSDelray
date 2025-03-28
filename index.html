@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="description" content="The Antiquity  - Discover hidden truths, and practical skills for the modern world." />
-  <title>The Antiquity & Progress Society | One-Page Showcase</title>
+  <meta name="description" content="The Antiquity & Progress Society - Building resilient communities through decentralized impact and genuine local action." />
+  <title>The Antiquity & Progress Society | Decentralized Impact Guild</title>
 
   <!-- Favicon and Social Meta Tags -->
   <link rel="icon" href="images/favicon.ico" type="image/x-icon" />
   <!-- Open Graph / Twitter -->
   <meta property="og:title" content="The Antiquity & Progress Society" />
-  <meta property="og:description" content="Discover hidden truths and practical skills for the modern world." />
+  <meta property="og:description" content="Discover hidden truths, practical skills, and a new model for community building through our Decentralized Impact Guild." />
   <meta property="og:image" content="images/preview.png" />
   <meta property="og:url" content="https://www.yourwebsite.com" />
   <meta name="twitter:card" content="summary_large_image" />
@@ -275,7 +275,7 @@
     .table-of-contents ul li a {
       color: var(--text-dark);
       text-decoration: none;
-      font-size: 1.2rem;  /* Increased font size for clarity */
+      font-size: 1.2rem;
       font-weight: 600;
     }
     .table-of-contents ul li a:hover {
@@ -283,7 +283,7 @@
     }
 
     /*--------------------------------------------------------------
-      CONTENT SECTIONS (About, Discord, Form, Map, Footer)
+      CONTENT SECTIONS (About, Values, Connect, Form, Map, Footer)
     --------------------------------------------------------------*/
     .content-section,
     .about-section {
@@ -451,26 +451,20 @@
   </style>
 </head>
 <body>
-  <!-- ============================
-       FIXED TOP BAR
-  ============================ -->
+  <!-- FIXED TOP BAR -->
   <div class="top-bar">
     <img src="images/logo.png" alt="Antiquity & Progress Society Logo" loading="lazy"/>
     <h1>Antiquity & Progress Society</h1>
   </div>
 
-  <!-- Apply offset to content so it's not hidden under fixed top bar -->
+  <!-- Apply offset so content is not hidden under fixed top bar -->
   <div class="offset-top">
-    <!-- ============================
-         PRELOADER
-    ============================ -->
+    <!-- PRELOADER -->
     <div id="preloader">
       <div class="spinner"></div>
     </div>
 
-    <!-- ============================
-         POPUP MODAL
-    ============================ -->
+    <!-- POPUP MODAL -->
     <div class="popup-overlay" id="popupOverlay" role="dialog" aria-modal="true">
       <div class="popup-content">
         <button class="close-popup" id="closePopup" aria-label="Close popup">&times;</button>
@@ -478,7 +472,7 @@
         <p>
           Tired of the endless internet rabbit holes and corporate BS? We hear you.
           Ready to flip the script? Learn how to fix things, trade killer ideas, and
-          build a real local community—no mindless scrolling or pinging app notifications required.
+          build a real local community—no mindless scrolling or app notifications required.
         </p>
         <p>
           Join us and grab your free guide. It’s time to kick dependency to the curb
@@ -492,17 +486,13 @@
       </div>
     </div>
 
-    <!-- ============================
-         PINNED BOOK SECTION
-    ============================ -->
+    <!-- PINNED BOOK SECTION (with animated book reveal) -->
     <section class="pinned-book-section" id="pinnedBookSection">
       <div class="book-animation-container" id="bookAnimation">
         <!-- CLOSED BOOK -->
         <img src="images/book-closed.png" alt="Closed Book" id="bookClosed" loading="lazy" />
-
         <!-- OPEN BOOK -->
         <img src="images/book-open.png" alt="Open Book" id="bookOpen" loading="lazy" />
-
         <!-- Single-page Table of Contents overlay -->
         <div class="table-of-contents" id="tableContents">
           <h2>TABLE OF CONTENTS</h2>
@@ -519,94 +509,74 @@
       </div>
     </section>
 
-    <!-- SECTION DIVIDER -->
     <hr class="section-divider" />
 
-    <!-- ============================
-         ABOUT GAS SECTION
-    ============================ -->
-    <section class="about-section" id="aboutGAS">
-      <h2>About GAS</h2>
+    <!-- ABOUT APS & DIG SECTION -->
+    <section class="about-section" id="aboutAPS">
+      <h2>About APS & DIG</h2>
       <p>
-        Globalization has connected us like never before. Our trade systems have created
-        unprecedented prosperity through specialization, comparative advantage, and access
-        to resources across the globe. Yet, in the process, we've lost touch with essential
-        skills that once defined our day-to-day lives—skills like growing our own food,
-        craftsmanship, and truly understanding nature.
+        In response to rapid changes in how communities are built, the first APS chapter was formed. Long ago, people thrived on deep family bonds, cooperative farming, and shared survival—a stark contrast to today's fragmented, profit-driven society.
       </p>
       <p>
-        We've become accustomed to a world where help is always expected to come with a
-        price, and where industries—like agriculture, supported by cheap labor—highlight
-        the uneven distribution of wealth.
+        Modern innovations have reduced the cost of essentials while fostering a dependence on impersonal systems. At APS, we believe true resilience lies in reconnecting with the wisdom of our ancestors and rebuilding local communities from the ground up.
       </p>
       <p>
-        At GAS, we’re challenging this modern narrative. We’re not just about bringing
-        people together—we’re committed to rediscovering the wisdom of the past and
-        reawakening time-tested, practical skills that foster genuine, real-life
-        communities. By educating people on the ways of antiquity, we’re building networks
-        centered on sharing resources, mutual support, and hands-on learning.
+        Our mission is to restore genuine human connection through local action, skill sharing, and mutual aid. We are a decentralized, impact-driven guild—empowering every chapter to flourish through collaboration, continuous learning, and hands-on projects.
       </p>
       <p>
-        While globalization has gifted us with remarkable connectivity and prosperity, it
-        has also diluted authentic human connection. We believe that real wealth lies not
-        only in what our global systems produce but in the ability to nurture sustainable,
-        self-reliant communities that value cooperation over profit.
-      </p>
-      <p>
-        At GAS, we’re here to restore that balance—honoring tradition while embracing the
-        opportunities of today. Welcome to GAS—where reconnecting with our roots empowers
-        us to build a future that values genuine connection, self-sufficiency, and shared
-        prosperity.
+        Join us as we shift from seeking external sources of happiness to discovering it within our collective strength.
       </p>
     </section>
 
-    <!-- DISCORD SECTION -->
-    <section class="content-section" id="discordSection">
-      <h2>Discord</h2>
+    <!-- DIG VALUES SECTION -->
+    <section class="content-section" id="digValues">
+      <h2>DIG Values</h2>
+      <ul>
+        <li><strong>Local action over global noise:</strong> We start where we are, with what we have.</li>
+        <li><strong>Listening before fixing:</strong> We seek to understand before offering solutions.</li>
+        <li><strong>Helping without expecting:</strong> We give our time, energy, and care freely.</li>
+        <li><strong>Respecting nature as a teacher:</strong> We honor the earth and its cycles.</li>
+        <li><strong>Learning from others, always:</strong> Everyone has something to teach.</li>
+        <li><strong>Sharing meals, time, and space:</strong> Community is built over shared experiences.</li>
+        <li><strong>Leaving systems better than we found them:</strong> We aim to restore and improve.</li>
+        <li><strong>No hierarchy, just roles:</strong> Power is shared in our community.</li>
+        <li><strong>Showing up is what counts:</strong> Your presence matters most.</li>
+      </ul>
+    </section>
+
+    <!-- CONNECT WITH US SECTION (formerly Discord) -->
+    <section class="content-section" id="connectSection">
+      <h2>Connect With Us</h2>
       <p>
-        <strong>Set Sail With Our Crew!</strong><br />
-        Ready to take the next step? Join Delray Beach’s very own GAS (Global Antiquity
-        Society) Discord—a crew of free-thinkers mining the past to craft an inspiring future.
-      </p>
-      <p>
-        Come aboard and discover upcoming workshops, events, and more as we chart a new course together!
+        Ready to join a community that values real-life connection over digital distractions? Our APS (DIG) chapter is a gathering of free-thinkers committed to local action and genuine support. Discover workshops, events, and opportunities to build lasting bonds.
       </p>
       <button>Join Our Discord</button>
     </section>
 
-    <!-- FORM YOUR OWN CREW -->
+    <!-- START YOUR LOCAL CHAPTER SECTION -->
     <section class="content-section" id="formCrew">
-      <h2>Form Your Own Crew</h2>
+      <h2>Start Your Local Chapter</h2>
       <p>
-        Thinking of starting your own GAS crew? We’d love to hear about it. Share your name,
-        email, and a quick note about your vision—whether it’s building a community garden,
-        launching a makerspace, or starting any initiative that brings people together.
-        Let’s chart your course together.
+        Thinking of launching your own APS chapter? We’d love to hear your vision for building a resilient, locally-driven community. Share your name, email, and a brief note on how you plan to foster connection and self-reliance in your area.
       </p>
-
-      <!-- The form posts to process_form.php -->
       <form action="process_form.php" method="post">
         <label for="crewName">Your Name:</label>
         <input type="text" id="crewName" name="crewName" placeholder="Enter your name" required />
-
         <label for="crewEmail">Your Email:</label>
         <input type="email" id="crewEmail" name="crewEmail" placeholder="Enter your email" required />
-
-        <label for="crewMessage">Why Do You Want to Build a Community?</label>
-        <textarea id="crewMessage" name="crewMessage" rows="4" placeholder="Tell us more..."></textarea>
-
-        <button type="submit">Submit &amp; Set Sail</button>
+        <label for="crewMessage">Your Vision:</label>
+        <textarea id="crewMessage" name="crewMessage" rows="4" placeholder="Tell us your vision..."></textarea>
+        <button type="submit">Submit &amp; Launch</button>
       </form>
-
       <p style="margin-top:1rem;">
-        Step away from the static. Embrace the adventure—and help shape a future built on authenticity and shared learning!
+        Step away from the static. Embrace the adventure—and help shape a future built on authenticity, shared learning, and real human connection.
       </p>
     </section>
 
     <!-- MAP SECTION -->
     <section class="map-section">
       <h2>Interactive Event Map</h2>
-      <p style="text-align: center; color: #fff;">Find events and meetups happening near you.</p>
+      <p style="text-align: center; color: #fff;">Find local meetups and events where our community comes together.</p>
       <div id="map" aria-label="Interactive map for events"></div>
     </section>
 
@@ -621,7 +591,6 @@
           Email:
           <a href="mailto:info@globalantiquity.org" aria-label="Send an email to info@globalantiquity.org">info@globalantiquity.org</a>
         </p>
-        <!-- Decorative compass (optional) -->
         <img src="images/compass-rose.png" alt="Decorative compass rose" loading="lazy" style="width: 50px; margin-top: 10px;"/>
       </div>
       <p class="footer-copy">
@@ -633,9 +602,7 @@
   <!-- BACK TO TOP BUTTON -->
   <button id="backToTop" aria-label="Back to top">↑</button>
 
-  <!-- ============================
-       MAIN SCRIPT
-  ============================ -->
+  <!-- MAIN SCRIPT -->
   <script>
     document.addEventListener("DOMContentLoaded", () => {
       // --- Enhanced Preloader Logic with GSAP fade-out ---
@@ -658,7 +625,6 @@
       const subscriberEmail = document.getElementById('subscriberEmail');
       if (popupOverlay) {
         popupOverlay.classList.add('active');
-        // Move focus to the email input when the modal opens
         if (subscriberEmail) {
           subscriberEmail.focus();
         }
@@ -681,15 +647,12 @@
           subdomains: "abcd",
           maxZoom: 19,
         }).addTo(map);
-
-        // Custom marker
         const customIcon = L.icon({
           iconUrl: "images/custom-marker.png",
           iconSize: [38, 38],
           iconAnchor: [19, 38],
           popupAnchor: [0, -38],
         });
-
         L.marker([26.44201, -80.06126], { icon: customIcon })
           .addTo(map)
           .bindPopup(
@@ -698,9 +661,7 @@
             "<b>Description:</b> Crew Meet."
           )
           .openPopup();
-
         L.control.zoom({ position: "bottomright" }).addTo(map);
-
         window.addEventListener("resize", () => {
           map.invalidateSize();
         });
